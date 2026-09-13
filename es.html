@@ -1,1 +1,795 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Digital | Desarrollo de Menús Digitales | Bebell Digital Solutions</title>
+    <meta name="description" content="Una forma más fácil para que sus huéspedes exploren, ordenen y paguen desde su teléfono.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Menú Digital | Desarrollo de Menús Digitales | Bebell Digital Solutions">
+    <meta property="og:description" content="Una forma más fácil para que sus huéspedes exploren, ordenen y paguen desde su teléfono.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS VARIABLES & EXACT VISUAL IDENTITY */
+        :root {
+            --brand: #DF1783;
+            --brand-hover: #C71470;
+            --dark: #171717;
+            --dark-nav: rgba(23, 23, 23, 0.95);
+            --warm-white: #FAF8F6;
+            --white: #FFFFFF;
+            --neutral: #E9E5E7;
+            --rose-metallic: rgba(223, 23, 131, 0.25);
+            
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Poppins', sans-serif;
+            
+            --radius-btn: 12px;
+            --radius-card: 16px;
+            --radius-img: 20px;
+            --radius-phone: 34px;
+            
+            --shadow-subtle: 0 12px 35px rgba(23, 23, 23, 0.08);
+            --shadow-hover: 0 18px 45px rgba(23, 23, 23, 0.12);
+        }
+
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--dark);
+            background-color: var(--warm-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, .heading-font {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            line-height: 1.1;
+        }
+        
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* TYPOGRAPHY */
+        .text-hero-eyebrow { font-size: clamp(11px, 2vw, 13px); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--dark); }
+        .text-hero-title { font-size: clamp(40px, 6vw, 76px); color: var(--dark); margin: 16px 0; }
+        .text-section-title { font-size: clamp(36px, 5vw, 60px); margin-bottom: 24px; }
+        .text-body { font-size: clamp(15px, 2vw, 19px); font-weight: 400; max-width: 760px; }
+        .text-accent { color: var(--brand); }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            height: 50px; padding: 0 28px; border-radius: var(--radius-btn);
+            font-weight: 600; font-size: 15px; letter-spacing: 0.01em;
+            transition: all 0.2s ease; cursor: pointer; border: none;
+        }
+        .btn-primary { background: var(--brand); color: var(--white); }
+        .btn-primary:hover { background: var(--brand-hover); }
+        .btn-secondary { background: transparent; border: 1px solid var(--brand); color: var(--brand); }
+        .btn-secondary:hover { background: rgba(223, 23, 131, 0.05); }
+        .bg-dark .btn-secondary { border-color: rgba(255,255,255,0.65); color: var(--white); }
+        .bg-dark .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+        /* LAYOUT & SECTIONS */
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+        section { padding: clamp(72px, 10vw, 140px) 0; }
+        .bg-warm-white { background-color: var(--warm-white); }
+        .bg-white { background-color: var(--white); }
+        .bg-dark { background-color: var(--dark); color: var(--white); }
+        
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* NAVBAR */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 20px 0; transition: background 0.3s ease;
+        }
+        header.scrolled { background: var(--dark-nav); backdrop-filter: blur(10px); color: var(--white); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: var(--font-heading); font-size: 24px; font-weight: 600; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--brand); }
+        .lang-switch { display: flex; gap: 12px; font-size: 13px; font-weight: 600; }
+        .lang-switch a.active { color: var(--brand); }
+        
+        @media (max-width: 1024px) {
+            .nav-links { display: none; }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative; height: clamp(600px, 85vh, 900px);
+            display: flex; align-items: center; padding-top: 80px;
+            overflow: hidden;
+        }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
+        .hero-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0; transition: opacity 1.5s ease, transform 6s linear;
+            transform: scale(1);
+        }
+        .hero-slide.active { opacity: 1; transform: scale(1.05); }
+        
+        /* Subtle overlay for left text contrast */
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 40%, transparent 100%);
+            z-index: -1;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-slide { transition: opacity 1s ease; transform: none !important; }
+        }
+        
+        .hero-content {
+            position: relative; z-index: 10; max-width: 600px;
+        }
+        .hero-btns { display: flex; gap: 16px; margin-top: 40px; }
+        
+        .carousel-indicators {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 12px; z-index: 10;
+        }
+        .indicator {
+            width: 40px; height: 3px; background: rgba(23, 23, 23, 0.2);
+            border-radius: 2px; overflow: hidden; position: relative;
+        }
+        .indicator-progress {
+            position: absolute; top: 0; left: 0; height: 100%; width: 0%;
+            background: var(--brand); transition: width 0.1s linear;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-overlay { background: rgba(255,255,255,0.85); }
+            .hero-btns { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+
+        /* PERSONALIZED PROPOSAL */
+        .proposal-intro { text-align: center; border-bottom: 1px solid var(--neutral); }
+        .proposal-logo { max-height: 80px; margin: 0 auto 24px; }
+        .editorial-line { width: 60px; height: 1px; background: var(--rose-metallic); margin: 24px auto; }
+
+        /* GRID CARDS */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+        
+        .card {
+            background: var(--white); border-radius: var(--radius-card);
+            padding: 40px; box-shadow: var(--shadow-subtle); transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .bg-dark .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); box-shadow: none; }
+
+        /* PHONE MOCKUP */
+        .phone-container {
+            position: relative; width: 320px; height: 650px; margin: 0 auto;
+            border-radius: var(--radius-phone); background: var(--dark);
+            padding: 12px; box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        .phone-screen-area {
+            position: relative; width: 100%; height: 100%;
+            background: var(--warm-white); border-radius: 24px; overflow: hidden;
+        }
+        .phone-screen {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            padding: 24px; opacity: 0; transition: opacity 0.5s ease;
+            display: flex; flex-direction: column; gap: 16px;
+        }
+        .phone-screen.active { opacity: 1; z-index: 2; }
+        
+        /* Phone UI Mocks */
+        .mock-nav { display: flex; justify-content: space-between; margin-bottom: 16px; }
+        .mock-circle { width: 32px; height: 32px; border-radius: 50%; background: var(--neutral); }
+        .mock-line { height: 12px; border-radius: 6px; background: var(--neutral); margin-bottom: 8px; }
+        .mock-line.short { width: 60%; }
+        .mock-img { height: 140px; border-radius: 12px; background: var(--neutral); margin-bottom: 12px; }
+        .mock-btn { height: 40px; border-radius: 8px; background: var(--brand); margin-top: auto; }
+        
+        /* HOW IT WORKS PROCESS */
+        .process-steps { display: flex; gap: 24px; margin-top: 48px; overflow-x: auto; padding-bottom: 24px; }
+        .step { flex: 1; min-width: 240px; }
+        .step-num { 
+            font-family: var(--font-heading); font-size: 32px; color: var(--brand);
+            border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 12px; margin-bottom: 16px; 
+        }
+
+        /* PRICING */
+        .pricing-card-highlight {
+            border: 1px solid var(--brand);
+            box-shadow: 0 0 30px rgba(223,23,131,0.08);
+            position: relative;
+        }
+
+        /* FAQ ACCORDION */
+        .faq-item { border-bottom: 1px solid var(--neutral); padding: 24px 0; cursor: pointer; }
+        .faq-question { font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; opacity: 0.8; margin-top: 0; }
+        .faq-item.active .faq-answer { max-height: 200px; margin-top: 16px; }
+
+        /* FOOTER */
+        footer { background: #111111; color: rgba(255,255,255,0.6); padding: 60px 0; font-size: 14px; text-align: center;}
+        
+        /* ERROR STATE */
+        #error-state { display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; }
+        #main-content { display: none; } /* Hidden until initialized */
+    </style>
+</head>
+<body>
+
+    <!-- ERROR STATE -->
+    <div id="error-state" class="bg-warm-white">
+        <div class="container">
+            <h2 class="text-section-title">Esta propuesta ya no está disponible.</h2>
+            <p class="text-body" style="margin: 0 auto 24px;">Contacte a <span data-var="company_name">Bebell Digital Solutions</span> para solicitar una actualización.</p>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main-content">
+        <!-- HEADER -->
+        <header id="navbar">
+            <div class="container nav-container">
+                <div class="nav-logo">Bebell</div>
+                <nav class="nav-links">
+                    <a href="#how-it-works">Cómo funciona</a>
+                    <a href="#capabilities">Características</a>
+                    <a href="#pricing">Precio</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+                <div class="lang-switch">
+                    <a href="#" class="lang-btn active" data-lang="es">ES</a>
+                    <a href="#" class="lang-btn" data-lang="en">EN</a>
+                    <a href="#" class="lang-btn" data-lang="fr">FR</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- 01 HERO -->
+        <section class="hero" id="hero">
+            <div class="hero-bg">
+                <img class="hero-slide active" src="" data-bind-src="hero_image_1_url" data-fallback="assets/images/hotel-hero-pool.webp" alt="Hotel">
+                <img class="hero-slide" src="" data-bind-src="hero_image_2_url" data-fallback="assets/images/hotel-hero-room.webp" alt="Room">
+                <img class="hero-slide" src="" data-bind-src="hero_image_3_url" data-fallback="assets/images/hotel-hero-restaurant.webp" alt="Restaurant">
+            </div>
+            <div class="hero-overlay"></div>
+            
+            <div class="container hero-content fade-in">
+                <div class="text-hero-eyebrow">MENÚ DIGITAL</div>
+                <h1 class="text-hero-title">Desarrollo de Menús Digitales para hoteles, restaurantes y negocios de hospitalidad</h1>
+                <p class="text-body">Una forma más fácil para que sus huéspedes exploren, ordenen y paguen desde su teléfono.</p>
+                <div class="hero-btns">
+                    <a href="#" data-bind-href="cta_url" class="btn btn-primary">Solicitar propuesta</a>
+                    <a href="#how-it-works" class="btn btn-secondary">Ver cómo funciona</a>
+                </div>
+            </div>
+            
+            <div class="carousel-indicators">
+                <div class="indicator"><div class="indicator-progress"></div></div>
+                <div class="indicator"><div class="indicator-progress"></div></div>
+                <div class="indicator"><div class="indicator-progress"></div></div>
+            </div>
+        </section>
+
+        <!-- 02 PERSONALIZED PROPOSAL -->
+        <section class="bg-warm-white proposal-intro fade-in" id="proposal-intro">
+            <div class="container">
+                <img src="" alt="Logo" class="proposal-logo dynamic-logo" data-bind-src="business_logo" onerror="this.style.display='none'">
+                <p class="text-hero-eyebrow" style="margin-bottom: 8px;">Preparado especialmente para:</p>
+                <h2 class="heading-font" style="font-size: 28px; margin-bottom: 8px;" data-var="business_name">...</h2>
+                <p class="text-body" style="margin: 0 auto;">
+                    <span data-var="representative_name"></span>, <span data-var="representative_title"></span>
+                </p>
+                <div class="editorial-line"></div>
+                <p class="text-body" style="font-size: 14px;" data-var="proposal_date"></p>
+            </div>
+        </section>
+
+        <!-- 03 OPPORTUNITY -->
+        <section class="bg-white fade-in" id="opportunity">
+            <div class="container grid-2">
+                <div>
+                    <h2 class="text-section-title">UNA MEJOR EXPERIENCIA PARA SUS HUÉSPEDES</h2>
+                    <p class="text-body" style="margin-bottom: 24px;">Sus huéspedes esperan poder acceder fácilmente a la información, elegir lo que desean y realizar su pedido sin complicaciones.</p>
+                    <p class="text-body" style="margin-bottom: 24px;">Un Menú Digital permite ofrecer una experiencia de pedido más cómoda desde la habitación, la piscina, el restaurante, el bar o cualquier otra área de servicio.</p>
+                    <p class="text-body">Al mismo tiempo, su equipo obtiene una forma más organizada de gestionar productos, precios, pedidos y pagos.</p>
+                </div>
+                <div>
+                    <div class="card" style="margin-bottom: 24px;">
+                        <h3 class="heading-font" style="font-size: 24px; margin-bottom: 12px;">Experiencia del huésped</h3>
+                        <p class="text-body" style="font-size: 15px;">Acceso inmediato a fotografías, descripciones y precios actualizados desde su propio dispositivo.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 24px; margin-bottom: 12px;">Control operativo</h3>
+                        <p class="text-body" style="font-size: 15px;">Reducción de procesos manuales, toma de pedidos optimizada y gestión centralizada.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 DIGITAL MENU SOLUTION -->
+        <section class="bg-warm-white fade-in" id="solution">
+            <div class="container grid-2">
+                <div class="phone-container">
+                    <div class="phone-screen-area">
+                        <div class="phone-screen active" id="screen-menu">
+                            <div class="mock-nav"><div class="mock-line short"></div><div class="mock-circle"></div></div>
+                            <h3 class="heading-font">Menú</h3>
+                            <div class="mock-img"></div>
+                            <div class="mock-line"></div>
+                            <div class="mock-line short"></div>
+                        </div>
+                        <div class="phone-screen" id="screen-product">
+                            <div class="mock-img" style="height: 250px; margin: -24px -24px 24px -24px; border-radius: 0;"></div>
+                            <h3 class="heading-font">Producto</h3>
+                            <div class="mock-line"></div>
+                            <div class="mock-line short"></div>
+                            <div class="mock-btn"></div>
+                        </div>
+                        <div class="phone-screen" id="screen-cart">
+                            <h3 class="heading-font">Orden</h3>
+                            <div class="mock-line"></div>
+                            <div class="mock-line"></div>
+                            <div class="mock-btn"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-hero-eyebrow" style="margin-bottom: 16px;">MENÚ DIGITAL</div>
+                    <h2 class="text-section-title">Todo lo que su huésped necesita, en un solo lugar</h2>
+                    <p class="text-body" style="margin-bottom: 24px;">Su menú deja de ser únicamente una lista de productos.</p>
+                    <p class="text-body" style="margin-bottom: 24px;">Se convierte en una experiencia digital donde sus clientes pueden descubrir sus opciones, seleccionar sus favoritos, realizar pedidos y pagar desde su teléfono.</p>
+                    <p class="text-body">Y usted puede mantener toda la información actualizada con facilidad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 HOW IT WORKS -->
+        <section class="bg-dark fade-in" id="how-it-works">
+            <div class="container">
+                <h2 class="text-section-title" style="text-align: center;">CÓMO FUNCIONA</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-num">01</div>
+                        <h4 style="margin-bottom: 8px;">Accede al menú</h4>
+                        <p style="font-size: 14px; opacity: 0.8;">El huésped escanea un código QR o accede directamente al Menú Digital desde su teléfono.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">02</div>
+                        <h4 style="margin-bottom: 8px;">Explora</h4>
+                        <p style="font-size: 14px; opacity: 0.8;">Puede consultar categorías, productos, fotografías, descripciones y precios.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">03</div>
+                        <h4 style="margin-bottom: 8px;">Selecciona y ordena</h4>
+                        <p style="font-size: 14px; opacity: 0.8;">Elige sus productos, cantidades, opciones y observaciones antes de confirmar.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">04</div>
+                        <h4 style="margin-bottom: 8px;">Paga</h4>
+                        <p style="font-size: 14px; opacity: 0.8;">Puede completar el pago digitalmente mediante PayPal o Azul Dominicana, en USD o moneda local.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">05</div>
+                        <h4 style="margin-bottom: 8px;">Recibe confirmación</h4>
+                        <p style="font-size: 14px; opacity: 0.8;">El pedido queda registrado y el cliente recibe la confirmación correspondiente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 CORE CAPABILITIES -->
+        <section class="bg-white fade-in" id="capabilities">
+            <div class="container">
+                <h2 class="text-section-title" style="text-align: center; margin-bottom: 64px;">TODO LO QUE SU NEGOCIO NECESITA</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 28px; margin-bottom: 16px;">Gestión del menú</h3>
+                        <p class="text-body" style="font-size: 15px; margin-bottom: 16px;">Actualice fácilmente la información de su menú.</p>
+                        <ul style="font-size: 14px; opacity: 0.8; line-height: 2;">
+                            <li>• Productos</li><li>• Categorías</li><li>• Precios</li><li>• Fotografías</li><li>• Descripciones</li><li>• Disponibilidad</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 28px; margin-bottom: 16px;">Pedidos digitales</h3>
+                        <p class="text-body" style="font-size: 15px; margin-bottom: 16px;">Sus clientes pueden realizar pedidos directamente desde su teléfono.</p>
+                        <ul style="font-size: 14px; opacity: 0.8; line-height: 2;">
+                            <li>• Explorar el menú</li><li>• Seleccionar productos</li><li>• Indicar cantidades</li><li>• Elegir opciones</li><li>• Agregar instrucciones</li><li>• Confirmar pedidos</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 28px; margin-bottom: 16px;">Pagos digitales</h3>
+                        <p class="text-body" style="font-size: 15px; margin-bottom: 16px;">Ofrezca a sus clientes diferentes opciones de pago.</p>
+                        <ul style="font-size: 14px; opacity: 0.8; line-height: 2;">
+                            <li>• PayPal</li><li>• Azul Dominicana</li><li>• USD</li><li>• Moneda local</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 28px; margin-bottom: 16px;">Operación y control</h3>
+                        <p class="text-body" style="font-size: 15px; margin-bottom: 16px;">Mantenga los pedidos organizados y reduzca procesos manuales.</p>
+                        <ul style="font-size: 14px; opacity: 0.8; line-height: 2;">
+                            <li>• Pedidos registrados</li><li>• Historial de pedidos</li><li>• Confirmaciones digitales</li><li>• Recibos generados automáticamente</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 28px; margin-bottom: 16px;">Relación con sus clientes</h3>
+                        <p class="text-body" style="font-size: 15px; margin-bottom: 16px;">Con la autorización correspondiente del cliente, cada pedido puede convertirse en una oportunidad para mantener una relación después de la compra.</p>
+                        <ul style="font-size: 14px; opacity: 0.8; line-height: 2;">
+                            <li>• Capture información de clientes</li><li>• Facilite futuras comunicaciones</li><li>• Identifique oportunidades de recompra</li><li>• Solicite reseñas después del pedido</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 HOSPITALITY USE CASES -->
+        <section class="bg-warm-white fade-in" id="use-cases">
+            <div class="container">
+                <div class="text-hero-eyebrow" style="text-align: center; margin-bottom: 16px;">DISEÑADO PARA LA HOSPITALIDAD</div>
+                <div class="grid-3" style="margin-top: 48px;">
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 24px; margin-bottom: 12px;">Servicio a la habitación (Room Service)</h3>
+                        <p class="text-body" style="font-size: 15px;">Sus huéspedes pueden consultar el menú y realizar pedidos directamente desde su habitación.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 24px; margin-bottom: 12px;">Piscina y Lounge</h3>
+                        <p class="text-body" style="font-size: 15px;">Permita que sus clientes ordenen desde su chaise longue, mesa o área de descanso.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 24px; margin-bottom: 12px;">Restaurante</h3>
+                        <p class="text-body" style="font-size: 15px;">Facilite los pedidos directamente desde la mesa.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 24px; margin-bottom: 12px;">Bar</h3>
+                        <p class="text-body" style="font-size: 15px;">Presente sus bebidas y alimentos de forma clara y permita realizar pedidos desde el teléfono.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="heading-font" style="font-size: 24px; margin-bottom: 12px;">Eventos y servicios privados</h3>
+                        <p class="text-body" style="font-size: 15px;">Una opción práctica para eventos, reuniones y experiencias gastronómicas especiales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 GUEST EXPERIENCE -->
+        <section class="bg-white fade-in" id="experience">
+            <div class="container" style="text-align: center; max-width: 800px;">
+                <h2 class="text-section-title">Descubrir. Elegir. Ordenar. Pagar. Recibir confirmación.</h2>
+                <p class="text-body" style="margin: 0 auto 24px;">Todo desde su teléfono.</p>
+                <p class="text-body" style="margin: 0 auto;">El Menú Digital está diseñado para reducir pasos innecesarios y hacer que el proceso sea fácil de entender.</p>
+            </div>
+        </section>
+
+        <!-- 09 DIGITAL PAYMENTS -->
+        <section class="bg-dark fade-in" id="payments">
+            <div class="container text-center">
+                <div class="text-hero-eyebrow" style="color: var(--white); margin-bottom: 16px; text-align: center;">PAGOS DIGITALES PARA SUS CLIENTES</div>
+                <h2 class="text-section-title" style="text-align: center;">Opciones de pago para clientes locales e internacionales</h2>
+                <p class="text-body" style="margin: 0 auto 48px; text-align: center;">Permita que sus clientes paguen de forma digital y ofrezca opciones adaptadas tanto al público local como a visitantes internacionales.</p>
+                <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; font-size: 18px; font-weight: 600;">
+                    <span>PayPal</span> <span style="opacity: 0.3;">|</span>
+                    <span>Azul Dominicana</span> <span style="opacity: 0.3;">|</span>
+                    <span>USD</span> <span style="opacity: 0.3;">|</span>
+                    <span>Moneda local</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10 CUSTOMER RELATIONSHIPS -->
+        <section class="bg-warm-white fade-in" id="relationships">
+            <div class="container grid-2">
+                <div>
+                    <div class="text-hero-eyebrow" style="margin-bottom: 16px;">DESPUÉS DEL PEDIDO</div>
+                    <h2 class="text-section-title">La relación puede continuar después del pedido</h2>
+                    <p class="text-body" style="margin-bottom: 24px;">Una vez completado el pedido, el sistema puede ayudarle a mantener el contacto con sus clientes.</p>
+                    <p class="text-body" style="font-weight: 600; margin-bottom: 16px;">Con su autorización:</p>
+                    <ul style="line-height: 2; opacity: 0.8;">
+                        <li>• Registre información del cliente.</li>
+                        <li>• Envíe comunicaciones posteriores.</li>
+                        <li>• Promueva futuras compras.</li>
+                        <li>• Solicite una reseña sobre su experiencia.</li>
+                    </ul>
+                </div>
+                <div class="card" style="text-align: center; padding: 60px 40px;">
+                    <div style="font-size: 24px; font-weight: 600; margin-bottom: 16px;">Pedido completado</div>
+                    <div style="width: 2px; height: 40px; background: var(--brand); margin: 0 auto 16px;"></div>
+                    <div style="font-size: 16px; opacity: 0.8; margin-bottom: 16px;">Información del cliente capturada</div>
+                    <div style="width: 2px; height: 40px; background: var(--brand); margin: 0 auto 16px;"></div>
+                    <div style="font-size: 16px; opacity: 0.8; margin-bottom: 16px;">Comunicación y seguimiento</div>
+                    <div style="width: 2px; height: 40px; background: var(--brand); margin: 0 auto 16px;"></div>
+                    <div style="font-size: 16px; font-weight: 600; color: var(--brand);">Solicitud de reseña</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11 TRUSTED BY -->
+        <section class="bg-dark fade-in" id="trusted-section">
+            <div class="container" style="text-align: center;">
+                <div class="text-hero-eyebrow" style="color: var(--white); margin-bottom: 32px;">CON LA CONFIANZA DE</div>
+                <h3 class="heading-font" style="font-size: 32px; margin-bottom: 16px;" data-var="trusted_client_name">Sun on the Bay, Beach Hotel</h3>
+                <p class="text-body" style="margin: 0 auto 32px; opacity: 0.8;">Una solución de Menú Digital desarrollada por <span data-var="company_name">Bebell Digital Solutions</span>.</p>
+                <a href="#" data-bind-href="trusted_client_menu_url" target="_blank" class="btn btn-primary" style="background: var(--brand);">Visitar menú</a>
+            </div>
+        </section>
+
+        <!-- 12 PRICING -->
+        <section class="bg-white fade-in" id="pricing">
+            <div class="container">
+                <div class="text-hero-eyebrow" style="text-align: center; margin-bottom: 48px;">INVERSIÓN</div>
+                <div class="grid-2" style="max-width: 900px; margin: 0 auto;">
+                    <div class="card" style="text-align: center;">
+                        <h3 class="heading-font" style="font-size: 28px; margin-bottom: 16px;">IMPLEMENTACIÓN</h3>
+                        <div style="font-size: 40px; font-weight: 600; color: var(--brand); margin-bottom: 8px;">USD 795</div>
+                        <div style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 24px;">Pago único</div>
+                        <p class="text-body" style="font-size: 15px; margin: 0 auto;">Configuración y puesta en marcha del Menú Digital para su negocio.</p>
+                    </div>
+                    <div class="card pricing-card-highlight" style="text-align: center;">
+                        <h3 class="heading-font" style="font-size: 28px; margin-bottom: 16px;">SERVICIO</h3>
+                        <div style="font-size: 40px; font-weight: 600; color: var(--brand); margin-bottom: 8px;">USD 150</div>
+                        <div style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 24px;">Mensuales</div>
+                        <p class="text-body" style="font-size: 15px; margin: 0 auto;">Servicio continuo, mantenimiento y soporte del sistema.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13 FAQ -->
+        <section class="bg-warm-white fade-in" id="faq">
+            <div class="container" style="max-width: 800px;">
+                <h2 class="text-section-title" style="text-align: center; margin-bottom: 48px;">PREGUNTAS FRECUENTES</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">¿Puedo cambiar precios y productos fácilmente? <span>+</span></div>
+                        <div class="faq-answer">Sí. El Menú Digital está diseñado para que pueda mantener actualizados sus productos, precios, imágenes, descripciones y disponibilidad.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">¿Mis huéspedes pueden realizar pedidos desde sus habitaciones? <span>+</span></div>
+                        <div class="faq-answer">Sí. El sistema puede utilizarse desde habitaciones y otras áreas del establecimiento.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">¿Puedo utilizar códigos QR? <span>+</span></div>
+                        <div class="faq-answer">Sí. Los códigos QR pueden utilizarse para facilitar el acceso al Menú Digital desde mesas, habitaciones, áreas de piscina, bares y otros espacios.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">¿Puedo aceptar pagos digitales? <span>+</span></div>
+                        <div class="faq-answer">Sí. El sistema puede integrar PayPal y Azul Dominicana.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">¿Puedo recibir pagos en USD y moneda local? <span>+</span></div>
+                        <div class="faq-answer">Sí, según la configuración de sus métodos de pago y las condiciones de cada proveedor.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">¿Se generan recibos automáticamente? <span>+</span></div>
+                        <div class="faq-answer">El sistema puede generar registros y recibos digitales de los pedidos según la configuración implementada.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">¿Puedo solicitar reseñas a mis clientes? <span>+</span></div>
+                        <div class="faq-answer">Sí. Después del pedido puede configurarse una solicitud para invitar al cliente a compartir su experiencia.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">¿Cómo funciona el servicio mensual? <span>+</span></div>
+                        <div class="faq-answer">El servicio mensual cubre la continuidad del sistema, mantenimiento y soporte según las condiciones del servicio contratado.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14 FINAL CTA -->
+        <section class="bg-dark fade-in" id="cta">
+            <div class="container" style="text-align: center;">
+                <div class="text-hero-eyebrow" style="color: var(--white); margin-bottom: 16px;">MENÚ DIGITAL</div>
+                <h2 class="text-section-title">Una experiencia de pedido más simple para <span data-var="business_name">su negocio</span></h2>
+                <p class="text-body" style="margin: 0 auto 40px; opacity: 0.9;">Facilite el proceso para sus huéspedes y dé a su equipo una forma más organizada de gestionar sus pedidos.</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="#" data-bind-href="cta_url" class="btn btn-primary">Solicitar propuesta</a>
+                    <a href="#" data-bind-href="demo_menu_url" class="btn btn-secondary" target="_blank">Ver menú de ejemplo</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 15 FOOTER -->
+        <footer id="footer">
+            <div class="container">
+                <div style="margin-bottom: 24px;">
+                    <h4 class="heading-font" style="font-size: 24px;" data-var="company_name">Bebell Digital Solutions</h4>
+                    <p style="margin-top: 8px;"><span data-var="sales_rep_name"></span></p>
+                    <p><span data-var="public_email"></span> | <span data-var="public_phone"></span></p>
+                    <p><a href="#" data-bind-href="business_website" target="_blank" data-var="business_website"></a></p>
+                </div>
+                <div style="opacity: 0.6; font-size: 13px; margin-bottom: 24px;">
+                    Propuesta <span data-var="proposal_id"></span> | <span data-var="proposal_date"></span>
+                </div>
+                <div class="lang-switch" style="justify-content: center; opacity: 0.6;">
+                    <a href="#" class="lang-btn active" data-lang="es">Español</a>
+                    <a href="#" class="lang-btn" data-lang="en">English</a>
+                    <a href="#" class="lang-btn" data-lang="fr">Français</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MAIN JAVASCRIPT LOGIC -->
+    <script>
+        const API_URL = 'https://script.google.com/macros/s/AKfycbx5dqRmB6_kCyZSX6UYZ77Pzm3zqfuwWsId8Vjb0ge1dSp7iJmFOAbAVmnkSqIQwxJ0/exec';
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('t');
+
+        // Analytics Stubs
+        function trackEvent(name) { console.log('Analytics Event:', name); }
+
+        // Core Init
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!token) {
+                document.getElementById('error-state').style.display = 'flex';
+                return;
+            }
+
+            // Language Switcher Logic (Preserves Token)
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = e.target.getAttribute('data-lang');
+                    trackEvent('LanguageChange');
+                    window.location.href = `${lang}.html?t=${token}`;
+                });
+            });
+
+            // JSONP Request
+            const script = document.createElement('script');
+            script.src = `${API_URL}?t=${token}&callback=__menuDigitalProposalReceive`;
+            document.body.appendChild(script);
+
+            initScrollAnimations();
+            initNavbar();
+            initPhoneAnimation();
+        });
+
+        // JSONP Callback
+        function __menuDigitalProposalReceive(data) {
+            if (!data || !data.proposal_id) {
+                document.getElementById('error-state').style.display = 'flex';
+                return;
+            }
+
+            document.getElementById('main-content').style.display = 'block';
+
+            // Populate Text Variables
+            document.querySelectorAll('[data-var]').forEach(el => {
+                const key = el.getAttribute('data-var');
+                if (data[key]) {
+                    el.textContent = data[key];
+                }
+            });
+
+            // Populate URLs/HREFs safely
+            document.querySelectorAll('[data-bind-href]').forEach(el => {
+                const key = el.getAttribute('data-bind-href');
+                if (data[key] && data[key].startsWith('https://')) {
+                    el.href = data[key];
+                } else {
+                    el.style.display = 'none'; // Hide broken links
+                }
+            });
+
+            // Populate Images safely
+            document.querySelectorAll('[data-bind-src]').forEach(el => {
+                const key = el.getAttribute('data-bind-src');
+                if (data[key] && data[key].startsWith('https://')) {
+                    el.src = data[key];
+                } else if (el.hasAttribute('data-fallback')) {
+                    el.src = el.getAttribute('data-fallback');
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+
+            // Fallbacks
+            if (!data.business_logo) {
+                document.querySelectorAll('.dynamic-logo').forEach(el => {
+                    const txt = document.createElement('h2');
+                    txt.className = 'heading-font';
+                    txt.style.margin = '0 auto 24px';
+                    txt.textContent = data.company_name || data.business_name;
+                    el.replaceWith(txt);
+                });
+            }
+
+            if (!data.trusted_client_name) {
+                const tSec = document.getElementById('trusted-section');
+                if(tSec) tSec.style.display = 'none';
+            }
+
+            initHeroCarousel();
+        }
+
+        // Hero Carousel
+        function initHeroCarousel() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.indicator-progress');
+            let current = 0;
+            let interval;
+            const duration = 5000;
+
+            function showSlide(index) {
+                slides.forEach((s, i) => {
+                    s.classList.toggle('active', i === index);
+                    indicators[i].style.transition = i === index ? `width ${duration}ms linear` : 'none';
+                    indicators[i].style.width = i === index ? '100%' : '0%';
+                });
+            }
+
+            function nextSlide() {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            }
+
+            function start() {
+                showSlide(current);
+                interval = setInterval(nextSlide, duration);
+            }
+
+            function stop() {
+                clearInterval(interval);
+            }
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) stop();
+                else start();
+            });
+
+            if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                start();
+            } else {
+                slides[0].classList.add('active');
+            }
+        }
+
+        // Navbar Scroll
+        function initNavbar() {
+            const nav = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                nav.classList.toggle('scrolled', window.scrollY > 50);
+            });
+        }
+
+        // Intersection Observer
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }
+
+        // Phone Mockup Animation
+        function initPhoneAnimation() {
+            const screens = document.querySelectorAll('.phone-screen');
+            if(!screens.length) return;
+            let current = 0;
+            setInterval(() => {
+                screens.forEach(s => s.classList.remove('active'));
+                current = (current + 1) % screens.length;
+                screens[current].classList.add('active');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
