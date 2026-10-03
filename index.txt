@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Digital - Revoluciona tu Carta</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#13413a',
+                        'primary-light': 'rgba(223, 23, 131, 0.1)',
+                        'primary-lighter': 'rgba(223, 23, 131, 0.05)',
+                        'accent-color': '#13413a',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Base Variables (Scoped from provided code) */
+        :root {
+            --primary: #13413a;
+            --primary-light: rgba(223, 23, 131, 0.1);
+            --primary-lighter: rgba(223, 23, 131, 0.05);
+            --bg-body: #f7f7f3;
+            --text-dark: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --bg-main: #ffffff;
+            --card-bg: #ffffff;
+            --text-primary: #121212;
+            --text-secondary: #5a5a5a;
+            --accent-color: #6a4cff;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        
+        
+        
+
+        /* Hero Carousel Slider */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 100%);
+            z-index: 0;
+        }
+
+        /* Infinite Logo Slider */
+        .logo-slider {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .logo-slider:before, .logo-slider:after {
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            content: "";
+            z-index: 2;
+        }
+        .logo-slider:before {
+            left: 0;
+            background: linear-gradient(to left, rgba(247, 247, 243, 0), rgba(247, 247, 243, 1));
+        }
+        .logo-slider:after {
+            right: 0;
+            background: linear-gradient(to right, rgba(247, 247, 243, 0), rgba(247, 247, 243, 1));
+        }
+        .logo-track {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Dashboard Block Styles */
+        .dashboard-wrapper {
+            padding: 4rem 1rem;
+        }
+        .dash-container { max-width: 1152px; margin: 0 auto; }
+        .header-section { text-align: center; margin-bottom: 3rem; }
+        .badge-container { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.875rem; font-weight: 500; color: var(--primary); letter-spacing: 0.05em; }
+        .badge-line { width: 2rem; height: 1px; background-color: var(--primary); opacity: 0.3; }
+        .main-title { font-size: 2.25rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1rem; line-height: 1.2; }
+        .main-title span { color: var(--primary); }
+        .subtitle { font-size: 1.125rem; color: var(--text-muted); max-width: 42rem; margin: 0 auto; }
+        .dashboard-container { background-color: #fff; border-radius: 1.5rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); overflow: hidden; border: 1px solid var(--border-color); }
+        .tab-list { display: flex; background-color: #fbfbf9; border-bottom: 1px solid var(--border-color); overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--primary) #f1f1f1; }
+        .tab-list::-webkit-scrollbar { height: 6px; }
+        .tab-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .tab-list::-webkit-scrollbar-thumb { background-color: var(--primary); border-radius: 4px; }
+        .tab-btn { position: relative; flex: 1; min-width: 200px; padding: 1.25rem 1.5rem; text-align: center; font-size: 0.875rem; font-weight: 600; color: var(--text-muted); background: transparent; border: none; cursor: pointer; transition: all 0.2s ease; outline: none; }
+        .tab-btn:hover { background-color: rgba(0, 0, 0, 0.02); }
+        .tab-btn.active { color: var(--primary); background-color: #fff; font-weight: 700; }
+        .tab-progress-bar { position: absolute; top: 0; left: 0; height: 3px; background-color: var(--primary); width: 0; display: none; }
+        .tab-btn.active .tab-progress-bar { display: block; animation: progress 10s linear forwards; }
+        @keyframes progress { 0% { width: 0; } 100% { width: 100%; } }
+        .tab-content-area { padding: 2rem; }
+        .tab-content { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .content-title { font-size: 1.5rem; font-weight: 700; text-align: center; color: var(--text-dark); margin-bottom: 2.5rem; letter-spacing: -0.025em; }
+        .features-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+        .feature-card { background-color: var(--primary-lighter); border: 1px solid var(--primary-light); border-radius: 1rem; padding: 1rem; display: flex; align-items: center; gap: 1rem; }
+        .feature-icon-wrapper { background-color: var(--primary-light); border-radius: 50%; padding: 0.375rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .feature-icon-wrapper svg { width: 1rem; height: 1rem; color: var(--primary); }
+        .feature-text { font-size: 0.875rem; font-weight: 500; color: #1f2937; margin:0; }
+        .image-container { border-radius: 0.75rem; overflow: hidden; border: 1px solid var(--border-color); background-color: #fff; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+        .image-container img { width: 100%; height: auto; display: block; object-fit: cover; object-position: top; }
+
+        @media (min-width: 768px) {
+            .dash-main-title { font-size: 3rem; }
+            .tab-content-area { padding: 3rem; }
+            .content-title { font-size: 1.75rem; }
+            .features-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* Stacking Cards */
+        .page-wrapper { max-width: 1200px; margin: 0 auto; padding: 80px 20px 20vh; }
+        .stack-container { position: relative; display: flex; flex-direction: column; gap: 40px; }
+        .stack-card { position: sticky; top: calc(40px + (var(--card-index) * 20px)); display: flex; align-items: center; background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 60px; gap: 60px; box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.06); transform-origin: top center; transition: transform 0.3s ease, filter 0.3s ease; }
+        .card-content { flex: 1; }
+        .stack-badge { display: inline-block; padding: 6px 16px; border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 50px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; background-color: rgba(106, 76, 255, 0.05); }
+        .card-title { font-size: 2.5rem; margin: 0 0 20px 0; font-weight: 600; letter-spacing: -0.5px; }
+        .card-text { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; max-width: 90%; }
+        .cta-btn { display: inline-block; padding: 14px 28px; background-color: #df1783; color: var(--bg-main); text-decoration: none; border-radius: 8px; font-weight: 600; transition: background-color 0.2s ease, transform 0.1s ease; }
+        .cta-btn:hover { background-color: #333333; }
+        .card-media { flex: 1; width: 100%; }
+        .image-wrapper { width: 100%; aspect-ratio: 3 / 2; border-radius: 12px; border: 1px solid var(--border-color); box-sizing: border-box; background-size: cover; background-position: center; }
+
+        @media (max-width: 992px) {
+            .stack-card { flex-direction: column; padding: 40px 24px; gap: 40px; top: calc(20px + (var(--card-index) * 10px)); }
+            .card-title { font-size: 2rem; }
+            .card-text { max-width: 100%; }
+        }
+
+        /* Macbook Mockup */
+        .macbook-wrapper { position: relative; background: #f7f7f3; padding: 20px; border-radius: 8px; margin-top: 0;}
+        
+        
+        .macbook-wrapper .macbook { padding: 4% 6%; margin: 0 auto; max-width: 1500px; background: #f7f7f3; border-radius: 8px; }
+        
+        
+        .macbook-wrapper .screen { background: #000; border-radius: 3% 3% 0.5% 0.5% / 5%; margin: 0 auto; position: relative; width: 80%; }
+        
+        
+        .macbook-wrapper .screen:before { border: 2px solid #cacacc; border-radius: 3% 3% 0.5% 0.5% / 5%; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 1px 2px rgba(255, 255, 255, 0.3) inset; content: ""; display: block; padding-top: 67%; }
+        
+        
+        
+        
+        .macbook-wrapper .viewport { position: absolute; bottom: 0; left: 0; right: 0; top: 0; margin: 4.3% 3.2%; background: #F2F1FB; border-radius: 4px; transition: background-position 20s ease; background-position: 0 0; background-size: 100% auto; overflow: hidden; cursor: pointer; }
+        
+        
+        
+        .macbook-wrapper .base { position: relative; width: 100%; background: #f7f7f3; border-radius: 8px; }
+        
+        
+        .macbook-wrapper .base:before { content: ""; display: block; padding-top: 3.3%; background: linear-gradient(#eaeced, #edeef0 55%, #fff 55%, #8a8b8f 56%, #999ba0 61%, #4B4B4F 84%, #262627 89%, rgba(0, 0, 0, .01) 98%); border-radius: 0 0 10% 10%/ 0 0 50% 50%; }
+        
+        
+        
+        .macbook-wrapper .notch { background: #ddd; border-radius: 0 0 7% 7% / 0 0 95% 95%; box-shadow: -5px -1px 3px rgba(0, 0, 0, 0.2) inset, 5px -1px 3px rgba(0, 0, 0, 0.2) inset; margin-left: auto; margin-right: auto; margin-top: -3.5%; z-index: 2; position: relative; width: 14%; }
+        .macbook-wrapper .notch:before { content: ""; display: block; padding-top: 10%; }
+        
+        
+        .macbook-wrapper .macbook:hover .viewport { background-position: 0 100%; }
+        
+        
+        
+        .macbook-wrapper .macbook .viewport:after { background: radial-gradient(circle at right bottom, transparent 75%, rgba(255, 255, 255, 0.05) 75%, transparent); bottom: 0; content: ""; left: 0; position: absolute; right: 0; top: 0; }
+        
+        
+        
+
+        /* Pricing & Utils */
+        .plan-card:hover { box-shadow: 0 25px 50px -12px rgba(13, 148, 136, 0.15); }
+        .accordion-content { transition: max-height 0.3s ease-out, padding 0.3s ease; max-height: 0; overflow: hidden; }
+        .accordion-content.active { max-height: 500px; padding-bottom: 1.5rem; padding-top: 0.5rem; }
+
+        @property --a { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+        @keyframes spin { 0% { --a: 0deg; } 100% { --a: 360deg; } }
+        .animated-border-wrapper { position: relative; padding: 2px; border-radius: 0.875rem; background: conic-gradient(from var(--a), transparent 0%, transparent 75%, rgba(80, 211, 204, 0.3) 90%, rgba(80, 211, 204, 0.9) 98%, #50d3cc 100%); animation: spin 3s linear infinite; z-index: 1; }
+        .animated-border-wrapper::before { content: ''; position: absolute; inset: -4px; border-radius: 1rem; background: conic-gradient(from var(--a), transparent 0%, transparent 75%, rgba(80, 211, 204, 0.1) 90%, rgba(80, 211, 204, 0.6) 98%, rgba(80, 211, 204, 0.8) 100%); filter: blur(8px); z-index: -1; animation: spin 3s linear infinite; }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+
+
+
+
+    <nav class="relative z-50 w-full max-w-full mx-auto px-6 py-6 flex justify-between items-center bg-black">
+        <div class="flex items-center gap-2">
+            <a href="#" class="flex items-center gap-2 group">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/eebc62809be08cbd0454502bcc89c8ff5e667a34.png" alt="LegacyMD Logo" class="w-10 h-10 object-contain" />
+                <span class="font-bold text-slate-800 text-xl tracking-tight">Legacy<span class="text-teal-600">MD</span></span>
+            </a>
+        </div>
+        <div class="hidden md:flex items-center gap-6">
+
+            <a href="#" class="text-sm font-semibold text-slate-600 hover:text-teal-600 transition-colors">Inicio</a>
+            
+            <a href="#caracteristicas" class="text-sm font-semibold text-slate-600 hover:text-teal-600 transition-colors">Características</a>
+            <a href="#planes" class="text-sm font-semibold text-slate-600 hover:text-teal-600 transition-colors">Planes</a>
+            <a href="/portafolio" class="text-sm font-semibold text-slate-600 hover:text-teal-600 transition-colors">Portafolio</a>
+            <a href="/p/reporte" target="_blank" class="text-sm font-semibold text-slate-600 hover:text-teal-600 transition-colors">Reporte</a>
+
+<a href="https://en.legacymd.online" title="English" class="text-slate-600 hover:text-teal-600 transition-colors">
+    <i data-lucide="languages" class="w-5 h-5"></i>
+</a>
+                    
+            
+            <button data-cal-link="bebell-digital-solutions/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}' class="text-sm font-bold bg-teal-700 text-white px-5 py-2.5 rounded-full hover:bg-slate-800 hover:shadow-lg transition-all shadow-slate-300">
+                Agendar Demo
+            </button>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[90vh] flex items-center pt-20 pb-16 overflow-hidden">
+        <!-- Background Carousel -->
+        <div class="absolute inset-0 z-0 bg-black" id="hero-carousel">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1920&q=80')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80')"></div>
+            <div class="hero-overlay"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Left Side -->
+            <div class="flex flex-col justify-center animate-fade-in-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/20 border border-primary/30 w-fit mb-6">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    <span class="text-white text-xs font-bold uppercase tracking-wider">Nuevo Sistema</span>
+                </div>
+                
+                <h1 class="text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                    Tus platos ya se ven increíbles en redes sociales. <span class="text-primary">¿Por qué no en tu carta?</span>
+                </h1>
+                
+                <p class="text-lg text-gray-300 mb-8 max-w-xl">
+                    Menú digital con fotos, pedidos y pagos integrados. Tus clientes ven lo que van a pedir, piden desde el navegador y pagan en segundos. Tú gestionas todo desde nuestra app móvil y la nube.
+                </p>
+                
+                <div class="flex flex-wrap items-center gap-4 mb-8">
+                    <a href="#contacto" class="bg-primary hover:bg-primary/90 text-white font-bold py-4 px-8 rounded-xl transition-all flex items-center gap-2 transform hover:scale-105 shadow-lg shadow-primary/30">
+                        Solicita tu demo gratis
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                    
+                   
+                    
+                    
+                </div>
+
+
+
+                <!-- 3 Benefits -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-2 text-xs text-gray-400 font-medium">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i>
+                        Sin contratos largos
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i>
+                        Sin inversión inicial alta
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i>
+                        Operativo en 48 horas
+                    </div>
+                </div>
+            </div>
+            <!-- Right Side (Empty Space for slider visibility) -->
+            <div class="hidden lg:block"></div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- LOGO SLIDER SECTION -->
+    <section class="py-10 bg-black border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 mb-4 text-center">
+            <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">Confiado por los mejores negocios locales</p>
+        </div>
+        <div class="logo-slider">
+            <div class="logo-track flex items-center gap-16 px-8">
+                <!-- Doubled for infinite scroll effect -->
+                <div class="flex items-center gap-16">
+                    <h3 class="text-2xl font-black text-gray-300">BurgerJoint</h3>
+                    <h3 class="text-2xl font-black text-gray-300">SushiLounge</h3>
+                    <h3 class="text-2xl font-black text-gray-300">CafeCentral</h3>
+                    <h3 class="text-2xl font-black text-gray-300">HotelPalace</h3>
+                    <h3 class="text-2xl font-black text-gray-300">TacoStreet</h3>
+                </div>
+                <div class="flex items-center gap-16">
+                    <h3 class="text-2xl font-black text-gray-300">BurgerJoint</h3>
+                    <h3 class="text-2xl font-black text-gray-300">SushiLounge</h3>
+                    <h3 class="text-2xl font-black text-gray-300">CafeCentral</h3>
+                    <h3 class="text-2xl font-black text-gray-300">HotelPalace</h3>
+                    <h3 class="text-2xl font-black text-gray-300">TacoStreet</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <!-- PROBLEMA & SOLUCIÓN -->
+    <section class="py-24 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="gsap-fade-up">
+                    <span class="text-red-500 font-bold tracking-wider uppercase text-sm mb-2 block">El Problema</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Tu cliente no lee el menú.<br/>Tu cliente quiere <span class="text-red-500">VER</span> el plato.</h2>
+                    <p class="text-gray-600 mb-4 text-lg">Ya lo sabes. Una buena foto vende. Lo ves cada día en redes sociales: tus platos generan likes, comentarios, ganas. La gente come con los ojos antes de pedir.</p>
+                    <p class="text-gray-600 mb-6 text-lg">Pero tu carta no muestra nada de eso. Un menú impreso es una lista de texto. Sin fotos. Sin color. Sin deseo. El cliente lee "pollo al ajillo" y no siente nada. No ve el plato. No se imagina el sabor.</p>
+                    <div class="p-6 bg-red-50 rounded-2xl border border-red-100">
+                        <p class="font-semibold text-red-900">Tienes las fotos. Tienes el dato. Solo te falta el soporte correcto.</p>
+                    </div>
+                </div>
+                <div class="gsap-fade-up" style="transition-delay: 200ms;">
+                    <span class="text-teal-600 font-bold tracking-wider uppercase text-sm mb-2 block">La Solución</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Un enlace. Tu carta con fotos. Pedidos y pagos sin instalar nada.</h2>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="bg-teal-100 p-3 rounded-xl mt-1"><i data-lucide="globe" class="w-6 h-6 text-teal-600"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-lg">Para tu cliente</h4>
+                                <p class="text-gray-600">Frontend en línea con fotos reales. Sin descargas, sin registros, sin esperas.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="bg-teal-100 p-3 rounded-xl mt-1"><i data-lucide="smartphone" class="w-6 h-6 text-teal-600"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-lg">Para ti</h4>
+                                <p class="text-gray-600">App de gestión (iPhone y Android) para controlar pedidos, stock y precios desde donde estés.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="bg-teal-100 p-3 rounded-xl mt-1"><i data-lucide="cloud" class="w-6 h-6 text-teal-600"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-lg">En la nube</h4>
+                                <p class="text-gray-600">Toda la operación centralizada. Actualiza tu carta en segundos.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+
+    <!-- INTERACTIVE LAPTOP & DASHBOARD EXACT BLOCKS -->
+    <section class="py-20 bg-[var(--bg-body)] border-t border-gray-200 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mt-16 text-center gsap-fade-up">
+        
+        <div class="badge-container">
+                        <span class="badge-line"></span>
+                        <span>05 · QUÉ INCLUYE</span>
+                        <span class="badge-line"></span>
+                    </div>
+                    
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">La gestión completa en tus manos</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Interfaz moderna, rápida y pensada para la operación diaria de tu restaurante.</p>
+        </div>
+
+        <!-- EXACT MACBOOK WRAPPER -->
+        <div class="macbook-wrapper gsap-scale-up">
+            <div class="macbook">
+                <div class="screen">
+                    <div class="viewport" style="background-image: url('https://cdn.shopify.com/s/files/1/0242/0175/6777/files/Tienda-Prueba-04-13-2025_06_36_PM.png?v=1744583957');">
+                    </div>
+                </div>
+                <div class="base"></div>
+                <div class="notch"></div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        <!-- EXACT DASHBOARD TABS BLOCK -->
+        <div class="dashboard-wrapper gsap-fade-up">
+            <div class="dash-container container">
+                <!-- Header Text -->
+                <div class="header-section">
+                    <div class="badge-container">
+                        <span class="badge-line"></span>
+                        <span>05 · QUÉ INCLUYE</span>
+                        <span class="badge-line"></span>
+                    </div>
+                    <h2 class="main-title dash-main-title">
+                        Cuatro áreas. <br/><span>Una operación completa.</span>
+                    </h2>
+                    <p class="subtitle">
+                        Todo comparte los mismos contactos y los mismos datos. Lo configuras una vez y funciona en conjunto.
+                    </p>
+                </div>
+
+
+                <!-- Main Dashboard Container -->
+                <div class="dashboard-container">
+                    <!-- Tabs Navigation -->
+                    <div class="tab-list" role="tablist">
+                        <button class="tab-btn" data-target="tab1" role="tab" aria-selected="false">Atención<div class="tab-progress-bar"></div></button>
+                        <button class="tab-btn" data-target="tab2" role="tab" aria-selected="false">Clientes y Embudos<div class="tab-progress-bar"></div></button>
+                        <button class="tab-btn" data-target="tab3" role="tab" aria-selected="false">Campañas y Jornadas<div class="tab-progress-bar"></div></button>
+                        <button class="tab-btn active" data-target="tab4" role="tab" aria-selected="true">Tu equipo de IA<div class="tab-progress-bar"></div></button>
+                    </div>
+
+                    <!-- Tab Content Area -->
+                    <div class="tab-content-area">
+                    
+                    
+                    
+                        <!-- Tab 1 -->
+                        <div id="tab1" class="tab-content">
+                            <h3 class="content-title">Atención humanizada y eficiente en todos los canales.</h3>
+                            <div class="features-grid">
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Centralización de mensajes de WhatsApp, IG y más</p></div>
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Múltiples agentes en el mismo número</p></div>
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Historial unificado del cliente</p></div>
+                            </div>
+                            <div class="image-container"><img src="https://ik.imagekit.io/bebell/HelpDesk%20App/f0781370-21d2-49da-922b-f60079b00b23.webp" alt="Interfaz de agentes"></div>
+                        </div>
+                        
+                        
+                        
+                        
+
+                        <!-- Tab 2 -->
+                        <div id="tab2" class="tab-content">
+                            <h3 class="content-title">Gestión de clientes y embudos de venta integrados.</h3>
+                            <div class="features-grid">
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">CRM completo para seguir negociaciones</p></div>
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Embudos de venta personalizables</p></div>
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Automatizaciones basadas en las etapas del embudo</p></div>
+                            </div>
+                            <div class="image-container"><img src="https://ik.imagekit.io/bebell/HelpDesk%20App/dd8927ff-6887-43f7-93ff-17a1e19ce19c.webp" alt="Interfaz clientes"></div>
+                        </div>
+                        
+                        
+                        
+                        
+
+                        <!-- Tab 3 -->
+                        <div id="tab3" class="tab-content">
+                            <h3 class="content-title">Campañas y jornadas automatizadas de alto impacto.</h3>
+                            <div class="features-grid">
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Envíos masivos por WhatsApp</p></div>
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Constructor visual de flujos de automatización</p></div>
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Métricas y reportes de conversión</p></div>
+                            </div>
+                            <div class="image-container"><img src="https://ik.imagekit.io/bebell/HelpDesk%20App/chatflow-preview.webp" alt="Interfaz flujos"></div>
+                        </div>
+                        
+                        
+                        
+                        
+
+                        <!-- Tab 4 -->
+                        <div id="tab4" class="tab-content active">
+                            <h3 class="content-title">Inteligencia artificial trabajando para tu negocio 24/7.</h3>
+                            <div class="features-grid">
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Agentes para ventas, soporte y triaje</p></div>
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Entrenados con los datos de tu empresa</p></div>
+                                <div class="feature-card"><div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><p class="feature-text">Atención a escala directamente en tus canales</p></div>
+                            </div>
+                            <div class="image-container"><img src="https://ik.imagekit.io/bebell/HelpDesk%20App/base-de-conocimientos.webp" alt="Interfaz IA"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- EXACT STACKING CARDS BLOCK -->
+    <section class="bg-[var(--bg-body)]">
+        <div class="page-wrapper">
+            <!-- Header Text -->
+            <div class="header-section gsap-fade-up">
+                <div class="badge-container">
+                    <span class="badge-line"></span>
+                    <span>06 · QUÉ INCLUYE</span>
+                    <span class="badge-line"></span>
+                </div>
+                <h2 class="main-title dash-main-title">
+                    Automate <span class="text-accent-color">Everything</span>
+                </h2>
+                <p class="subtitle">
+                    Haz scroll para ver cómo se acumulan las funcionalidades
+                </p>
+            </div>
+
+            <div class="stack-container" id="stack-container">
+            
+            
+            
+            
+                <!-- Block 1 -->
+                <div class="stack-card" style="--card-index: 0;">
+                    <div class="card-content">
+                        <div class="stack-badge">Feature</div>
+                        <h2 class="card-title">View Documentation</h2>
+                        <p class="card-text">Easily pull data from any webpage using our advanced syntax. Handle dynamic elements, javascript rendering, and pagination effortlessly.</p>
+                        <a href="#" class="cta-btn">View Documentation</a>
+                    </div>
+                    <div class="card-media">
+                        <div class="image-wrapper" style="background-image: url('https://ik.imagekit.io/bebell/Banners%20&%20Backgrounds/Backgrounds/6_yellow.png?updatedAt=1787948546654');"></div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+                <!-- Block 2 -->
+                <div class="stack-card" style="--card-index: 1;">
+                    <div class="card-content">
+                        <div class="stack-badge">Extract</div>
+                        <h2 class="card-title">Extract Entities</h2>
+                        <p class="card-text">Automatically identify and structure unstructured data. Extract names, prices, addresses, and dates without complex regex configurations.</p>
+                        <a href="#" class="cta-btn">View Documentation</a>
+                    </div>
+                    <div class="card-media">
+                        <div class="image-wrapper" style="background-image: url('https://ik.imagekit.io/bebell/Banners%20&%20Backgrounds/Backgrounds/7_green.png?updatedAt=1787948546614');"></div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
+
+                <!-- Block 3 -->
+                <div class="stack-card" style="--card-index: 2;">
+                    <div class="card-content">
+                        <div class="stack-badge">Monitor</div>
+                        <h2 class="card-title">Monitor Changes</h2>
+                        <p class="card-text">Watch webpages for changes and get notified via webhook. Perfect for price tracking, content updates, and competitor intelligence.</p>
+                        <a href="#" class="cta-btn">View Documentation</a>
+                    </div>
+                    <div class="card-media">
+                        <div class="image-wrapper" style="background-image: url('https://ik.imagekit.io/bebell/Banners%20&%20Backgrounds/Backgrounds/2_purple.png?updatedAt=1787948546627');"></div>
+                    </div>
+                </div>
+
+                <!-- Block 4 -->
+                <div class="stack-card" style="--card-index: 3;">
+                    <div class="card-content">
+                        <div class="stack-badge">Deploy</div>
+                        <h2 class="card-title">Scale Instantly</h2>
+                        <p class="card-text">Run thousands of concurrent tasks with zero infrastructure management. Our globally distributed network bypasses blocks automatically.</p>
+                        <a href="#" class="cta-btn">View Documentation</a>
+                    </div>
+                    <div class="card-media">
+                        <div class="image-wrapper" style="background-image: url('https://ik.imagekit.io/bebell/Banners%20&%20Backgrounds/Backgrounds/4_red.png?updatedAt=1787948546599');"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- BENEFICIOS & PARA QUIÉN -->
+    <section class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="gsap-fade-up">
+                <h2 class="text-3xl font-bold mb-8">Lo que ganas desde el primer día</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="flex flex-col gap-2 p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors">
+                        <i data-lucide="piggy-bank" class="w-8 h-8 text-primary"></i>
+                        <h4 class="font-bold text-gray-900">Ahorra en impresión</h4>
+                        <p class="text-sm text-gray-500">$1,400–$3,500 al año en menús físicos.</p>
+                    </div>
+                    <div class="flex flex-col gap-2 p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors">
+                        <i data-lucide="trending-up" class="w-8 h-8 text-primary"></i>
+                        <h4 class="font-bold text-gray-900">Vende más</h4>
+                        <p class="text-sm text-gray-500">+10% a +30% en ticket promedio.</p>
+                    </div>
+                    <div class="flex flex-col gap-2 p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors">
+                        <i data-lucide="camera" class="w-8 h-8 text-primary"></i>
+                        <h4 class="font-bold text-gray-900">Vende con fotos</h4>
+                        <p class="text-sm text-gray-500">Hasta +30% más pedidos por antojo visual.</p>
+                    </div>
+                    <div class="flex flex-col gap-2 p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors">
+                        <i data-lucide="zap" class="w-8 h-8 text-primary"></i>
+                        <h4 class="font-bold text-gray-900">Sirve más rápido</h4>
+                        <p class="text-sm text-gray-500">El cliente pide y paga solo, reduciendo esperas.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gsap-fade-up" style="transition-delay: 200ms;">
+                <h2 class="text-3xl font-bold mb-8">¿Para quién es esto?</h2>
+                <div class="space-y-4">
+                    <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white flex items-center gap-6">
+                        <div class="w-16 h-16 rounded-full bg-white/10 flex flex-shrink-0 items-center justify-center">
+                            <i data-lucide="utensils" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Restaurantes y Cafeterías</h4>
+                            <p class="text-slate-300 text-sm">Sala, takeaway y delivery centralizados en un solo sistema sin comisiones abusivas.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white flex items-center gap-6">
+                        <div class="w-16 h-16 rounded-full bg-white/10 flex flex-shrink-0 items-center justify-center">
+                            <i data-lucide="martini" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Bares y Discotecas</h4>
+                            <p class="text-slate-300 text-sm">Pedidos rápidos en hora punta, pagos ágiles y menos presión para los meseros.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white flex items-center gap-6">
+                        <div class="w-16 h-16 rounded-full bg-white/10 flex flex-shrink-0 items-center justify-center">
+                            <i data-lucide="hotel" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Hoteles y Clubs</h4>
+                            <p class="text-slate-300 text-sm">Room service inteligente, carta de piscina y multiidioma automático para huéspedes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- MODOS DE PAGO -->
+    <section class="py-24 bg-[var(--bg-body)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 gsap-fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Tres formas de cobrar. Tú eliges cómo.</h2>
+                <p class="text-lg text-gray-600">Adaptado a la realidad de tu operativa diaria.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow gsap-fade-up">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="banknote" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Pago Manual</h3>
+                    <p class="text-gray-600 text-sm mb-6">El cliente pide desde el navegador y paga en caja o al mesero. Ideal para efectivo y propinas.</p>
+                    <ul class="space-y-2 text-sm font-medium text-gray-900">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Comisión: 0%</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Confirmación: Manual</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-primary relative overflow-hidden gsap-fade-up" style="transition-delay: 100ms;">
+                    <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg">Más usado</div>
+                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="credit-card" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Pago con Tarjeta</h3>
+                    <p class="text-gray-600 text-sm mb-6">El cliente paga desde su móvil y el pedido se confirma al instante vía pasarelas (Azul o PayPal).</p>
+                    <ul class="space-y-2 text-sm font-medium text-gray-900">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Comisión: Según tarifa</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Confirmación: Automática</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow gsap-fade-up" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="landmark" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Transferencia</h3>
+                    <p class="text-gray-600 text-sm mb-6">Para pedidos grandes, catering o clientes corporativos. Tú confirmas desde la app cuando llegue el balance.</p>
+                    <ul class="space-y-2 text-sm font-medium text-gray-900">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-yellow-600"></i> Comisión: 0%</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-yellow-600"></i> Confirmación: Manual</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- PLANES -->
+    <section id="planes" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 gsap-fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Planes diseñados para escalar</h2>
+                <p class="text-lg text-gray-600">Todos los planes incluyen 30 días de prueba y migración gratis.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Plan 1 -->
+                <div class="plan-card border border-gray-200 rounded-3xl p-8 transition-all duration-300 flex flex-col bg-white">
+                    <h3 class="text-xl font-bold text-gray-900">START-UP</h3>
+                    <p class="text-gray-500 text-sm mb-6">Bares y cafeterías locales</p>
+                    <div class="mb-6"><span class="text-4xl font-extrabold">$29</span><span class="text-gray-500">/mes</span></div>
+                    <a href="#" class="w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 text-gray-900 font-bold rounded-xl text-center mb-8 transition-colors">Comenzar gratis</a>
+                    <ul class="space-y-4 text-sm text-gray-600 flex-1">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Menú digital con fotos</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Pedidos desde navegador</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> App de gestión</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> 2 Idiomas</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> PayPal + Pasarelas Base</li>
+                    </ul>
+                </div>
+                
+                <!-- Plan 2 -->
+                <div class="plan-card border-2 border-primary rounded-3xl p-8 transition-all duration-300 flex flex-col bg-white relative transform md:-translate-y-4 shadow-xl">
+                    <div class="absolute top-0 inset-x-0 transform -translate-y-1/2 text-center">
+                        <span class="bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">Más Popular ⭐</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">BÁSICO</h3>
+                    <p class="text-gray-500 text-sm mb-6">Restaurantes en crecimiento</p>
+                    <div class="mb-6"><span class="text-4xl font-extrabold">$59</span><span class="text-gray-500">/mes</span></div>
+                    <a href="#" class="w-full py-3 px-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl text-center mb-8 transition-colors shadow-lg shadow-primary/30">Comenzar gratis</a>
+                    <ul class="space-y-4 text-sm text-gray-600 flex-1">
+                        <li class="flex items-center gap-3 font-medium text-gray-900"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Todo lo de Start-Up</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> 5 Idiomas</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Pago con QR y Split</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Gestión de stock</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Analítica avanzada</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Soporte WhatsApp prioritario</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Integración TPV</li>
+                    </ul>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="plan-card border border-gray-200 rounded-3xl p-8 transition-all duration-300 flex flex-col bg-white">
+                    <h3 class="text-xl font-bold text-gray-900">CORPORATIVO</h3>
+                    <p class="text-gray-500 text-sm mb-6">Cadenas, grupos y hoteles</p>
+                    <div class="mb-6"><span class="text-4xl font-extrabold">$99</span><span class="text-gray-500">/mes</span></div>
+                    <a href="#" class="w-full py-3 px-4 bg-gray-900 hover:bg-black text-white font-bold rounded-xl text-center mb-8 transition-colors">Hablar con ventas</a>
+                    <ul class="space-y-4 text-sm text-gray-600 flex-1">
+                        <li class="flex items-center gap-3 font-medium text-gray-900"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Todo lo de Básico</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Idiomas ilimitados</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Múltiples sedes</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Sistema de fidelización</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Soporte 24/7 + Gestor</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> API personalizada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+ 
+  
+
+    <section id="planes" class="py-20 lg:py-28 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 scroll-fade-up">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Planes de Desarrollo Web</h2>
+                <p class="text-slate-500">Elige el plan que mejor se adapte a tu nivel de práctica profesional. Todos incluyen hosting, dominio y soporte premium.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 items-start stagger-grid">
+                
+                <!-- PLAN 1: START-UP -->
+                <div class="stagger-item plan-card bg-white rounded-3xl p-8 border border-slate-200 flex flex-col h-full relative transition-all duration-300">
+                    <div class="mb-6">
+                        <span class="inline-block px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full uppercase tracking-wide mb-4">Start-Up</span>
+                        <h3 class="text-4xl font-extrabold text-slate-900 mb-2">$48.77<span class="text-lg text-slate-400 font-medium">/mes</span></h3>
+                        <p class="text-sm text-slate-500 min-h-[40px]">Para médicos autónomos buscando establecer presencia básica.</p>
+                        <p class="text-xs text-slate-400 mt-2 font-medium bg-slate-50 p-2 rounded-lg inline-block">+ Configuración inicial: $295 USD</p>
+                    </div>
+                    
+                    <div class="h-px w-full bg-slate-100 my-6"></div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> 1 Landing Page (hasta 2 págs)</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> Dominio Personalizado + SSL</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> 2 GB Almacenamiento SSD</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> 1 Correo Profesional (250MB)</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> Formulario (4 preguntas) + Double Opt-In</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> Integración Chat Widget</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> Portal de Cliente & Soporte Ticket</li>
+                    </ul>
+                    
+                    <button  onclick="window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-07A13968TE2714135NKJFSMQ', '_blank')" class="w-full py-4 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl transition-colors mt-auto">
+                        Seleccionar Start-Up
+                    </button>
+                </div>
+
+                <!-- PLAN 2: BÁSICO (Highlighted) -->
+                <div class="stagger-item plan-card bg-white rounded-3xl p-8 border-2 border-teal-500 shadow-2xl shadow-teal-900/10 flex flex-col h-full relative transform lg:-translate-y-4 transition-all duration-300">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-teal-500 to-purple-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide shadow-lg">
+                        Más Popular
+                    </div>
+                    
+                    <div class="mb-6 mt-2">
+                        <span class="inline-block px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold rounded-full uppercase tracking-wide mb-4">Básico</span>
+                        <h3 class="text-4xl font-extrabold text-slate-900 mb-2">$78.77<span class="text-lg text-slate-400 font-medium">/mes</span></h3>
+                        <p class="text-sm text-slate-500 min-h-[40px]">Para clínicas y consultorios que requieren reservas y profesionalismo.</p>
+                        <p class="text-xs text-slate-400 mt-2 font-medium bg-slate-50 p-2 rounded-lg inline-block">+ Configuración inicial: $450 USD</p>
+                    </div>
+                    
+                    <div class="h-px w-full bg-slate-100 my-6"></div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3 text-sm text-slate-800 font-medium"><i data-lucide="calendar-days" class="w-5 h-5 text-teal-500 shrink-0"></i> <strong>Sistema de Reservas Integrado</strong></li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> Sitio Web Completo (hasta 8 págs)</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> 5 GB Almacenamiento SSD</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> Correo Prof. + 1 Reenvío</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> Integración Chat en Vivo & Exit Pop-Up</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> Notificaciones Automatizadas</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-teal-500 shrink-0"></i> Optimización SEO Básico</li>
+                    </ul>
+                    
+                    <!-- BUTTON 2: Animated Border on Popular Plan -->
+                    <div class="animated-border-wrapper w-full mt-auto flex">
+                    <button  onclick="window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-53X3421052351562GNKJFTCQ', '_blank')" class="w-full py-4 bg-teal-500 hover:bg-teal-700 text-white font-bold rounded-xl shadow-lg shadow-teal-200 transition-all mt-auto flex justify-center items-center gap-2">
+                        Seleccionar Básico
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                    </div>
+
+                    
+                </div>
+
+
+
+                
+
+                <!-- PLAN 3: AVANZADO -->
+                <div class="stagger-item plan-card bg-white rounded-3xl p-8 border border-slate-200 flex flex-col h-full relative transition-all duration-300">
+                    <div class="mb-6">
+                        <span class="inline-block px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded-full uppercase tracking-wide mb-4">Avanzado</span>
+                        <h3 class="text-4xl font-extrabold text-slate-900 mb-2">$150.77<span class="text-lg text-slate-400 font-medium">/mes</span></h3>
+                        <p class="text-sm text-slate-500 min-h-[40px]">Plataforma integral automatizada para centros médicos en crecimiento.</p>
+                        <p class="text-xs text-slate-400 mt-2 font-medium bg-slate-50 p-2 rounded-lg inline-block">+ Configuración inicial: $595 USD</p>
+                    </div>
+                    
+                    <div class="h-px w-full bg-slate-100 my-6"></div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3 text-sm text-slate-800 font-medium"><i data-lucide="bot" class="w-5 h-5 text-purple-500 shrink-0"></i> <strong>Asistente Inteligente (Bot) 🤖</strong></li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-purple-500 shrink-0"></i> Sitio Web Pro (hasta 12 págs)</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-purple-500 shrink-0"></i> Sistema de Reservas & 8 GB SSD</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-purple-500 shrink-0"></i> Sistema de Email Marketing</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-purple-500 shrink-0"></i> Flujo de Bienvenida & Reportes Leads</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-purple-500 shrink-0"></i> SEO Avanzado + 1 Artículo Blog/mes</li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600"><i data-lucide="check" class="w-5 h-5 text-purple-500 shrink-0"></i> Soporte VIP (WhatsApp, Email, Ticket)</li>
+                    </ul>
+                    
+                    <button  onclick="window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8B469613R1010332LNKJFTUY', '_blank')" class="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-colors mt-auto">
+                        Seleccionar Avanzado
+                    </button>
+                </div>
+
+            </div>
+            
+            <p class="text-center text-xs text-slate-400 mt-16 font-medium">
+                *Pagos seguros procesados a través de PayPal. Renovación anual de dominios y correos: $95 USD.
+            
+             <img src="https://bucket.mlcdn.com/a/3336/3336910/images/a55a916fae27396be180e733423f570f40afb57a.png" alt="Image description" style="width: 280px; height: auto; display: block; margin: 0 auto; margin-top: 20px;">
+
+            
+            </p>
+
+
+
+
+            
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+  
+
+    <section id="testimonios" class="py-20 lg:py-28 bg-white border-y border-slate-200 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 scroll-fade-up">
+                <h2 class="text-xs font-bold text-teal-600 uppercase tracking-widest mb-3">No te lleves de nosotros</h2>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Descubre lo que dicen nuestros clientes</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-grid">
+                
+                <!-- Review 1 -->
+                <div class="stagger-item bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-shadow">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">"10/10 !! Trabajar con este equipo es lo mejor! Los super recomiendo para lo que necesiten en sus companias! Ernesto siempre nos mantiene al dia y ayuda muchisimo con lo que necesite!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-700 font-bold text-sm">VC</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900">Victoria Chediak</h4>
+                            <p class="text-xs text-slate-500">Chef, Poke 305</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="stagger-item bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-shadow">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">"Una Maravillosa Experiencia puedo definirla como: Encontré lo que Buscaba!! Muy satisfecha con las soluciones digitales y servicios que Bebell le ha proporcionado a mi negocio."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-sm">MG</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900">Michelle Goede</h4>
+                            <p class="text-xs text-slate-500">CEO Senses Luxury Spa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="stagger-item bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-shadow">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">"Bebelldigitalsolutions ha sido un paso importante para nuestro desarrollo en el mercado moderno donde la tecnología de punta se impone para el crecimiento y posicionamiento de las empresas."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">GP</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900">Greydys Pose</h4>
+                            <p class="text-xs text-slate-500">CEO Ame Cafe RD</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Review 4 -->
+                 <div class="stagger-item bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-shadow">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">"¡EXCELENTE servicio! Buscaba una solución para facilitarme la vida y la de los clientes también. Sin quejas!! Los felicito!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 font-bold text-sm">LM</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900">Lisaris Madera</h4>
+                            <p class="text-xs text-slate-500">CEO Santé Brand</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="stagger-item bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-shadow">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">"Mi experiencia ha sido excelente. Me han ayudado a avanzar y a ofrecerle más facilidades a mis clientes. Muy profesionales a la hora de dar el servicio. Siempre atentos a cada solicitud."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-700 font-bold text-sm">MR</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900">Massiel Rosario</h4>
+                            <p class="text-xs text-slate-500">Trendisima RD</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="stagger-item bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-shadow">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">"Vengo desde hace 6 años tratando de tener una página web que sea intuitiva. Estoy super feliz, Ernesto tiene paciencia para escuchar, da buenas sugerencias que me han servido mucho."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-sm">AV</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900">Andy Valdez</h4>
+                            <p class="text-xs text-slate-500">Fundador For Fun Travel</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <!-- Ver todos los testimonios -->
+            <div class="text-center mt-14 scroll-fade-up">
+                <a href="/testimonios" class="inline-flex items-center gap-2 text-teal-600 font-bold text-sm group hover:text-teal-700 transition-colors">
+                    Descubrir todos los testimonios
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+
+
+            
+        </div>
+    </section>
+
+
+   
+    
+    
+    
+    
+    
+    
+
+    <!-- FAQ -->
+    <section class="py-24 bg-[var(--bg-body)]">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-12 gsap-fade-up">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Preguntas Frecuentes</h2>
+                <p class="text-gray-600">Resolvemos tus dudas rápidamente.</p>
+            </div>
+            
+            <div class="space-y-4 gsap-fade-up">
+                <!-- FAQ Item -->
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-bold text-gray-900 flex justify-between items-center focus:outline-none">
+                        ¿Mis clientes tienen que descargar una app?
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 text-gray-600 text-sm">
+                        No. Solo abren un enlace desde el navegador o escanean un QR. La app de gestión es exclusiva para ti y tu equipo, para organizar todo el negocio.
+                    </div>
+                </div>
+                <!-- FAQ Item -->
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-bold text-gray-900 flex justify-between items-center focus:outline-none">
+                        ¿Necesito conocimientos técnicos?
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 text-gray-600 text-sm">
+                        No. Nosotros lo configuramos por ti en base a tu carta actual. Tu plataforma estará operativa en 48 horas lista para usar.
+                    </div>
+                </div>
+                <!-- FAQ Item -->
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-bold text-gray-900 flex justify-between items-center focus:outline-none">
+                        ¿Cómo cobro?
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 text-gray-600 text-sm">
+                        Eliges: pago manual, tarjeta (pasarelas como Azul en pesos o PayPal en USD) o transferencia bancaria para pedidos grandes.
+                    </div>
+                </div>
+                <!-- FAQ Item -->
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-bold text-gray-900 flex justify-between items-center focus:outline-none">
+                        ¿Y si se cae internet?
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 text-gray-600 text-sm">
+                        El sistema cuenta con un modo offline de emergencia para sala. Los pedidos realizados de esta forma se sincronizarán al recuperar la conexión.
+                    </div>
+                </div>
+                <!-- FAQ Item -->
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-bold text-gray-900 flex justify-between items-center focus:outline-none">
+                        ¿Hay contrato mínimo?
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 text-gray-600 text-sm">
+                        No. Pagas mes a mes (o anual con descuento) y puedes cancelar cuando quieras sin penalizaciones ni letras pequeñas.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- BOTTOM CTA BANNER (EXACT PROVIDED STRUCTURE) -->
+    <section id="contacto" class="py-12 relative z-10 scroll-fade-up">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-gradient-to-r from-slate-900 to-[#1e1e1e] rounded-3xl p-10 lg:p-16 text-center shadow-2xl relative overflow-hidden">
+                <!-- Background decor -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
+                
+                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6 relative z-10">Tienes las fotos. Tienes el dato.<br/>Solo te falta el sistema.</h2>
+                <p class="text-gray-300 mb-10 max-w-2xl mx-auto relative z-10">
+                    Cada día con un menú impreso es un día que pierdes ventas, datos y eficiencia. Sin compromiso. Sin tarjeta. Sin letra pequeña.
+                </p>
+                
+                <!-- Animated Border in CTA Banner -->
+                <div class="animated-border-wrapper relative z-10 inline-flex">
+                    <button class="w-full px-8 py-4 bg-white text-slate-900 font-bold rounded-xl shadow-xl hover:bg-gray-50 transition-colors flex items-center gap-2">
+                        <i data-lucide="rocket" class="w-5 h-5 text-primary"></i>
+                        Solicita tu demo gratis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- FOOTER (EXACT MATCH) -->
+    <footer class="bg-white border-t border-slate-200 pt-16 pb-8 relative z-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            
+            
+            <!-- Main Grid: Stacked on mobile, 12-columns on tablet/desktop -->
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 lg:gap-8 mb-12">
+                
+                
+                <!-- Left Column (Logo & Description) -->
+                <div class="sm:col-span-12 lg:col-span-3 mb-6 lg:mb-0">
+                    <div class="flex items-center gap-2 mb-4">
+                        <a href="https://elnegocio.digital/consultorio-digital" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2">
+                            <img src="https://bucket.mlcdn.com/a/3336/3336910/images/80a14e0eaa1e329f06524198044d53e3dcc75d28.png" alt="LegacyMD Logo" class="w-8 h-8 object-contain" />
+                            <span class="font-bold text-slate-800 text-lg tracking-tight">HechoEn<span class="text-teal-600">RD</span></span>
+                        </a>
+                    </div>
+                    
+                    
+                    
+                    <p class="text-sm text-slate-500 leading-relaxed max-w-sm">
+                        Transformando la Presencia Digital de la gastronomía en República Dominicana. 🇩🇴
+                    </p>
+                </div>
+
+                <!-- Center Columns -->
+                <div class="sm:col-span-7 lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-4 lg:gap-6">
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wider">Plataforma</h4>
+                        <ul class="space-y-3 text-sm text-slate-500">
+                            <li><a href="#" class="hover:text-primary transition-colors">Página de Inicio</a></li>
+                            <li><a href="#caracteristicas" class="hover:text-primary transition-colors">Características</a></li>
+                            <li><a href="#planes" class="hover:text-primary transition-colors">Planes y Precio</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wider">Compañía</h4>
+                        <ul class="space-y-3 text-sm text-slate-500">
+                            <li><a href="#" class="hover:text-primary transition-colors">Sobre Nosotros</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Contacto</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Centro de Ayuda</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wider">Legal</h4>
+                        <ul class="space-y-3 text-sm text-slate-500">
+                            <li><a href="#" class="hover:text-primary transition-colors">Términos</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Privacidad</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Disclaimer</a></li>                            
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Column (Support Card) -->
+                <div class="sm:col-span-5 lg:col-span-4 mt-6 sm:mt-0">
+                    <div class="bg-white rounded-2xl p-6 relative overflow-hidden flex flex-col justify-center h-full min-h-[190px] shadow-lg border border-primary">
+                        <div class="relative z-10 w-[75%] sm:w-3/4 lg:w-2/3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h4 class="text-slate-900 font-bold text-xl">Soporte Online</h4>
+                                <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded-md">24/7</span>
+                            </div>
+                            <p class="text-slate-400 text-sm mb-6 leading-snug">Contáctenos si tiene alguna pregunta. Nuestro equipo de soporte está aquí para atenderte.</p>
+                            <button onclick="window.open('https://wa.me/18296203970?text=%C2%A1Hola!', '_blank')" class="bg-slate-800 hover:bg-slate-700 text-white text-sm font-semibold py-2.5 px-4 rounded-xl flex items-center gap-2 transition-colors border border-slate-700 shadow-sm w-fit group">
+                                <i data-lucide="headset" class="w-4 h-4 text-slate-300 group-hover:text-white transition-colors"></i>
+                                Escríbanos
+                            </button>
+                        </div>
+                        <img 
+                            src="https://ik.imagekit.io/bebell/Bebell%20Digital%20Solutions/Consultorios%20Digitales/legacymd-operator.webp" 
+                            alt="Soporte 24/7" 
+                            class="absolute bottom-0 right-0 w-32 md:w-36 lg:w-40 object-contain z-0 pointer-events-none opacity-80" 
+                        />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+                <p>MenúDigital © 2026. Todos los derechos reservados.</p>
+                <p class="flex items-center gap-1">
+                    Desarrollado con <span class="text-primary">❤️</span> por <span class="font-bold text-slate-600">Bebell Digital Solutions</span>.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Hero Carousel Setup
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        });
+        
+        
+        
+        
+        
+
+        // Exact Dashboard Tabs Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+            let currentIndex = 3; 
+            const rotationInterval = 10000; 
+            let timer;
+
+            function switchTab(index) {
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.setAttribute('aria-selected', 'false');
+                    const progressBar = tab.querySelector('.tab-progress-bar');
+                    if (progressBar) {
+                        progressBar.style.animation = 'none';
+                        void progressBar.offsetWidth; 
+                        progressBar.style.animation = null; 
+                    }
+                });
+
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                const activeTab = tabs[index];
+                activeTab.classList.add('active');
+                activeTab.setAttribute('aria-selected', 'true');
+                
+const targetId = activeTab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+
+                // SOLUCIÓN: Scroll suave solo dentro del contenedor horizontal de las pestañas
+                const tabList = activeTab.parentElement;
+                tabList.scrollTo({
+                    left: activeTab.offsetLeft - (tabList.clientWidth / 2) + (activeTab.clientWidth / 2),
+                    behavior: 'smooth'
+                });
+            }
+            
+            
+            
+
+            function nextTab() {
+                const nextIndex = (currentIndex + 1) % tabs.length;
+                switchTab(nextIndex);
+            }
+
+            function startTimer() {
+                clearInterval(timer);
+                timer = setInterval(nextTab, rotationInterval);
+            }
+
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => {
+                    switchTab(index);
+                    startTimer(); 
+                });
+            });
+
+            startTimer();
+            const initialProgressBar = tabs[currentIndex].querySelector('.tab-progress-bar');
+            if (initialProgressBar) {
+                initialProgressBar.style.animation = 'none';
+                void initialProgressBar.offsetWidth; 
+                initialProgressBar.style.animation = null;
+            }
+        });
+        
+        
+        
+        
+        
+
+        // Exact Sticky Cards Logic
+        document.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.stack-card');
+            cards.forEach((card, index) => {
+                const rect = card.getBoundingClientRect();
+                const cardTop = rect.top;
+                const stickyOffset = parseInt(getComputedStyle(card).top); 
+                if (cardTop <= stickyOffset + 5) {
+                    const distancePast = (stickyOffset - cardTop);
+                    const scale = Math.max(0.95, 1 - (distancePast * 0.0005));
+                    const brightness = Math.max(0.92, 1 - (distancePast * 0.0003));
+                    card.style.transform = `scale(${scale})`;
+                    card.style.filter = `brightness(${brightness})`;
+                } else {
+                    card.style.transform = 'scale(1)';
+                    card.style.filter = 'brightness(1)';
+                }
+            });
+        });
+
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                const isActive = content.classList.contains('active');
+                
+                // Close all others
+                document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.faq-btn i').forEach(i => i.style.transform = 'rotate(0deg)');
+                
+                if (!isActive) {
+                    content.classList.add('active');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // GSAP Scroll Animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+            gsap.fromTo(element, 
+                { y: 50, opacity: 0 },
+                { 
+                    y: 0, 
+                    opacity: 1, 
+                    duration: 0.8, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+
+        gsap.utils.toArray('.gsap-scale-up').forEach(element => {
+            gsap.fromTo(element, 
+                { scale: 0.9, opacity: 0 },
+                { 
+                    scale: 1, 
+                    opacity: 1, 
+                    duration: 1, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+    </script>
+    
+    
+    <script>
+    
+            // Back to Top functionality
+            const backToTop = document.createElement("div");
+            backToTop.id = "back-to-top";
+            backToTop.style.position = "fixed";
+            backToTop.style.bottom = "20px";
+            backToTop.style.right = "20px";
+            backToTop.style.display = "none";
+            backToTop.style.cursor = "pointer";
+            backToTop.style.zIndex = "9999";
+            
+            const backToTopImg = document.createElement("img");
+            backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/3ace734af12df1fd752b6855e73fba6a96451ae3.png";
+            backToTopImg.alt = "Volver arriba";
+            backToTopImg.style.width = "50px";
+            backToTopImg.style.height = "50px";
+            
+            backToTop.appendChild(backToTopImg);
+            document.body.appendChild(backToTop);
+            
+            window.addEventListener("scroll", function () {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    backToTop.style.display = "block";
+                } else {
+                    backToTop.style.display = "none";
+                }
+            });
+            
+            backToTop.addEventListener("click", function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+        });
+        
+        </script>
+    
+    
+    
+</body>
+</html>
