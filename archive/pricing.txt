@@ -1,0 +1,68 @@
+  
+    
+
+    <!-- PLANES -->
+    <section id="planes" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 gsap-fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Planes diseñados para escalar</h2>
+                <p class="text-lg text-gray-600">Todos los planes incluyen 30 días de prueba y migración gratis.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Plan 1 -->
+                <div class="plan-card border border-gray-200 rounded-3xl p-8 transition-all duration-300 flex flex-col bg-white">
+                    <h3 class="text-xl font-bold text-gray-900">START-UP</h3>
+                    <p class="text-gray-500 text-sm mb-6">Bares y cafeterías locales</p>
+                    <div class="mb-6"><span class="text-4xl font-extrabold">$29</span><span class="text-gray-500">/mes</span></div>
+                    <a href="#" class="w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 text-gray-900 font-bold rounded-xl text-center mb-8 transition-colors">Comenzar gratis</a>
+                    <ul class="space-y-4 text-sm text-gray-600 flex-1">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Menú digital con fotos</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Pedidos desde navegador</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> App de gestión</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> 2 Idiomas</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> PayPal + Pasarelas Base</li>
+                    </ul>
+                </div>
+                
+                <!-- Plan 2 -->
+                <div class="plan-card border-2 border-primary rounded-3xl p-8 transition-all duration-300 flex flex-col bg-white relative transform md:-translate-y-4 shadow-xl">
+                    <div class="absolute top-0 inset-x-0 transform -translate-y-1/2 text-center">
+                        <span class="bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">Más Popular ⭐</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">BÁSICO</h3>
+                    <p class="text-gray-500 text-sm mb-6">Restaurantes en crecimiento</p>
+                    <div class="mb-6"><span class="text-4xl font-extrabold">$59</span><span class="text-gray-500">/mes</span></div>
+                    <a href="#" class="w-full py-3 px-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl text-center mb-8 transition-colors shadow-lg shadow-primary/30">Comenzar gratis</a>
+                    <ul class="space-y-4 text-sm text-gray-600 flex-1">
+                        <li class="flex items-center gap-3 font-medium text-gray-900"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Todo lo de Start-Up</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> 5 Idiomas</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Pago con QR y Split</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Gestión de stock</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Analítica avanzada</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Soporte WhatsApp prioritario</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Integración TPV</li>
+                    </ul>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="plan-card border border-gray-200 rounded-3xl p-8 transition-all duration-300 flex flex-col bg-white">
+                    <h3 class="text-xl font-bold text-gray-900">CORPORATIVO</h3>
+                    <p class="text-gray-500 text-sm mb-6">Cadenas, grupos y hoteles</p>
+                    <div class="mb-6"><span class="text-4xl font-extrabold">$99</span><span class="text-gray-500">/mes</span></div>
+                    <a href="#" class="w-full py-3 px-4 bg-gray-900 hover:bg-black text-white font-bold rounded-xl text-center mb-8 transition-colors">Hablar con ventas</a>
+                    <ul class="space-y-4 text-sm text-gray-600 flex-1">
+                        <li class="flex items-center gap-3 font-medium text-gray-900"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Todo lo de Básico</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Idiomas ilimitados</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Múltiples sedes</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Sistema de fidelización</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Soporte 24/7 + Gestor</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> API personalizada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
