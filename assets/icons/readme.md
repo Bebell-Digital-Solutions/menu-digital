@@ -2,7 +2,9 @@
   <img src="https://ik.imagekit.io/bebell/menus-digitales/Branding/tablet-icon.webp" alt="Ontolabs Logo" width="70" />  
 </div>
 <div align="center">
+  
 # Menú Digital
+
 </div>
 <div align="center">
 <table>
