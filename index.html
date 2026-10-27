@@ -455,12 +455,13 @@
         display: none; }
         
         
-        @media (max-width: 1036px) {
+        @media (max-width: 1050px) {
             .nav-desktop { 
             display: none !important; }
             
             .nav-burger  { 
-            display: flex !important; }
+            display: flex !important; 			
+			}
         }
         
         
@@ -486,9 +487,7 @@
         width: 26px; 
         height: 26px; 
         }
-        
-        
-        
+ 
         .burger-icon-stack lottie-player {
             position: absolute;
             inset: 0;
@@ -497,27 +496,20 @@
             transition: opacity 0.2s ease;
         }
         
-        
-        
         .burger-icon-stack .icon-menu  { 
         opacity: 1; 
         }
-        
-        
-        
+
         .burger-icon-stack .icon-close { 
         opacity: 0; 
         pointer-events: none; 
         }
-        
-        
-        
+
         .burger-icon-stack.is-open .icon-menu  { 
         opacity: 0; 
         pointer-events: none; 
         }
-        
-        
+
         .burger-icon-stack.is-open .icon-close { 
         opacity: 1; 
         }
@@ -633,6 +625,8 @@
             pointer-events: none;
         }
 
+		
+
         /* Mobile submenu (Soluciones) */
         .mobile-sub { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
         .mobile-sub.open { max-height: 500px; }
@@ -646,38 +640,20 @@
         
     /* Macbook Mockup */
         .macbook-wrapper { position: relative; background: #fff; padding: 20px; border-radius: 8px; margin-top: 0;}
-        
-        
         .macbook-wrapper .macbook { padding: 4% 6%; margin: 0 auto; max-width: 1500px; background: #fff; border-radius: 8px; }
-        
-        
         .macbook-wrapper .screen { background: #000; border-radius: 3% 3% 0.5% 0.5% / 5%; margin: 0 auto; position: relative; width: 80%; }
-        
-        
         .macbook-wrapper .screen:before { border: 2px solid #cacacc; border-radius: 3% 3% 0.5% 0.5% / 5%; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 1px 2px rgba(255, 255, 255, 0.3) inset; content: ""; display: block; padding-top: 67%; }
-        
-        
-        
-        
         .macbook-wrapper .viewport { position: absolute; bottom: 0; left: 0; right: 0; top: 0; margin: 4.3% 3.2%; background: #F2F1FB; border-radius: 4px; transition: background-position 20s ease; background-position: 0 0; background-size: 100% auto; overflow: hidden; cursor: pointer; }
-        
-        
-        
+
         .macbook-wrapper .base { position: relative; width: 100%; background: #f7f7f3; border-radius: 8px; }
-        
-        
+
         .macbook-wrapper .base:before { content: ""; display: block; padding-top: 3.3%; background: linear-gradient(#eaeced, #edeef0 55%, #fff 55%, #8a8b8f 56%, #999ba0 61%, #4B4B4F 84%, #262627 89%, rgba(0, 0, 0, .01) 98%); border-radius: 0 0 10% 10%/ 0 0 50% 50%; }
-        
-        
-        
+
         .macbook-wrapper .notch { background: #ddd; border-radius: 0 0 7% 7% / 0 0 95% 95%; box-shadow: -5px -1px 3px rgba(0, 0, 0, 0.2) inset, 5px -1px 3px rgba(0, 0, 0, 0.2) inset; margin-left: auto; margin-right: auto; margin-top: -3.5%; z-index: 2; position: relative; width: 14%; }
         .macbook-wrapper .notch:before { content: ""; display: block; padding-top: 10%; }
-        
-        
+
         .macbook-wrapper .macbook:hover .viewport { background-position: 0 100%; }
-        
-        
-        
+
         .macbook-wrapper .macbook .viewport:after { background: radial-gradient(circle at right bottom, transparent 75%, rgba(255, 255, 255, 0.05) 75%, transparent); bottom: 0; content: ""; left: 0; position: absolute; right: 0; top: 0; }
         
             
