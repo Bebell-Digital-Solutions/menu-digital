@@ -1764,7 +1764,7 @@
          
 
   <!-- EXACT DASHBOARD TABS BLOCK -->
-<section class="dashboard-wrapper gsap-fade-up pt-14 bg-[var(--bg-body)]">
+<section class="dashboard-wrapper gsap-fade-up pt-14 px-16 bg-[var(--bg-body)]">
 
     <div class="dash-container container">
 
@@ -2620,6 +2620,39 @@
             });
         })();
     </script>
+
+
+	    
+  
+  <!-- Interactive Animated Icons (Lottie & AnimateIcons) -->
+  <script>
+    // 1. Handle Lottie icons
+    document.querySelectorAll('[data-lottie-hover]').forEach((icon) => {
+      const btn = icon.closest('button');
+      if (!btn) return;
+
+      btn.addEventListener('mouseenter', () => {
+        icon.speed = 0.6;
+        icon.stop();
+        icon.play();
+      });
+      btn.addEventListener('mouseleave', () => icon.stop());
+    });
+
+    // 2. Handle AnimateIcons (Languages, Sun, etc.)
+    document.querySelectorAll('[data-animate-icon]').forEach((icon) => {
+      const btn = icon.closest('button');
+      if (!btn) return;
+
+      btn.addEventListener('mouseenter', () => {
+        if (icon.startAnimation) icon.startAnimation();
+      });
+      btn.addEventListener('mouseleave', () => {
+        if (icon.stopAnimation) icon.stopAnimation();
+      });
+    });
+  </script>
+  
 
 
 <!--- Hero Carousel Scripts --->
