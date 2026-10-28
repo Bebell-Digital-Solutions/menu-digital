@@ -1174,7 +1174,6 @@
 
     </style>
     
-    <script type="text/javascript" src="https://app.cal.com/embed/embed.js"></script>
     
 </head>
 <body class="antialiased font-sans">
@@ -3037,6 +3036,7 @@ const targetId = activeTab.getAttribute('data-target');
         
         
 
+
 <!--- Cal.com calendar Modal --->
 <script type="text/javascript">
   (function (C, A, L) {
@@ -3064,14 +3064,20 @@ const targetId = activeTab.getAttribute('data-target');
     };
   })(window, "https://app.cal.com/embed/embed.js", "init");
 
-  // --- Namespace 1: existing 30min demo ---
+  // Init ONCE (only the first init call is required; extra ones can break things)
+  Cal("init", { origin: "https://app.cal.com" });
+
+  // Now register each namespace separately
   Cal("init", "30min", { origin: "https://app.cal.com" });
   Cal.ns["30min"]("ui", {
     hideEventTypeDetails: false,
-    layout: "month_view"
+    layout: "month_view",
+    cssVarsPerTheme: {
+      light: { "cal-brand": "#ab9239" },
+      dark:  { "cal-brand": "#ab9239" }
+    }
   });
 
-  // --- Namespace 2: new free consultation ---
   Cal("init", "consulta-gratuita", { origin: "https://app.cal.com" });
   Cal.config = Cal.config || {};
   Cal.config.forwardQueryParams = true;
@@ -3084,8 +3090,7 @@ const targetId = activeTab.getAttribute('data-target');
     hideEventTypeDetails: true,
     layout: "month_view"
   });
-</script>  
-
+</script>
 
 
 
