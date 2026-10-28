@@ -3083,7 +3083,7 @@ const targetId = activeTab.getAttribute('data-target');
 
   Cal("init", "consulta-gratuita", { origin: "https://app.cal.com" });
   Cal.config = Cal.config || {};
-  Cal.config.forwardQueryParams = true;
+  Cal.config.forwardQueryParams = false;
   Cal.ns["consulta-gratuita"]("ui", {
     theme: "light",
     cssVarsPerTheme: {
