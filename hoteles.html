@@ -32,6 +32,8 @@
             }
         }
     </script>
+
+	
     
     <!-- TrustBox script -->
 <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
@@ -39,28 +41,28 @@
 
 
 
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
     <!-- AnimateIcons + Lottie -->
-    <script src="https://cdn.jsdelivr.net/npm/@animateicons/vanilla/dist/cdn/lucide.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
+	  <!-- Third-party CDNs, before your code -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 
-    
+	
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Cal.com init (keep inline or in its own file) -->
+  <script src="js/cal.js" defer></script>
+
+
+	    
     <link rel="stylesheet" href="style.css">
+
+
+
     
 </head>
 <body class="antialiased font-sans">
-
-
  <div class="site-wrapper">
-
-
-
 
 
 
@@ -1409,7 +1411,13 @@
     
    </div> 
 
- <script scr="js/main.js" defer></script>
-  
+
+
+	
+ <script src="js/main.js" defer></script>
+
+
+
+	
 </body>
 </html>
