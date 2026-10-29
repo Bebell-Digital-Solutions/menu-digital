@@ -365,71 +365,67 @@
 
         // Exact Dashboard Tabs Logic
         document.addEventListener('DOMContentLoaded', () => {
-            const tabs = document.querySelectorAll('.tab-btn');
-            const contents = document.querySelectorAll('.tab-content');
-            let currentIndex = 3; 
-            const rotationInterval = 10000; 
-            let timer;
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+    let currentIndex = 3;
+    const rotationInterval = 10000;
+    let timer;
 
-            function switchTab(index) {
-                tabs.forEach(tab => {
-                    tab.classList.remove('active');
-                    tab.setAttribute('aria-selected', 'false');
-                    const progressBar = tab.querySelector('.tab-progress-bar');
-                    if (progressBar) {
-                        progressBar.style.animation = 'none';
-                        void progressBar.offsetWidth; 
-                        progressBar.style.animation = null; 
-                    }
-                });
+    function switchTab(index) {
+        currentIndex = index;   // ✅ keep state in sync
 
-                contents.forEach(content => {
-                    content.classList.remove('active');
-                });
-
-                const activeTab = tabs[index];
-                activeTab.classList.add('active');
-                activeTab.setAttribute('aria-selected', 'true');
-                
-const targetId = activeTab.getAttribute('data-target');
-                document.getElementById(targetId).classList.add('active');
-
-                // SOLUCIÓN: Scroll suave solo dentro del contenedor horizontal de las pestañas
-                const tabList = activeTab.parentElement;
-                tabList.scrollTo({
-                    left: activeTab.offsetLeft - (tabList.clientWidth / 2) + (activeTab.clientWidth / 2),
-                    behavior: 'smooth'
-                });
-            }
-            
-            
-            
-
-            function nextTab() {
-                const nextIndex = (currentIndex + 1) % tabs.length;
-                switchTab(nextIndex);
-            }
-
-            function startTimer() {
-                clearInterval(timer);
-                timer = setInterval(nextTab, rotationInterval);
-            }
-
-            tabs.forEach((tab, index) => {
-                tab.addEventListener('click', () => {
-                    switchTab(index);
-                    startTimer(); 
-                });
-            });
-
-            startTimer();
-            const initialProgressBar = tabs[currentIndex].querySelector('.tab-progress-bar');
-            if (initialProgressBar) {
-                initialProgressBar.style.animation = 'none';
-                void initialProgressBar.offsetWidth; 
-                initialProgressBar.style.animation = null;
+        tabs.forEach(tab => {
+            tab.classList.remove('active');
+            tab.setAttribute('aria-selected', 'false');
+            const progressBar = tab.querySelector('.tab-progress-bar');
+            if (progressBar) {
+                progressBar.style.animation = 'none';
+                void progressBar.offsetWidth;
+                progressBar.style.animation = null;
             }
         });
+
+        contents.forEach(content => content.classList.remove('active'));
+
+        const activeTab = tabs[index];
+        activeTab.classList.add('active');
+        activeTab.setAttribute('aria-selected', 'true');
+
+        const targetId = activeTab.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+
+        const tabList = activeTab.parentElement;
+        tabList.scrollTo({
+            left: activeTab.offsetLeft - (tabList.clientWidth / 2) + (activeTab.clientWidth / 2),
+            behavior: 'smooth'
+        });
+    }
+
+    function nextTab() {
+        switchTab((currentIndex + 1) % tabs.length);
+    }
+
+    function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(nextTab, rotationInterval);
+    }
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            switchTab(index);
+            startTimer();
+        });
+    });
+
+    startTimer();
+
+    const initialProgressBar = tabs[currentIndex].querySelector('.tab-progress-bar');
+    if (initialProgressBar) {
+        initialProgressBar.style.animation = 'none';
+        void initialProgressBar.offsetWidth;
+        initialProgressBar.style.animation = null;
+    }
+});
 
         
         
