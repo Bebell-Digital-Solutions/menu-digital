@@ -939,7 +939,44 @@
             grid-template-columns: repeat(3, 1fr); 
             }
         }
-        
+
+
+
+
+
+		.ipad-controls {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 5;
+}
+
+.ipad-btn {
+  display: inline-block;
+  background: #0a0a0a;
+  box-shadow: inset 0 0 0 2px #1a1a1a, 0 0 0 1px #333;
+}
+
+/* small round camera */
+.ipad-btn-camera {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* elongated power button */
+.ipad-btn-power {
+  width: 34px;
+  height: 14px;
+  border-radius: 999px;
+}
+
+
+
+
 
 
         /* Stacking Cards */
