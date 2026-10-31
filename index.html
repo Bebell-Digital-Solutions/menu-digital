@@ -1888,139 +1888,139 @@
    
    
    
-   <!-- EXACT STACKING CARDS BLOCK -->
-<section class="gsap-fade-up bg-[white] pt-12">
-    <div class="page-wrapper">
-    
-     <!-- Header Text -->
-        <div class="max-w-7xl mx-auto px-6 mt-16 mb-12 text-center">
+         
+
+  <!-- EXACT DASHBOARD TABS BLOCK -->
+<section class="dashboard-wrapper gsap-fade-up pt-14  xl:px-32 2xl:px-40  bg-[var(--bg-body)]">
+
+    <div class="dash-container container">
+
+        <!-- Header Text -->
+        <div class="max-w-7xl mx-auto px-6 mt-16 text-center">
             <!-- Eyebrow badge — gold metallic (no backdrop-blur: it causes scroll jank) -->
             <div class="gsap-fade-up inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ab9239]/15 border border-[#ab9239]/40 w-fit mb-6">
                 <span class="w-2 h-2 rounded-full bg-[#ab9239] shadow-[0_0_8px_rgba(245,213,71,0.8)]"></span>
-                <span class="text-[#ab9239] text-xs font-bold uppercase tracking-wider">Beneficios para tu restaurante</span>
+                <span class="text-[#ab9239] text-xs font-bold uppercase tracking-wider">Tu panel de control</span>
             </div>
 
             <h2 class="gsap-fade-up text-4xl font-bold text-gray-900 mb-4">Todo tu restaurante, en una sola pantalla.</h2>
-            <p class="gsap-fade-up text-lg text-gray-600 max-w-2xl mx-auto">Haz scroll para ver cómo se acumulan las funcionalidades</p>
+            <p class="gsap-fade-up text-lg text-gray-600 max-w-2xl mx-auto">Pedidos, clientes, campañas e inteligencia artificial trabajando juntos. Sin hojas de cálculo, sin apps sueltas, sin caos.</p>
         </div>
-        
-        
-        
 
-        <div class="gsap-fade-up stack-container" id="stack-container">
-
-            <!-- Block 1 — Tu menú digital -->
-            <div class="stack-card" style="--card-index: 0;">
-                <div class="card-content">
-                    <div class="stack-badge inline-flex items-center gap-2 ">
-                     <span class="w-2 h-2 rounded-full bg-[#ab9239] shadow-[0_0_8px_rgba(245,213,71,0.8)]"></span>
-                    Menú Digital</div>
-                    <h2 class="card-title">Tu carta con fotos, no una lista de texto.</h2>
-                    <p class="card-text">Cada plato con foto real, descripción, alérgenos y precio actualizado. Tus clientes ven lo que van a pedir antes de pedir. Un enlace, sin descargas, sin apps, sin registros.</p>
-					
-<button
-    class="cta-btn group inline-flex items-center gap-2 text-lg font-bold py-4 px-8 rounded-xl transition-all transform shadow-lg shadow-[#ab9239]/30"
-    data-cal-link="bebell-digital-solutions/consulta-gratuita"
-    data-cal-namespace="consulta-gratuita"
-    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}'>
-    Solicita tu demo
-    <span class="inline-flex transition-transform duration-300 ease-out group-hover:translate-x-1.5">
-        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-    </span>
-</button>
-
-                </div>
-                <div class="card-media">
-                    <div class="image-wrapper" style="background-image: url('https://ik.imagekit.io/bebell/Banners%20&%20Backgrounds/Backgrounds/6_yellow.png?updatedAt=1787948546654');"></div>
-                </div>
+        <!-- Main Dashboard Container -->
+        <div class="gsap-fade-up dashboard-container mt-12">
+            <!-- Tabs Navigation -->
+            <div class="tab-list" role="tablist">
+            
+                <button class="tab-btn" data-target="tab1" role="tab" aria-selected="false">Pedidos en vivo<div class="tab-progress-bar"></div></button>
+                
+                
+                <button class="tab-btn" data-target="tab2" role="tab" aria-selected="false">Clientes y fidelización<div class="tab-progress-bar"></div></button>
+                
+                
+                <button class="tab-btn" data-target="tab3" role="tab" aria-selected="false">Campañas y promociones<div class="tab-progress-bar"></div></button>
+                
+                
+                <button class="tab-btn active" data-target="tab4" role="tab" aria-selected="true">Análiticas y Reportes<div class="tab-progress-bar"></div></button>
+                
             </div>
 
+            <!-- Tab Content Area -->
+            <div class="tab-content-area">
 
-
-
-            <!-- Block 2 — Pedidos y pagos -->
-            <div class="stack-card" style="--card-index: 1;">
-                <div class="card-content">
-                    <div class="stack-badge inline-flex items-center gap-2 ">
-                     <span class="w-2 h-2 rounded-full bg-[#ab9239] shadow-[0_0_8px_rgba(245,213,71,0.8)]"></span>
-                    Pedidos</div>
-                    <h2 class="card-title">Del antojo al pago en menos de un minuto.</h2>
-                    <p class="card-text">El cliente pide desde la mesa, el mostrador o su casa. Paga en el navegador con tarjeta o en efectivo. El pedido llega a cocina y a tu panel al instante, sin intermediarios.</p>
-
-
-<button
-    class="cta-btn group inline-flex items-center gap-2 text-lg font-bold py-4 px-8 rounded-xl transition-all transform shadow-lg shadow-[#ab9239]/30"
-    data-cal-link="bebell-digital-solutions/consulta-gratuita"
-    data-cal-namespace="consulta-gratuita"
-    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}'>
-    Solicita tu demo
-    <span class="inline-flex transition-transform duration-300 ease-out group-hover:translate-x-1.5">
-        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-    </span>
-</button>
-	
+                <!-- Tab 1 — Pedidos en vivo -->
+                <div id="tab1" class="tab-content">
+                    <h3 class="content-title">Cada pedido entra, se ve y se atiende al instante.</h3>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                            <p class="feature-text">Pedidos de mesa, mostrador y delivery en una sola cola</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                            <p class="feature-text">Alertas en tiempo real para cocina y meseros</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                            <p class="feature-text">Estado de cada pedido visible para tu equipo y tu cliente</p>
+                        </div>
+                    </div>
+                    <div class="image-container border-[10px] border-[#000]">
+                        <img src="https://ik.imagekit.io/bebell/menus-digitales/screenshots/orders.webp" alt="Pedidos en vivo en el panel">
+                    </div>
                 </div>
-                <div class="card-media">
-                    <div class="image-wrapper" style="background-image: url('https://ik.imagekit.io/bebell/Banners%20&%20Backgrounds/Backgrounds/7_green.png?updatedAt=1787948546614');"></div>
-                </div>
-            </div>
 
-			
-
-            <!-- Block 3 — Gestión desde el móvil -->
-            <div class="stack-card" style="--card-index: 2;">
-                <div class="card-content">
-                    <div class="stack-badge inline-flex items-center gap-2 ">
-                     <span class="w-2 h-2 rounded-full bg-[#ab9239] shadow-[0_0_8px_rgba(245,213,71,0.8)]"></span>
-                    Gestión</div>
-                    <h2 class="card-title">Tu restaurante en el bolsillo, en tiempo real.</h2>
-                    <p class="card-text">Cambia precios, marca platos agotados o pausa pedidos desde el móvil. Todo se sincroniza al instante para tus clientes. Sin llamar a nadie, sin esperar al informático.</p>
-
-<button
-    class="cta-btn group inline-flex items-center gap-2 text-lg font-bold py-4 px-8 rounded-xl transition-all transform shadow-lg shadow-[#ab9239]/30"
-    data-cal-link="bebell-digital-solutions/consulta-gratuita"
-    data-cal-namespace="consulta-gratuita"
-    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}'>
-    Solicita tu demo
-    <span class="inline-flex transition-transform duration-300 ease-out group-hover:translate-x-1.5">
-        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-    </span>
-</button>
+                <!-- Tab 2 — Clientes y fidelización -->
+                <div id="tab2" class="tab-content">
+                    <h3 class="content-title">Conoce a tu cliente y hazlo volver.</h3>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                            <p class="feature-text">Historial de pedidos y preferencias por cliente</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                            <p class="feature-text">Programa de puntos y cupones automáticos</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                            <p class="feature-text">Base de datos propia: tu cliente es tuyo, no de la plataforma</p>
+                        </div>
+                    </div>
+                    <div class="image-container border-[10px] border-[#000]">
+                        <img src="https://ik.imagekit.io/bebell/menus-digitales/screenshots/clientes.webp" alt="Clientes y fidelización en el panel">
+                    </div>
                 </div>
-                <div class="card-media">
-                    <div class="image-wrapper" style="background-image: url('https://ik.imagekit.io/bebell/Banners%20&%20Backgrounds/Backgrounds/2_purple.png?updatedAt=1787948546627');"></div>
-                </div>
-            </div>
 
-            <!-- Block 4 — Clientes y datos -->
-            <div class="stack-card" style="--card-index: 3;">
-                <div class="card-content">
-                    <div class="stack-badge inline-flex items-center gap-2 ">
-                     <span class="w-2 h-2 rounded-full bg-[#ab9239] shadow-[0_0_8px_rgba(245,213,71,0.8)]"></span>
-                    Datos</div>
-                    <h2 class="card-title">Los clientes son tuyos, no de la plataforma.</h2>
-                    <p class="card-text">Cada pedido construye tu propia base de datos: quién vuelve, qué pide, cuánto gasta. Lanza promociones a los que no vienen hace un mes y llena mesas en horas valle.</p>
+                <!-- Tab 3 — Campañas y promociones -->
+                <div id="tab3" class="tab-content">
+                    <h3 class="content-title">Llena mesas en horas valle sin regalar margen.</h3>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                            <p class="feature-text">Envíos segmentados por WhatsApp y email</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                            <p class="feature-text">Promos automáticas para cumpleaños, inactivos y VIP</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                            <p class="feature-text">Métricas claras: cuántos abrieron, pidieron y volvieron</p>
+                        </div>
+                    </div>
+                    <div class="image-container border-[10px] border-[#000]">
+                        <img src="https://ik.imagekit.io/bebell/menus-digitales/screenshots/promociones.webp" alt="Campañas y promociones en el panel">
+                    </div>
+                </div>
 
-					
-<button
-    class="cta-btn group inline-flex items-center gap-2 text-lg font-bold py-4 px-8 rounded-xl transition-all transform shadow-lg shadow-[#ab9239]/30"
-    data-cal-link="bebell-digital-solutions/consulta-gratuita"
-    data-cal-namespace="consulta-gratuita"
-    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}'>
-    Solicita tu demo
-    <span class="inline-flex transition-transform duration-300 ease-out group-hover:translate-x-1.5">
-        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-    </span>
-</button>
-					
-                </div>
-                <div class="card-media">
-                    <div class="image-wrapper" style="background-image: url('https://ik.imagekit.io/bebell/Banners%20&%20Backgrounds/Backgrounds/4_red.png?updatedAt=1787948546599');"></div>
-                </div>
+                <!-- Tab 4 — Estadísticas y Reportes (ACTIVE) -->
+<div id="tab4" class="tab-content active">
+    <h3 class="content-title">Toma decisiones basadas en datos, no en suposiciones.</h3>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+            <p class="feature-text">Descubre cuántos clientes potenciales se generan en tu sitio web</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+            <p class="feature-text">Analiza las interacciones como clics en el mapa o clics para llamar</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+            <p class="feature-text">Compara el rendimiento de este mes con el periodo anterior</p>
+        </div>
+    </div>
+    <div class="image-container border-[10px] border-[#000]">
+        <img src="https://ik.imagekit.io/bebell/menus-digitales/screenshots/analiticas-banner.webp" alt="Panel de Estadísticas y Reportes de Interacción">
+    </div>
+</div>
+
             </div>
         </div>
     </div>
 </section>
+   
    
    
    
