@@ -540,178 +540,329 @@
         <!-- ============================================ -->
         <!-- NAVBAR                                       -->
         <!-- ============================================ -->
-        <nav id="mainNav" class="nav-metallic-border relative z-50 w-full max-w-full mx-auto px-6 py-6 bg-black">
+       
+    <nav id="mainNav" class="nav-metallic-border  relative z-50 w-full max-w-full mx-auto px-6 py-6 bg-black">
+    
+        <div class="flex justify-between items-center">
+           <div class="flex items-center gap-2">
+    <a href="#" class="flex items-center gap-2 group">
+        <img src="https://ik.imagekit.io/bebell/menus-digitales/Branding/ONTO%20AGENCY.webp" alt="Menu Digital Logo" class="w-12 h-12 object-contain mr-1 transition-transform duration-300 ease-out group-hover:scale-110" />
 
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <a href="#" class="flex items-center gap-2 group">
-                        <img src="https://ik.imagekit.io/bebell/menus-digitales/Branding/ONTO%20AGENCY.webp" alt="Menu Digital Logo" class="w-12 h-12 object-contain mr-1 transition-transform duration-300 ease-out group-hover:scale-110" />
-                        <div class="flex flex-col leading-none">
-                            <span class="font-bold font-cabin italic text-[#f1f1f1] drop-shadow-sm text-xl sm:text-2xl lg:text-[28px] leading-[1.1] tracking-tight">
-                                Menú <span class="font-instrument italic font-bold text-metallic-gold">Digital</span>
-                            </span>
-                            <span class="text-[8px] font-inter font-medium tracking-[0.15em] italic text-white/50 leading-none mt-1 ml-[2px]">
-                                por Bebell Digital Solutions
-                            </span>
-                        </div>
-                    </a>
-                </div>
+        <div class="flex flex-col leading-none">
+            <span class="font-bold font-cabin italic text-[#f1f1f1] drop-shadow-sm text-xl sm:text-2xl lg:text-[28px] leading-[1.1] tracking-tight">
+                Menú <span class="font-instrument italic font-bold text-metallic-gold">Digital</span>
+            </span>
 
-                <!-- DESKTOP NAV -->
-                <div class="nav-desktop items-center gap-6">
+            <!-- Byline -->
+            <span class="text-[8px] font-inter font-medium tracking-[0.15em] italic text-white/50 leading-none mt-1 ml-[2px]">
+                por Bebell Digital Solutions
+            </span>
+        </div>
+    </a>
+</div>
+ 
+            <!-- DESKTOP NAV -->
+            <div class="nav-desktop items-center gap-6">
 
-                    <a href="#" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Inicio</a>
+                <a href="#" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Inicio</a>
 
-                    <div id="solucionesWrap">
-                        <button
-                            id="solucionesBtn"
-                            class="flex items-center gap-1 text-md font-semibold text-white hover:text-[#ab9239] transition-colors"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-                            Soluciones
-                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="solucionesChevron"></i>
-                        </button>
-                    </div>
-
-                    <a href="#caracteristicas" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Características</a>
-                    <a href="#planes" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Planes</a>
-                    <a href="/portafolio" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Portafolio</a>
-                    <a href="/p/reporte" target="_blank" class="text-sm font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
-
-                    <a href="https://en.legacymd.online" title="English" class="relative group text-white hover:text-[#ab9239] transition-colors">
-                        <i data-lucide="languages" class="w-5 h-5"></i>
-                        <span class="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1 whitespace-nowrap rounded bg-black/90 px-4 py-2 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-50">English</span>
-                    </a>
-
+                <div id="solucionesWrap">
                     <button
-                        data-cal-link="bebell-digital-solutions/30min"
-                        data-cal-namespace="30min"
-                        data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                        class="btn-metallic btn-metallic-nav flex items-center gap-2"
+                        id="solucionesBtn"
+                        class="flex items-center gap-1 text-md font-semibold text-white hover:text-[#ab9239] transition-colors"
+                        aria-haspopup="true"
+                        aria-expanded="false"
                     >
-                        <lottie-player
-                            src="/assets/icons/calendar.json"
-                            data-lottie-hover
-                            style="width:26px;height:26px;flex:0 0 26px"
-                            class="pointer-events-none">
-                        </lottie-player>
-                        <span>Agendar Demo</span>
+                        Soluciones
+                        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="solucionesChevron"></i>
                     </button>
                 </div>
 
-                <!-- BURGER -->
-                <button id="burgerBtn" class="nav-burger items-center justify-center text-white p-2 rounded-lg hover:bg-white/10 transition-colors" aria-label="Abrir menú" aria-expanded="false">
-                    <span class="burger-icon-stack" id="burgerIconStack">
-                        <lottie-player
-                            src="/assets/icons/menu-white.json"
-                            data-lottie-hover
-                            class="pointer-events-none icon-menu"
-                            aria-hidden="true">
-                        </lottie-player>
-                        <lottie-player
-                            src="/assets/icons/x-square-white.json"
-                            data-lottie-hover
-                            class="pointer-events-none icon-close"
-                            aria-hidden="true">
-                        </lottie-player>
-                    </span>
+                <a href="#caracteristicas" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Características</a>
+
+                <a href="#planes" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Planes</a>
+
+                <a href="/portafolio" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Portafolio</a>
+
+                <a href="/p/reporte" target="_blank" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
+
+             
+                    
+                <!-- Language dropdown (hover + click + keyboard) -->
+<div class="relative group/lang inline-block">
+
+  <!-- Trigger -->
+  <button
+    type="button"
+    class="flex items-center gap-2 text-white hover:text-[#ab9239] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ab9239]/60 rounded-md px-1 py-1"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <i data-lucide="languages" class="w-5 h-5"></i>
+
+  </button>
+
+  <!-- Dropdown panel -->
+  <div
+    class="absolute right-0 mt-2 w-48 origin-top-right rounded-xl bg-white shadow-xl ring-1 ring-black/10
+           opacity-0 invisible translate-y-1 scale-95
+           group-hover/lang:opacity-100 group-hover/lang:visible group-hover/lang:translate-y-0 group-hover/lang:scale-100
+           group-focus-within/lang:opacity-100 group-focus-within/lang:visible group-focus-within/lang:translate-y-0 group-focus-within/lang:scale-100
+           transition-all duration-200 z-50"
+    role="menu"
+    aria-label="Select language"
+  >
+    <!-- Spanish -->
+    <a href="#" hreflang="es" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] first:rounded-t-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇪🇸</span>
+      <span class="font-medium">Español</span>
+      <span class="ml-auto text-xs text-gray-400">ES</span>
+    </a>
+
+    <!-- American (English) -->
+    <a href="/en" hreflang="en-US" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇺🇸</span>
+      <span class="font-medium">Inglés</span>
+      <span class="ml-auto text-xs text-gray-400">EN</span>
+    </a>
+
+    <!-- French -->
+    <a href="/fr" hreflang="fr" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] last:rounded-b-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇫🇷</span>
+      <span class="font-medium">Francés</span>
+      <span class="ml-auto text-xs text-gray-400">FR</span>
+    </a>
+  </div>
+</div>
+
+                
+                
+                
+
+                <!-- Gold metallic CTA -->
+                <button
+                    data-cal-link="bebell-digital-solutions/30min"
+                    data-cal-namespace="30min"
+                    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                    class="btn-metallic btn-metallic-nav flex items-center gap-2"
+                >
+                    <lottie-player
+                        src="/assets/icons/calendar.json"
+                        data-lottie-hover
+                        style="width:26px;height:26px;flex:0 0 26px"
+                        class="pointer-events-none">
+                    </lottie-player>
+                    <span>Agendar Demo</span>
                 </button>
-            </div>
 
-            <!-- MEGA MENU -->
-            <div class="mega-menu" id="megaMenu" role="menu" aria-label="Soluciones">
-                <div class="mega-menu-inner">
-                    <div class="mega-menu-left" id="megaLeft">
-                        <a href="#caracteristicas" class="mega-item active" data-img="default" role="menuitem">
-                            <span class="mega-icon"><i data-lucide="layout-grid" class="w-5 h-5"></i></span>
-                            <span class="mega-text">
-                                <span class="mega-title">Menú Digital</span>
-                                <span class="mega-desc">Carta interactiva con QR, fotos y precios actualizados.</span>
-                            </span>
-                        </a>
-                        <a href="#caracteristicas" class="mega-item" data-img="pedidos" role="menuitem">
-                            <span class="mega-icon"><i data-lucide="shopping-bag" class="w-5 h-5"></i></span>
-                            <span class="mega-text">
-                                <span class="mega-title">Pedidos Online</span>
-                                <span class="mega-desc">Toma de pedidos y pago sin fricción desde la mesa.</span>
-                            </span>
-                        </a>
-                        <a href="#caracteristicas" class="mega-item" data-img="reservas" role="menuitem">
-                            <span class="mega-icon"><i data-lucide="calendar-check" class="w-5 h-5"></i></span>
-                            <span class="mega-text">
-                                <span class="mega-title">Reservas</span>
-                                <span class="mega-desc">Agenda de mesas y confirmaciones automáticas.</span>
-                            </span>
-                        </a>
-                        <a href="#caracteristicas" class="mega-item" data-img="analitica" role="menuitem">
-                            <span class="mega-icon"><i data-lucide="bar-chart-3" class="w-5 h-5"></i></span>
-                            <span class="mega-text">
-                                <span class="mega-title">Analítica</span>
-                                <span class="mega-desc">Métricas de platos vistos y productos top.</span>
-                            </span>
-                        </a>
-                        <a href="#caracteristicas" class="mega-item" data-img="branding" role="menuitem">
-                            <span class="mega-icon"><i data-lucide="palette" class="w-5 h-5"></i></span>
-                            <span class="mega-text">
-                                <span class="mega-title">Branding</span>
-                                <span class="mega-desc">Personaliza colores, tipografías y portada.</span>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="mega-menu-right" id="megaRight">
-                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Menú Digital - vista general" class="mega-img active" data-img-id="default" />
-                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80" alt="Pedidos online" class="mega-img" data-img-id="pedidos" />
-                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" alt="Reservas" class="mega-img" data-img-id="reservas" />
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Analítica" class="mega-img" data-img-id="analitica" />
-                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80" alt="Branding" class="mega-img" data-img-id="branding" />
-                    </div>
-                </div>
             </div>
+            
+            
+            
+            
 
-            <!-- MOBILE PANEL -->
-            <div id="mobilePanel" class="mobile-panel">
-                <div class="flex flex-col gap-4 pt-6 pb-2">
-                    <a href="#" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Inicio</a>
-                    <div>
-                        <button id="mobileSolBtn" class="mobile-sub-btn text-md font-semibold text-white hover:text-[#ab9239] transition-colors" aria-expanded="false">
-                            <span>Soluciones</span>
-                            <i data-lucide="chevron-down" class="chev w-4 h-4"></i>
-                        </button>
-                        <div class="mobile-sub pl-2" id="mobileSolSub">
-                            <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Menú Digital</a>
-                            <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Pedidos Online</a>
-                            <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Reservas</a>
-                            <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Analítica</a>
-                            <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Branding</a>
-                        </div>
-                    </div>
-                    <a href="#caracteristicas" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Características</a>
-                    <a href="#planes" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Planes</a>
-                    <a href="/portafolio" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Portafolio</a>
-                    <a href="/p/reporte" target="_blank" class="text-sm font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
-                    <a href="/en" title="English" class="flex items-center gap-2 text-white hover:text-[#ab9239] transition-colors">
-                        <i data-lucide="languages" class="w-5 h-5"></i>
-                        <span class="text-sm font-semibold">English</span>
+            <!-- BURGER BUTTON — two stacked Lottie players (menu ↔ close) -->
+            <button id="burgerBtn" class="nav-burger items-center justify-center text-white p-2 rounded-lg hover:bg-white/10 transition-colors" aria-label="Abrir menú" aria-expanded="false">
+                <span class="burger-icon-stack" id="burgerIconStack">
+					
+                    <lottie-player
+                        src="/assets/icons/menu-white.json"
+                        data-lottie-hover
+                        class="pointer-events-none icon-menu"
+                        aria-hidden="true">
+                    </lottie-player>
+					
+                    <lottie-player
+                        src="/assets/icons/x-square-white.json"
+                        data-lottie-hover
+                        class="pointer-events-none icon-close"
+                        aria-hidden="true">
+                    </lottie-player>
+					
+                </span>
+            </button>
+
+        </div>
+
+        <!-- MEGA MENU CARD -->
+        <div class="mega-menu" id="megaMenu" role="menu" aria-label="Soluciones">
+            <div class="mega-menu-inner">
+                <div class="mega-menu-left" id="megaLeft">
+
+                    <a href="#caracteristicas" class="mega-item active" data-img="default" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="layout-grid" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Menú Digital</span>
+                            <span class="mega-desc">Carta interactiva con QR, fotos y precios actualizados.</span>
+                        </span>
                     </a>
-                    <button
-                        data-cal-link="bebell-digital-solutions/30min"
-                        data-cal-namespace="30min"
-                        data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                        class="btn-metallic btn-metallic-nav w-full mt-2 flex items-center justify-center gap-2"
-                    >
-                        <lottie-player
-                            src="/assets/icons/calendar.json"
-                            data-lottie-hover
-                            style="width:26px;height:26px;flex:0 0 26px"
-                            class="pointer-events-none">
-                        </lottie-player>
-                        <span>Agendar Demo</span>
-                    </button>
+
+                    <a href="#caracteristicas" class="mega-item" data-img="pedidos" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="shopping-bag" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Pedidos Online</span>
+                            <span class="mega-desc">Toma de pedidos y pago sin fricción desde la mesa.</span>
+                        </span>
+                    </a>
+
+                    <a href="#caracteristicas" class="mega-item" data-img="reservas" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="calendar-check" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Reservas</span>
+                            <span class="mega-desc">Agenda de mesas y confirmaciones automáticas.</span>
+                        </span>
+                    </a>
+
+                    <a href="#caracteristicas" class="mega-item" data-img="analitica" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="bar-chart-3" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Analítica</span>
+                            <span class="mega-desc">Métricas de platos vistos y productos top.</span>
+                        </span>
+                    </a>
+
+                    <a href="#caracteristicas" class="mega-item" data-img="branding" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="palette" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Branding</span>
+                            <span class="mega-desc">Personaliza colores, tipografías y portada.</span>
+                        </span>
+                    </a>
+
+                </div>
+
+                <div class="mega-menu-right" id="megaRight">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Menú Digital - vista general" class="mega-img active" data-img-id="default" />
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80" alt="Pedidos online" class="mega-img" data-img-id="pedidos" />
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" alt="Reservas" class="mega-img" data-img-id="reservas" />
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Analítica" class="mega-img" data-img-id="analitica" />
+                    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80" alt="Branding" class="mega-img" data-img-id="branding" />
                 </div>
             </div>
-        </nav>
+        </div>
         
+        
+
+        <!-- MOBILE PANEL -->
+        <div id="mobilePanel" class="mobile-panel">
+            <div class="flex flex-col gap-4 pt-6 pb-2">
+
+                <a href="#" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Inicio</a>
+
+                <div>
+                
+                    <button id="mobileSolBtn" class="mobile-sub-btn text-md font-semibold text-white hover:text-[#ab9239] transition-colors" aria-expanded="false">
+                    
+                        <span>Soluciones</span>
+                        <i data-lucide="chevron-down" class="chev w-4 h-4"></i>
+                    </button>
+                    
+                    
+                    <div class="mobile-sub pl-2" id="mobileSolSub">
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Menú Digital</a>
+                        
+                        
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Pedidos Online</a>
+                        
+                        
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Reservas</a>
+                        
+                        
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Analítica</a>
+                        
+                        
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Branding</a>
+                        
+                        
+                    </div>
+                </div>
+
+                <a href="#caracteristicas" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Características</a>
+                
+                
+                <a href="/planes" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Planes</a>
+                
+                
+                <a href="/portafolio" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Portafolio</a>
+                
+                
+                <a href="/reporte" target="_blank" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
+
+              
+                
+               <!-- Language dropdown (mobile — opens upward) -->
+<div class="relative group/lang inline-block w-full">
+
+  <!-- Trigger -->
+  <button
+    type="button"
+    class="flex items-center gap-2 text-white hover:text-[#ab9239] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ab9239]/60 rounded-md px-1 py-1"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <i data-lucide="languages" class="w-5 h-5"></i>
+    <span class="text-sm font-semibold">Español</span>
+    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200 group-hover/lang:rotate-180"></i>
+  </button>
+
+  <!-- Dropdown panel — opens ABOVE the trigger on mobile -->
+  <div
+    class="absolute right-0 bottom-full mb-0 w-48 origin-bottom-left rounded-xl bg-white shadow-xl ring-1 ring-black/10
+           opacity-0 invisible translate-y-1 scale-95
+           group-hover/lang:opacity-100 group-hover/lang:visible group-hover/lang:translate-y-0 group-hover/lang:scale-100
+           group-focus-within/lang:opacity-100 group-focus-within/lang:visible group-focus-within/lang:translate-y-0 group-focus-within/lang:scale-100
+           transition-all duration-200 z-50"
+    role="menu"
+    aria-label="Select language"
+  >
+    <!-- Spanish -->
+    <a href="/es" hreflang="es" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] first:rounded-t-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇪🇸</span>
+      <span class="font-medium">Español</span>
+      <span class="ml-auto text-xs text-gray-400">ES</span>
+    </a>
+
+    <!-- American (English) -->
+    <a href="/en" hreflang="en-US" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇺🇸</span>
+      <span class="font-medium">Inglés</span>
+      <span class="ml-auto text-xs text-gray-400">EN</span>
+    </a>
+
+    <!-- French -->
+    <a href="/fr" hreflang="fr" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] last:rounded-b-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇫🇷</span>
+      <span class="font-medium">Francés</span>
+      <span class="ml-auto text-xs text-gray-400">FR</span>
+    </a>
+  </div>
+</div>
+
+                <button
+                    data-cal-link="bebell-digital-solutions/30min"
+                    data-cal-namespace="30min"
+                    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                    class="btn-metallic btn-metallic-nav w-full mt-2 flex items-center justify-center gap-2"
+                >
+                    <lottie-player
+                        src="/assets/icons/calendar.json"
+                        data-lottie-hover
+                        style="width:26px;height:26px;flex:0 0 26px"
+                        class="pointer-events-none">
+                    </lottie-player>
+					
+                    <span>Agendar Demo</span>
+                </button>
+
+            </div>
+        </div>
+    </nav>
         
         
         
@@ -735,12 +886,13 @@
 
             <!-- Section header -->
             <div class="text-center mb-12">
-                <h2 class="hero-reveal font-instrument text-7xl font-normal text-metallic-light mb-4">Planes y Precios</h2>
-                <p class="text-gray-400 max-w-xl mx-auto">Elige el plan perfecto para tu negocio. Todos los precios en USD.</p>
+                <h2 class="gsap-fade-up font-instrument text-7xl font-normal text-metallic-light mb-4">Planes y Precios</h2>
+                <p class="gsap-fade-up text-gray-400 max-w-xl mx-auto">Elige el plan perfecto para tu negocio. Todos los precios en USD.</p>
             </div>
 
             <!-- Toggle Switch -->
-            <div class="relative flex items-center p-1.5 bg-white/5 backdrop-blur-md rounded-full border border-white/10 mx-auto mb-12 shadow-[0_4px_15px_rgba(0,0,0,0.2)]">
+            <div class="gsap-fade-up relative flex items-center p-1.5 bg-white/5 backdrop-blur-md rounded-full border border-white/10 mx-auto mb-12 shadow-[0_4px_15px_rgba(0,0,0,0.2)]">
+            
                 <button id="btn-monthly" class="relative z-10 px-8 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 btn-metallic">Mensual</button>
                 <div class="relative group ml-2">
                     <button id="btn-yearly" class="relative z-10 px-8 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 text-gray-400 hover:text-white">Pago Anual</button>
@@ -766,7 +918,7 @@
                     <!-- ============================================ -->
                     <!-- CARD 1: START-UP                             -->
                     <!-- ============================================ -->
-                    <div class="w-[320px] sm:w-[360px] flex-shrink-0 card-outer relative group snap-center">
+                    <div class="w-[320px] sm:w-[360px] flex-shrink-0 card-outer relative group snap-center gsap-fade-up">
                         <div class="card-inner p-8">
                             <h3 class="text-3xl font-bold text-metallic-light mb-2">START-UP</h3>
                             <p class="text-sm text-gray-400 mb-6 leading-relaxed">Hasta 10 Productos</p>
@@ -823,7 +975,7 @@
                     <!-- ============================================ -->
                     <!-- CARD 2: BASIC (Highlighted)                  -->
                     <!-- ============================================ -->
-                    <div class="w-[320px] sm:w-[360px] flex-shrink-0 relative snap-center">
+                    <div class="w-[320px] sm:w-[360px] flex-shrink-0 relative snap-center gsap-fade-up">
                         <div class="blob-container hidden md:block">
                             <div class="animated-blob"></div>
                         </div>
@@ -891,7 +1043,7 @@
                     <!-- ============================================ -->
                     <!-- CARD 3: CORPORATE                            -->
                     <!-- ============================================ -->
-                    <div class="w-[320px] sm:w-[360px] flex-shrink-0 card-outer relative group snap-center">
+                    <div class="w-[320px] sm:w-[360px] flex-shrink-0 card-outer relative group snap-center gsap-fade-up">
                         <div class="card-inner p-8">
                             <h3 class="text-3xl font-bold text-metallic-light mb-2">CORPORATIVO</h3>
                             <p class="text-sm text-gray-400 mb-6 leading-relaxed">Más de 100 Productos</p>
@@ -995,7 +1147,7 @@
         
         
   <!-- Centered container -->
-<div class="min-h-screen flex items-center justify-center py-10 px-4 mt-0 mb-8 text-center">
+<div class="gsap-fade-up min-h-screen flex items-center justify-center py-10 px-4 mt-0 mb-8 text-center">
 
   <div class="w-full max-w-3xl">
 
@@ -1229,7 +1381,7 @@
                         </a>
                     </div>
                     <div class="text-xs text-white/50">
-                        &copy; 2026 Domain Vault. Todos los derechos reservados.
+                        &copy; 2026 Menú Digital. Todos los derechos reservados.
                     </div>
                     <img
                         src="https://bucket.mlcdn.com/a/3336/3336910/images/c6a6d752e1132502e3879b1b07d2ff66e3bb34d3.png"
