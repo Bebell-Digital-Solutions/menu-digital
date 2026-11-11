@@ -1,8 +1,8 @@
 <div align="center">
 
-![Logo](.png)
+![Logo](https://ik.imagekit.io/bebell/menus-digitales/Branding/ONTO%20AGENCY.webp?updatedAt=1793005960042)
 
-# Consultorio Digital para Médicos
+# Menú Digital para Restaurantes, Bares y Hoteles
 
 <img src="https://ik.imagekit.io/bebell/menus-digitales/menu-digital-readme-banner.png" alt="LegacyMD Banner" width="100%">
 
