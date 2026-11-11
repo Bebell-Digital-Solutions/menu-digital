@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precios · Metallic Gold · Menú Digital</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cabin:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        manrope: ['Manrope', 'sans-serif'],
+                        cabin: ['Cabin', 'sans-serif'],
+                        instrument: ['Instrument Serif', 'serif'],
+                    },
+                    colors: {
+                        primary: '#ab9239',
+                        'primary-light': 'rgba(171, 146, 57, 0.1)',
+                        'primary-lighter': 'rgba(171, 146, 57, 0.05)',
+                        'accent-color': '#ab9239',
+                    }
+                }
+            }
+        }
+    </script>
+
+
+
+
+
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <!-- TrustBox script -->
+    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+
+    <style>
+    
+    
+            @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=Manrope:wght@400;500;600;700&display=swap');
+
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .font-cabin { font-family: 'Cabin', sans-serif; }
+        .font-instrument { font-family: 'Instrument Serif', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+
+
+
+
+        /* ============================================ */
+        /* BASE & TYPOGRAPHY                            */
+        /* ============================================ */
+        :root {
+            --primary: #ab9239;
+            --primary-light: rgba(171, 146, 57, 0.1);
+            --primary-lighter: rgba(171, 146, 57, 0.05);
+            --bg-body: #f7f7f3;
+            --text-dark: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --bg-main: #ffffff;
+            --card-bg: #ffffff;
+            --text-primary: #121212;
+            --text-secondary: #5a5a5a;
+            --accent-color: #ab9239;
+            --brand-bg: #13413a;
+        }
+
+
+        
+             body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+             
+            /* The Dot Grid Pattern */
+            background-color: #000; /* Very light gray base */
+            background-image: radial-gradient(#41360e 1px, transparent 1px);
+            background-size: 24px 24px; /* Controls the spacing of the dots */
+            
+            /* Optional: Adds a subtle fade effect to the dots */
+            background-attachment: fixed;
+        }
+        
+           
+        
+        
+        
+
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .font-cabin { font-family: 'Cabin', sans-serif; }
+        .font-instrument { font-family: 'Instrument Serif', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        
+        
+        
+        
+        
+
+        /* ============================================ */
+        /* BACKGROUNDS (pricing page)                   */
+        /* ============================================ */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: radial-gradient(circle, rgba(171, 146, 57, 0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        
+        
+
+
+        /* ============================================ */
+        /* SITE WRAPPER (outer dotted background)        */
+        /* ============================================ */
+        .site-wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            background-color: #070B14;
+            border-left: 1px solid #41360e;
+            border-right: 1px solid #41360e;
+            min-height: 100vh;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.02);
+            position: relative;
+        }
+        
+        
+
+        /* ============================================ */
+        /* NAVBAR                                       */
+        /* ============================================ */
+        .nav-metallic-border::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 3px;
+            z-index: 2;
+            background: linear-gradient(90deg,
+                #8a7429 0%, #c9ad55 20%, #f5d547 40%, #fffbe0 50%,
+                #f5d547 60%, #c9ad55 80%, #8a7429 100%);
+            background-size: 200% 100%;
+            animation: navBorderShine 6s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(245, 213, 71, 0.4), 0 1px 3px rgba(0, 0, 0, 0.6);
+            pointer-events: none;
+        }
+
+        @keyframes navBorderShine {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .nav-desktop { display: flex; }
+        .nav-burger  { display: none; }
+
+        @media (max-width: 1136px) {
+            .nav-desktop { display: none !important; }
+            .nav-burger  { display: flex !important; }
+        }
+
+        .mobile-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .mobile-panel.open { max-height: 900px; }
+
+        .burger-icon-stack {
+            position: relative;
+            width: 26px;
+            height: 26px;
+        }
+        .burger-icon-stack lottie-player {
+            position: absolute;
+            inset: 0;
+            width: 26px !important;
+            height: 26px !important;
+            transition: opacity 0.2s ease;
+        }
+        .burger-icon-stack .icon-menu  { opacity: 1; }
+        .burger-icon-stack .icon-close { opacity: 0; pointer-events: none; }
+        .burger-icon-stack.is-open .icon-menu  { opacity: 0; pointer-events: none; }
+        .burger-icon-stack.is-open .icon-close { opacity: 1; }
+
+        /* === Mega menu === */
+        .mega-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            width: min(760px, calc(100vw - 3rem));
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+            pointer-events: none;
+            z-index: 60;
+        }
+        .mega-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+        .mega-menu-inner {
+            background: #0b0b0b;
+            border: 1px solid rgba(171, 146, 57, 0.35);
+            border-radius: 16px;
+            box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255,255,255,0.02);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 340px;
+        }
+        .mega-menu-left {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .mega-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #e8e8e8;
+            border: 1px solid transparent;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .mega-item:hover,
+        .mega-item.active {
+            background: rgba(171, 146, 57, 0.10);
+            border-color: rgba(171, 146, 57, 0.35);
+        }
+        .mega-item .mega-icon {
+            flex: 0 0 36px;
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 8px;
+            background: rgba(171, 146, 57, 0.12);
+            color: #c9ad55;
+        }
+        .mega-item:hover .mega-icon,
+        .mega-item.active .mega-icon {
+            background: rgba(171, 146, 57, 0.22);
+            color: #f2e3a5;
+        }
+        .mega-item .mega-text { display: flex; flex-direction: column; gap: 2px; }
+        .mega-item .mega-title { font-size: 0.95rem; font-weight: 700; color: #f1f1f1; line-height: 1.25; }
+        .mega-item .mega-desc  { font-size: 0.78rem; color: #a3a3a3; line-height: 1.35; }
+        .mega-menu-right {
+            position: relative;
+            background: #050505;
+            overflow: hidden;
+        }
+        .mega-img {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            transform: scale(1.02);
+        }
+        .mega-img.active { opacity: 1; }
+        .mega-menu-right::after {
+            content: "";
+            position: absolute; inset: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 35%);
+            pointer-events: none;
+        }
+
+        .mobile-sub { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        .mobile-sub.open { max-height: 500px; }
+        .mobile-sub-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+        .mobile-sub-btn .chev { transition: transform 0.3s ease; }
+        .mobile-sub-btn.open .chev { transform: rotate(180deg); }
+
+        /* ============================================ */
+        /* BUTTONS — METALLIC GOLD                      */
+        /* ============================================ */
+        .btn-metallic {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e8d48a 0%, #c9ad55 25%, #ab9239 50%, #8a7429 75%, #6e5c1f 100%);
+            color: #2a2000 !important;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.55), inset 0 -2px 4px rgba(0,0,0,0.35);
+            text-shadow: 0 1px 1px rgba(255,255,255,0.35);
+            border: 3px solid #8a7429;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            transition: transform 0.3s ease, background 0.3s ease;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+        .btn-metallic::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.0) 30%, rgba(255,255,255,0.65) 50%, rgba(255,255,255,0.0) 70%, transparent 100%);
+            transform: skewX(-25deg);
+            pointer-events: none;
+            animation: shine 3.5s ease-in-out infinite;
+        }
+        @keyframes shine {
+            0% { left: -75%; }
+            60% { left: 125%; }
+            100% { left: 125%; }
+        }
+        .btn-metallic:hover {
+            background: linear-gradient(135deg, #f2e3a5 0%, #d9c06a 25%, #c0a646 50%, #ab9239 75%, #8a7429 100%);
+            transform: translateY(-2px);
+        }
+        .btn-metallic:hover::before { animation-duration: 1.2s; }
+        .btn-metallic:active {
+            transform: translateY(0px);
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.4), inset 0 -1px 2px rgba(255,255,255,0.4);
+        }
+        .btn-metallic-nav {
+            font-size: 1rem;
+            padding: 12px 26px;
+            border-radius: 10px;
+            max-width: none;
+        }
+
+        /* ============================================ */
+        /* PRICING CARDS — METALLIC GOLD (exact style)  */
+        /* ============================================ */
+        .blob-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140%;
+            height: 120%;
+            z-index: -1;
+            overflow: visible;
+            pointer-events: none;
+        }
+        .animated-blob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(171, 146, 57, 0.45) 0%, rgba(171, 146, 57, 0) 70%);
+            filter: blur(60px);
+            border-radius: 50%;
+            animation: rotate 10s infinite linear, pulse 5s infinite alternate ease-in-out;
+            transform-origin: center center;
+        }
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+
+        .card-outer {
+            border-radius: 2rem;
+            padding: 16px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 100%);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card-outer:hover { transform: translateY(-5px); }
+
+        .card-inner {
+            background-color: #11151c;
+            border-radius: 1.25rem;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .card-outer.highlighted {
+            background: linear-gradient(180deg, #e8d48a 0%, #c9ad55 25%, #ab9239 50%, #8a7429 75%, #6e5c1f 100%);
+            box-shadow:
+                0 0 45px rgba(171, 146, 57, 0.45),
+                0 0 80px rgba(171, 146, 57, 0.15),
+                inset 0 2px 6px rgba(255, 245, 200, 0.7),
+                inset 0 -2px 6px rgba(80, 55, 0, 0.4);
+            padding-top: 40px;
+            transform: scale(1.05);
+            z-index: 10;
+            border: 3px solid #8a7429;
+        }
+        .card-outer.highlighted:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow:
+                0 0 55px rgba(171, 146, 57, 0.6),
+                0 0 100px rgba(171, 146, 57, 0.2),
+                inset 0 2px 6px rgba(255, 245, 200, 0.8),
+                inset 0 -2px 6px rgba(80, 55, 0, 0.5);
+        }
+        .card-outer.highlighted .card-inner {
+            background-color: #0f171e;
+            box-shadow: inset 0 2px 12px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(171, 146, 57, 0.1);
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: 14px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            color: #2a2000;
+            text-transform: uppercase;
+            text-shadow: 0 1px 1px rgba(255, 245, 200, 0.5);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(171,146,57,0.0) 0%, rgba(171,146,57,0.3) 50%, rgba(171,146,57,0.0) 100%);
+            margin: 24px 0;
+            width: 100%;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+            font-size: 0.875rem;
+            color: #d1d5db;
+        }
+        .bullet-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #9ca3af;
+        }
+        .bullet-list.highlighted-list li::before {
+            background-color: #ab9239;
+            box-shadow: 0 0 6px rgba(171, 146, 57, 0.9);
+        }
+        .bullet-list li strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .text-metallic-light {
+            background: linear-gradient(to bottom right, #ffffff 0%, #f1f5f9 30%, #cbd5e1 50%, #f8fafc 70%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.2);
+        }
+
+        .plan-title-gold {
+            background: linear-gradient(to bottom right, #e8d48a 0%, #ab9239 50%, #6e5c1f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(171, 146, 57, 0.4);
+            font-weight: 800;
+        }
+
+        /* ============================================ */
+        /* PRICING SCROLL (mobile)                      */
+        /* ============================================ */
+        .pricing-scroll {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scroll-padding-left: 1rem;
+            scroll-padding-right: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(171, 146, 57, 0.4) transparent;
+        }
+        .pricing-scroll::-webkit-scrollbar { height: 6px; }
+        .pricing-scroll::-webkit-scrollbar-track { background: transparent; margin: 0 1rem; }
+        .pricing-scroll::-webkit-scrollbar-thumb { background: rgba(171, 146, 57, 0.45); border-radius: 9999px; }
+        .pricing-scroll::-webkit-scrollbar-thumb:hover { background: rgba(171, 146, 57, 0.7); }
+        .pricing-scroll .card-outer,
+        .pricing-scroll .card-wrap {
+            scroll-snap-align: center;
+            flex: 0 0 auto;
+        }
+        @media (min-width: 768px) {
+            .pricing-scroll {
+                overflow-x: visible;
+                scroll-snap-type: none;
+                scrollbar-width: auto;
+            }
+            .pricing-scroll::-webkit-scrollbar { height: auto; }
+        }
+
+        /* ============================================ */
+        /* FOOTER                                       */
+        /* ============================================ */
+        .text-metallic-gold {
+            background: linear-gradient(to bottom right, #e8d48a 0%, #ab9239 50%, #6e5c1f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 12px rgba(171, 146, 57, 0.3);
+        }
+
+        /* ============================================ */
+        /* MISC UTILITIES                               */
+        /* ============================================ */
+        .gsap-fade-up { opacity: 1; }
+    </style>
+</head>
+
+<body class="antialiased font-sans">
+
+    <!-- ============================================ -->
+    <!-- BACKGROUNDS                                  -->
+    <!-- ============================================ -->
+    <div class="bg-pattern"></div>
+    <div class="bg-glow"></div>
+
+    <!-- ============================================ -->
+    <!-- SITE WRAPPER                                 -->
+    <!-- ============================================ -->
+    <div class="site-wrapper">
+
+        <!-- ============================================ -->
+        <!-- NAVBAR                                       -->
+        <!-- ============================================ -->
+       
+  
+    <nav id="mainNav" class="nav-metallic-border  relative z-50 w-full max-w-full mx-auto px-6 py-6 bg-black">
+    
+        <div class="flex justify-between items-center">
+           <div class="flex items-center gap-2">
+    <a href="#" class="flex items-center gap-2 group">
+        <img src="https://ik.imagekit.io/bebell/menus-digitales/Branding/ONTO%20AGENCY.webp" alt="Menu Digital Logo" class="w-12 h-12 object-contain mr-1 transition-transform duration-300 ease-out group-hover:scale-110" />
+
+        <div class="flex flex-col leading-none">
+            <span class="font-bold font-cabin italic text-[#f1f1f1] drop-shadow-sm text-xl sm:text-2xl lg:text-[28px] leading-[1.1] tracking-tight">
+                Menú <span class="font-instrument italic font-bold text-metallic-gold">Digital</span>
+            </span>
+
+            <!-- Byline -->
+            <span class="text-[8px] font-inter font-medium tracking-[0.15em] italic text-white/50 leading-none mt-1 ml-[2px]">
+                por Bebell Digital Solutions
+            </span>
+        </div>
+    </a>
+</div>
+ 
+            <!-- DESKTOP NAV -->
+            <div class="nav-desktop items-center gap-6">
+
+                <a href="#" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Inicio</a>
+
+                <div id="solucionesWrap">
+                    <button
+                        id="solucionesBtn"
+                        class="flex items-center gap-1 text-md font-semibold text-white hover:text-[#ab9239] transition-colors"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        Soluciones
+                        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="solucionesChevron"></i>
+                    </button>
+                </div>
+
+                <a href="#caracteristicas" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Características</a>
+
+                <a href="#planes" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Planes</a>
+
+                <a href="/portafolio" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Portafolio</a>
+
+                <a href="/p/reporte" target="_blank" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
+
+             
+                    
+                <!-- Language dropdown (hover + click + keyboard) -->
+<div class="relative group/lang inline-block">
+
+  <!-- Trigger -->
+  <button
+    type="button"
+    class="flex items-center gap-2 text-white hover:text-[#ab9239] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ab9239]/60 rounded-md px-1 py-1"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <i data-lucide="languages" class="w-5 h-5"></i>
+
+  </button>
+
+  <!-- Dropdown panel -->
+  <div
+    class="absolute right-0 mt-2 w-48 origin-top-right rounded-xl bg-white shadow-xl ring-1 ring-black/10
+           opacity-0 invisible translate-y-1 scale-95
+           group-hover/lang:opacity-100 group-hover/lang:visible group-hover/lang:translate-y-0 group-hover/lang:scale-100
+           group-focus-within/lang:opacity-100 group-focus-within/lang:visible group-focus-within/lang:translate-y-0 group-focus-within/lang:scale-100
+           transition-all duration-200 z-50"
+    role="menu"
+    aria-label="Select language"
+  >
+    <!-- Spanish -->
+    <a href="#" hreflang="es" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] first:rounded-t-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇪🇸</span>
+      <span class="font-medium">Español</span>
+      <span class="ml-auto text-xs text-gray-400">ES</span>
+    </a>
+
+    <!-- American (English) -->
+    <a href="/en" hreflang="en-US" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇺🇸</span>
+      <span class="font-medium">Inglés</span>
+      <span class="ml-auto text-xs text-gray-400">EN</span>
+    </a>
+
+    <!-- French -->
+    <a href="/fr" hreflang="fr" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] last:rounded-b-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇫🇷</span>
+      <span class="font-medium">Francés</span>
+      <span class="ml-auto text-xs text-gray-400">FR</span>
+    </a>
+  </div>
+</div>
+
+                
+                
+                
+
+                <!-- Gold metallic CTA -->
+                <button
+                    data-cal-link="bebell-digital-solutions/30min"
+                    data-cal-namespace="30min"
+                    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                    class="btn-metallic btn-metallic-nav flex items-center gap-2"
+                >
+                    <lottie-player
+                        src="/assets/icons/calendar.json"
+                        data-lottie-hover
+                        style="width:26px;height:26px;flex:0 0 26px"
+                        class="pointer-events-none">
+                    </lottie-player>
+                    <span>Agendar Demo</span>
+                </button>
+
+            </div>
+            
+            
+            
+            
+
+            <!-- BURGER BUTTON — two stacked Lottie players (menu ↔ close) -->
+            <button id="burgerBtn" class="nav-burger items-center justify-center text-white p-2 rounded-lg hover:bg-white/10 transition-colors" aria-label="Abrir menú" aria-expanded="false">
+                <span class="burger-icon-stack" id="burgerIconStack">
+					
+                    <lottie-player
+                        src="/assets/icons/menu-white.json"
+                        data-lottie-hover
+                        class="pointer-events-none icon-menu"
+                        aria-hidden="true">
+                    </lottie-player>
+					
+                    <lottie-player
+                        src="/assets/icons/x-square-white.json"
+                        data-lottie-hover
+                        class="pointer-events-none icon-close"
+                        aria-hidden="true">
+                    </lottie-player>
+					
+                </span>
+            </button>
+
+        </div>
+
+        <!-- MEGA MENU CARD -->
+        <div class="mega-menu" id="megaMenu" role="menu" aria-label="Soluciones">
+            <div class="mega-menu-inner">
+                <div class="mega-menu-left" id="megaLeft">
+
+                    <a href="#caracteristicas" class="mega-item active" data-img="default" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="layout-grid" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Menú Digital</span>
+                            <span class="mega-desc">Carta interactiva con QR, fotos y precios actualizados.</span>
+                        </span>
+                    </a>
+                    
+                    
+                    
+       <a href="#caracteristicas" class="mega-item" data-img="pos" role="menuitem">
+    <span class="mega-icon"><i data-lucide="credit-card" class="w-5 h-5"></i></span>
+    <span class="mega-text">
+        <span class="mega-title">Punto de Venta (POS)</span>
+        <span class="mega-desc">Cobra, factura y gestiona ventas desde mostrador o mesa.</span>
+    </span>
+</a>             
+                    
+                    
+                    
+
+                    <a href="#caracteristicas" class="mega-item" data-img="pedidos" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="shopping-bag" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Pedidos Online</span>
+                            <span class="mega-desc">Toma de pedidos y pago sin fricción desde la mesa.</span>
+                        </span>
+                    </a>
+
+                    <a href="#caracteristicas" class="mega-item" data-img="reservas" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="calendar-check" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Reservas</span>
+                            <span class="mega-desc">Agenda de mesas y confirmaciones automáticas.</span>
+                        </span>
+                    </a>
+
+                    <a href="#caracteristicas" class="mega-item" data-img="analitica" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="bar-chart-3" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Analítica</span>
+                            <span class="mega-desc">Métricas de platos vistos y productos top.</span>
+                        </span>
+                    </a>
+
+                    <a href="#caracteristicas" class="mega-item" data-img="branding" role="menuitem">
+                        <span class="mega-icon"><i data-lucide="palette" class="w-5 h-5"></i></span>
+                        <span class="mega-text">
+                            <span class="mega-title">Personalización</span>
+                            <span class="mega-desc">Personaliza colores, tipografías y portada.</span>
+                        </span>
+                    </a>
+
+                </div>
+
+                <div class="mega-menu-right" id="megaRight">
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/menu-digital.webp?auto=format&fit=crop&w=900&q=80" alt="Menú Digital - vista general" class="mega-img active" data-img-id="default" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/punto-de-venta.webp?auto=format&fit=crop&w=900&q=80" alt="Punto de Venta (POS)" class="mega-img" data-img-id="pos" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/pedidos-online.webp?auto=format&fit=crop&w=900&q=80" alt="Pedidos online" class="mega-img" data-img-id="pedidos" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/reservaciones.webp?auto=format&fit=crop&w=900&q=80" alt="Reservas" class="mega-img" data-img-id="reservas" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/analiticas.webp?auto=format&fit=crop&w=900&q=80" alt="Analítica" class="mega-img" data-img-id="analitica" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/personalizacion.webp?auto=format&fit=crop&w=900&q=80" alt="Branding" class="mega-img" data-img-id="branding" />
+                </div>
+            </div>
+        </div>
+        
+        
+
+        <!-- MOBILE PANEL -->
+        <div id="mobilePanel" class="mobile-panel">
+            <div class="flex flex-col gap-4 pt-6 pb-2">
+
+                <a href="#" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Inicio</a>
+
+                <div>
+                
+                    <button id="mobileSolBtn" class="mobile-sub-btn text-md font-semibold text-white hover:text-[#ab9239] transition-colors" aria-expanded="false">
+                    
+                        <span>Soluciones</span>
+                        <i data-lucide="chevron-down" class="chev w-4 h-4"></i>
+                    </button>
+                    
+                    
+                    <div class="mobile-sub pl-2" id="mobileSolSub">
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Menú Digital</a>
+                        
+                        
+                        
+<a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Punto de Venta (POS)</a>                        
+                      
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Pedidos Online</a>
+                        
+                        
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Reservas</a>
+                        
+                        
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Analítica</a>
+                        
+                        
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Personalización</a>
+                        
+                        
+                    </div>
+                </div>
+
+                <a href="#caracteristicas" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Características</a>
+                
+                
+                <a href="/planes" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Planes</a>
+                
+                
+                <a href="/portafolio" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Portafolio</a>
+                
+                
+                <a href="/reporte" target="_blank" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
+
+              
+                
+               <!-- Language dropdown (mobile — opens upward) -->
+<div class="relative group/lang inline-block w-full">
+
+  <!-- Trigger -->
+  <button
+    type="button"
+    class="flex items-center gap-2 text-white hover:text-[#ab9239] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ab9239]/60 rounded-md px-1 py-1"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <i data-lucide="languages" class="w-5 h-5"></i>
+    <span class="text-sm font-semibold">Español</span>
+    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200 group-hover/lang:rotate-180"></i>
+  </button>
+
+  <!-- Dropdown panel — opens ABOVE the trigger on mobile -->
+  <div
+    class="absolute right-0 bottom-full mb-0 w-48 origin-bottom-left rounded-xl bg-white shadow-xl ring-1 ring-black/10
+           opacity-0 invisible translate-y-1 scale-95
+           group-hover/lang:opacity-100 group-hover/lang:visible group-hover/lang:translate-y-0 group-hover/lang:scale-100
+           group-focus-within/lang:opacity-100 group-focus-within/lang:visible group-focus-within/lang:translate-y-0 group-focus-within/lang:scale-100
+           transition-all duration-200 z-50"
+    role="menu"
+    aria-label="Select language"
+  >
+    <!-- Spanish -->
+    <a href="/es" hreflang="es" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] first:rounded-t-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇪🇸</span>
+      <span class="font-medium">Español</span>
+      <span class="ml-auto text-xs text-gray-400">ES</span>
+    </a>
+
+    <!-- American (English) -->
+    <a href="/en" hreflang="en-US" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇺🇸</span>
+      <span class="font-medium">Inglés</span>
+      <span class="ml-auto text-xs text-gray-400">EN</span>
+    </a>
+
+    <!-- French -->
+    <a href="/fr" hreflang="fr" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] last:rounded-b-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇫🇷</span>
+      <span class="font-medium">Francés</span>
+      <span class="ml-auto text-xs text-gray-400">FR</span>
+    </a>
+  </div>
+</div>
+
+                <button
+                    data-cal-link="bebell-digital-solutions/30min"
+                    data-cal-namespace="30min"
+                    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                    class="btn-metallic btn-metallic-nav w-full mt-2 flex items-center justify-center gap-2"
+                >
+                    <lottie-player
+                        src="/assets/icons/calendar.json"
+                        data-lottie-hover
+                        style="width:26px;height:26px;flex:0 0 26px"
+                        class="pointer-events-none">
+                    </lottie-player>
+					
+                    <span>Agendar Demo</span>
+                </button>
+
+            </div>
+        </div>
+    </nav>
+    
+
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        <!-- ============================================ -->
+        <!-- MAIN CONTENT — PRICING                       -->
+        <!-- ============================================ -->
+        <main id="planes" class="relative flex flex-col items-center justify-center py-20 px-4 w-full max-w-[1200px] mx-auto mb-0 z-10 min-h-screen">
+
+            <!-- Section header -->
+            <div class="text-center mb-12">
+            
+            <!-- Eyebrow badge — gold metallic (no backdrop-blur: it causes scroll jank) -->
+            <div class="gsap-fade-up inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ab9239]/15 border border-[#ab9239]/40 w-fit mb-6">
+                <span class="w-2 h-2 rounded-full bg-[#ab9239] shadow-[0_0_8px_rgba(245,213,71,0.8)]"></span>
+                <span class="text-[#ab9239] text-xs font-bold uppercase tracking-wider">Menú Digital</span>
+            </div>
+            
+            
+                <h2 class="gsap-fade-up font-instrument text-7xl font-normal text-metallic-light mb-4">Planes y Precios</h2>
+                <p class="gsap-fade-up text-gray-400 max-w-xl mx-auto">Elige el plan perfecto para tu negocio. Todos los precios en USD.</p>
+            </div>
+
+            <!-- Toggle Switch -->
+            <div class="gsap-fade-up relative flex items-center p-1.5 bg-white/5 backdrop-blur-md rounded-full border border-white/10 mx-auto mb-12 shadow-[0_4px_15px_rgba(0,0,0,0.2)]">
+            
+                <button id="btn-monthly" class="relative z-10 px-8 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 btn-metallic">Mensual</button>
+                <div class="relative group ml-2">
+                    <button id="btn-yearly" class="relative z-10 px-8 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 text-gray-400 hover:text-white">Pago Anual</button>
+                    <div class="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
+                        <div class="bg-gradient-to-br from-[#e8d48a] via-[#ab9239] to-[#6e5c1f] text-[#2a2000] text-xs font-bold px-3 py-1.5 rounded-full shadow-[0_0_15px_rgba(171,146,57,0.7)] whitespace-nowrap relative border border-[#8a7429]">
+                            Ahorra 20%
+                            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#ab9239] rotate-45 border-r border-b border-[#8a7429]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            
+
+            <!-- Pricing Cards Container -->
+            <div class="pricing-scroll w-full pt-10 pb-10 overflow-x-auto overflow-y-hidden xl:overflow-visible snap-x snap-mandatory">
+                <div class="flex flex-row justify-start xl:justify-center items-stretch gap-8 pt-4 pb-8 px-4 xl:px-0 w-max xl:w-full mx-auto">
+
+                    <!-- ============================================ -->
+                    <!-- CARD 1: START-UP                             -->
+                    <!-- ============================================ -->
+                    <div class="w-[320px] sm:w-[360px] flex-shrink-0 card-outer relative group snap-center gsap-fade-up">
+                        <div class="card-inner p-8">
+                            <h3 class="text-3xl font-bold text-metallic-light mb-2">START-UP</h3>
+                            <p class="text-sm text-gray-400 mb-6 leading-relaxed">Hasta 10 Productos</p>
+
+                            <!-- Price -->
+                            <div class="mb-6 flex items-baseline gap-1">
+                                <span class="text-[2.75rem] font-bold text-white leading-none">$<span class="price-val" data-monthly="78.77" data-yearly="756.19">78.77</span></span>
+                                <span class="price-period text-sm text-gray-400 font-medium">/mes</span>
+                            </div>
+
+                            <!-- CTA -->
+          <a href="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8B963841FU092102ANAF6TWI"
+   data-url-monthly="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8B963841FU092102ANAF6TWI"
+   data-url-yearly="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-2JG63275YS9704134NL2DO5Q"
+   target="_blank" rel="noopener noreferrer"
+   class="block w-full py-3.5 px-4 text-center rounded-[0.85rem] mb-6 btn-metallic">
+Seleccionar Plan
+</a>
+                            
+                            
+                            <p class="text-xs text-gray-400 text-center mb-6">Precios en Dólares Estadounidenses (USD)</p>
+
+                            <div class="divider"></div>
+
+                            <!-- Features -->
+                            <ul class="bullet-list">
+                                <li><strong>Hasta 10 Productos</strong></li>
+                                <li>Carrito de Compras</li>
+                                <li>5 GB de Almacenamiento</li>
+                                <li>1 Dominio Personalizado</li>
+                                <li>1 Cuenta de Correo Empresarial</li>
+                                <li>Hasta 1 Dirección de Reenvío de Correo</li>
+                                <li>1 Firma de Correo Profesional</li>
+                                <li>Gestión y Seguridad de Datos</li>
+                                <li>Gestión Contable</li>
+                                <li>Notificaciones Automatizadas</li>
+                                <li>Notificaciones por Correo</li>
+                                <li>Facturación Automatizada</li>
+                                <li>Cumplimiento GDPR</li>
+                                <li>Aceptar Pagos Personalizados</li>
+                                <li>Creación de 10 Productos</li>
+                                <li>Mantenimiento Periódico**</li>
+                                <li><strong>Acceso al Portal del Cliente</strong></li>
+                                <li>Reportes Periódicos</li>
+                                <li>Soporte al Cliente 24/7</li>
+                                <li>Soporte Técnico</li>
+                                <li>Consultoría y Asesoría Virtual</li>
+                            </ul>
+
+                            <div class="divider"></div>
+
+                            <!-- Note -->
+                            <p class="text-xs text-gray-500 leading-relaxed">
+                                <strong class="text-gray-400">Nota:</strong> Este plan tiene una tarifa de configuración única de <strong class="text-[#e8d48a]">USD $295.00</strong> + impuestos aplicables y una tarifa de renovación anual de <strong class="text-[#e8d48a]">USD $95.00</strong>. Todas las transacciones se procesan a través de PayPal. El cliente debe tener o crear una cuenta de PayPal. Los precios no incluyen impuestos.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- CARD 2: BASIC (Highlighted)                  -->
+                    <!-- ============================================ -->
+                    <div class="w-[320px] sm:w-[360px] flex-shrink-0 relative snap-center gsap-fade-up">
+                        <div class="blob-container hidden md:block">
+                            <div class="animated-blob"></div>
+                        </div>
+                        <div class="card-outer highlighted relative h-full group">
+                            <div class="recommended-badge">RECOMENDADO</div>
+                            <div class="card-inner p-8">
+                                <h3 class="text-3xl font-bold plan-title-gold mb-2">BÁSICO</h3>
+                                <p class="text-sm text-metallic-light mb-6 leading-relaxed">Hasta 100 Productos</p>
+
+                                <!-- Price -->
+                                <div class="mb-6 flex items-baseline gap-1">
+                                    <span class="text-[2.75rem] font-bold text-white leading-none">$<span class="price-val" data-monthly="98.77" data-yearly="948.19">98.77</span></span>
+                                    <span class="price-period text-sm text-gray-400 font-medium">/mes</span>
+                                </div>
+
+                                <!-- CTA -->
+                           <a href="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8B963841FU092102ANAF6TWI"
+   data-url-monthly="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8B963841FU092102ANAF6TWI"
+   data-url-yearly="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-2AY771581V7161313NL2DQKA"
+   target="_blank" rel="noopener noreferrer"
+   class="block w-full py-3.5 px-4 text-center rounded-[0.85rem] mb-6 btn-metallic">
+    Seleccionar Plan
+</a>
+                                <p class="text-xs text-gray-400 text-center mb-6">Precios en Dólares Estadounidenses (USD)</p>
+
+                                <div class="divider"></div>
+
+                                <!-- Features -->
+                                <ul class="bullet-list highlighted-list">
+                                    <li><strong>Hasta 100 Productos</strong></li>
+                                    <li>Carrito de Compras</li>
+                                    <li>10 GB de Almacenamiento</li>
+                                    <li>1 Dominio Personalizado</li>
+                                    <li>1 Cuenta de Correo Empresarial</li>
+                                    <li>Hasta 3 Direcciones de Reenvío de Correo</li>
+                                    <li>1 Firma de Correo Profesional</li>
+                                    <li>Cupones de Descuento</li>
+                                    <li>Canales de Venta</li>
+                                    <li>Gestión y Seguridad de Datos</li>
+                                    <li>Estadísticas y Reportes Móviles</li>
+                                    <li>Gestión Contable</li>
+                                    <li>Notificaciones Automatizadas</li>
+                                    <li>Notificaciones por Correo y Push</li>
+                                    <li>Facturación Automatizada</li>
+                                    <li>Cumplimiento GDPR</li>
+                                    <li>Aceptar Pagos vía PayPal y Stripe</li>
+                                    <li><strong>Entrada de Datos</strong> (5 Productos por Mes)</li>
+                                    <li><strong>Acceso a la Aplicación**</strong></li>
+                                    <li>1 Integración de Widget de Chat</li>
+                                    <li>1 Asistente de IA 🤖</li>
+                                    <li>Mantenimiento Periódico**</li>
+                                    <li><strong>Acceso al Portal del Cliente</strong></li>
+                                    <li>Soporte al Cliente 24/7</li>
+                                    <li>Soporte Técnico</li>
+                                    <li>Consultoría y Asesoría Virtual</li>
+                                </ul>
+
+                                <div class="divider"></div>
+
+                                <!-- Note -->
+                                <p class="text-xs text-gray-500 leading-relaxed">
+                                    <strong class="text-gray-400">Nota:</strong> Este plan tiene una tarifa de configuración única de <strong class="text-[#e8d48a]">USD $595.00</strong> + impuestos aplicables y una tarifa de renovación anual de <strong class="text-[#e8d48a]">USD $95.00</strong>. Todas las transacciones se procesan a través de PayPal. El cliente debe tener o crear una cuenta de PayPal. Los precios no incluyen impuestos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- CARD 3: CORPORATE                            -->
+                    <!-- ============================================ -->
+                    <div class="w-[320px] sm:w-[360px] flex-shrink-0 card-outer relative group snap-center gsap-fade-up">
+                        <div class="card-inner p-8">
+                            <h3 class="text-3xl font-bold text-metallic-light mb-2">CORPORATIVO</h3>
+                            <p class="text-sm text-gray-400 mb-6 leading-relaxed">Más de 100 Productos</p>
+
+                            <!-- Price -->
+                            <div class="mb-6 flex items-baseline gap-1">
+                                <span class="text-[2.75rem] font-bold text-white leading-none">$<span class="price-val" data-monthly="158.77" data-yearly="1524.19">158.77</span></span>
+                                <span class="price-period text-sm text-gray-400 font-medium">/mes</span>
+                            </div>
+
+                            <!-- CTA -->
+                          <a href="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-18E72951FN607312BNAF6T2Q"
+   data-url-monthly="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-18E72951FN607312BNAF6T2Q"
+   data-url-yearly="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-1C234280FH226262KNL2DRMA"
+   target="_blank" rel="noopener noreferrer"
+   class="block w-full py-3.5 px-4 text-center rounded-[0.85rem] mb-6 btn-metallic">
+    Seleccionar Plan
+</a>
+
+
+
+                            <p class="text-xs text-gray-400 text-center mb-6">Precios en Dólares Estadounidenses (USD)</p>
+
+                            <div class="divider"></div>
+
+                            <!-- Features -->
+                            <ul class="bullet-list">
+                                <li><strong>Hasta 2,500 Productos</strong></li>
+                                <li>Carrito de Compras</li>
+                                <li>20 GB de Almacenamiento</li>
+                                <li>1 Dominio Personalizado</li>
+                                <li>1 Cuenta de Correo Empresarial</li>
+                                <li>Hasta 5 Direcciones de Reenvío de Correo</li>
+                                <li>1 Firma de Correo Profesional</li>
+                                <li>Cupones de Descuento</li>
+                                <li>Canales de Venta</li>
+                                <li>Interfaz Multilingüe</li>
+                                <li>Recuperación de Carritos Abandonados</li>
+                                <li>Gestión y Seguridad de Datos</li>
+                                <li>Estadísticas y Reportes</li>
+                                <li>Notificaciones Automatizadas</li>
+                                <li>Notificaciones por Correo y Push</li>
+                                <li>Facturación Automatizada</li>
+                                <li>Cumplimiento GDPR</li>
+                                <li>Aceptar Pagos vía PayPal, Stripe y Más</li>
+                                <li>Aceptar Pagos vía <strong>Azul Dominicana</strong></li>
+                                <li><strong>Entrada de Datos</strong> (10 Productos por Mes)</li>
+                                <li><strong>Acceso a la Aplicación Móvil**</strong></li>
+                                <li><strong>Acceso a la Aplicación de Escritorio**</strong></li>
+                                <li>1 Integración de Widget de Chat</li>
+                                <li>1 Asistente de IA 🤖</li>
+                                <li>Mantenimiento Periódico**</li>
+                                <li><strong>Acceso al Portal del Cliente</strong></li>
+                                <li><strong>Soporte al Cliente 24/7</strong></li>
+                                <li><strong>Soporte Técnico</strong></li>
+                                <li><strong>Consultoría y Asesoría Virtual</strong></li>
+                            </ul>
+
+                            <div class="divider"></div>
+
+                            <!-- Note -->
+                            <p class="text-xs text-gray-500 leading-relaxed">
+                                <strong class="text-gray-400">Nota:</strong> Este plan tiene una tarifa de configuración única de <strong class="text-[#e8d48a]">USD $795.00</strong> + impuestos aplicables y una tarifa de renovación anual de <strong class="text-[#e8d48a]">USD $95.00</strong>. Todas las transacciones se procesan a través de PayPal. El cliente debe tener o crear una cuenta de PayPal. Los precios no incluyen impuestos.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+  <svg width="0" height="0" class="absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#e8d48a" />
+      <stop offset="25%"  stop-color="#c9ad55" />
+      <stop offset="50%"  stop-color="#ab9239" />
+      <stop offset="75%"  stop-color="#8a7429" />
+      <stop offset="100%" stop-color="#6e5c1f" />
+    </linearGradient>
+  </defs>
+</svg>
+
+<style>
+  .icon-metallic svg,
+  svg.icon-metallic {
+    stroke: url(#gold-gradient);
+    stroke-width: 2.2;
+    filter:
+      drop-shadow(0 1px 0 rgba(255,255,255,0.45))
+      drop-shadow(0 -1px 0 rgba(0,0,0,0.4));
+  }
+</style>      
+        
+        
+  <!-- Centered container -->
+<div class="gsap-fade-up min-h-screen flex items-center justify-center py-10 px-4 mt-0 mb-8 text-center">
+
+  <div class="w-full max-w-3xl">
+
+    <!-- Eyebrow (fixed) -->
+    <div class="gsap-fade-up inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ab9239]/15 border border-[#ab9239]/40 w-fit mb-6 mx-auto">
+      <span class="w-2 h-2 rounded-full bg-[#ab9239] shadow-[0_0_8px_rgba(245,213,71,0.8)]"></span>
+      <span class="text-[#ab9239] text-xs font-bold uppercase tracking-wider">TÉRMINOS DE SERVICIO</span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-3xl md:text-4xl font-bold text-center text-white mb-8 tracking-tight flex items-center justify-center gap-3">
+      <i data-lucide="lock" class="w-8 h-8 icon-metallic"></i>
+      Gestión y Seguridad de DATA
+    </h1>
+
+    <!-- Accordion -->
+    <div class="space-y-4">
+
+      <!-- 1. Protección y derechos -->
+      <details class="group rounded-xl overflow-hidden transition-all duration-300 shadow-lg">
+        <summary class="btn-metallic flex items-center justify-between w-full p-5 md:p-6 rounded-xl text-base md:text-xl">
+          <span class="flex items-center gap-3">
+            <i data-lucide="shield-check" class="w-6 h-6"></i> Protección y derechos de datos
+          </span>
+          <i data-lucide="chevron-right" class="accordion-chevron w-5 h-5"></i>
+        </summary>
+        <div class="bg-white border border-gray-200 border-t-0 rounded-b-xl px-5 md:px-6 pb-5 pt-4 text-gray-600 text-sm md:text-base space-y-3 text-left">
+          <p class="flex items-start gap-2 text-left"><i data-lucide="shield" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium text-gray-800">Protección Garantizada:</span> Mantenemos y protegemos toda la información recopilada en tu cuenta.</span></p>
+          <p class="flex items-start gap-2 text-left"><i data-lucide="lock" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium text-gray-800">Seguridad Avanzada:</span> Implementamos medidas de seguridad para preservar tus datos.</span></p>
+          <p class="flex items-start gap-2 text-left"><i data-lucide="download" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium text-gray-800">Derecho de Transferencia:</span> Al cancelar, tienes derecho a recibir toda tu data recopilada.</span></p>
+        </div>
+      </details>
+
+      <!-- 2. Panel de Control -->
+      <details class="group rounded-xl overflow-hidden transition-all duration-300 shadow-lg">
+        <summary class="btn-metallic flex items-center justify-between w-full p-5 md:p-6 rounded-xl text-base md:text-lg">
+          <span class="flex items-center gap-3">
+            <i data-lucide="shield" class="w-6 h-6"></i> Acceso a Panel de Control Administrativo
+          </span>
+          <i data-lucide="chevron-right" class="accordion-chevron w-5 h-5"></i>
+        </summary>
+        <div class="bg-white border border-gray-200 border-t-0 rounded-b-xl px-5 md:px-6 pb-5 pt-4 text-gray-600 text-sm md:text-base space-y-4 text-left">
+          <p class="font-medium text-gray-800 text-left">Por Plan Contratado (Tiendas/Menús Digitales):</p>
+          <ul class="space-y-2 text-left">
+            <li class="flex items-start gap-2 text-left"><i data-lucide="ban" class="w-5 h-5 text-red-500 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Planes Start-Up:</span> Sin acceso al panel de control administrativo.</span></li>
+            <li class="flex items-start gap-2 text-left"><i data-lucide="smartphone" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Planes Básicos:</span> Acceso exclusivo a aplicación móvil para gestión en la marcha.</span></li>
+            <li class="flex items-start gap-2 text-left"><i data-lucide="monitor" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Planes Corporativos:</span> Hasta 2 usuarios con acceso completo a versión Desktop.</span></li>
+          </ul>
+          <div class="bg-gray-50 p-4 rounded-lg mt-2 text-left">
+            <p class="font-medium text-gray-800 mb-2 text-left">Características por Nivel:</p>
+            <ul class="space-y-2 text-left">
+              <li class="flex items-start gap-2 text-left"><i data-lucide="minus-circle" class="w-5 h-5 text-gray-500 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Start-Up:</span> Gestión simplificada sin acceso administrativo.</span></li>
+              <li class="flex items-start gap-2 text-left"><i data-lucide="smartphone" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Básico:</span> Control total desde dispositivo móvil.</span></li>
+              <li class="flex items-start gap-2 text-left"><i data-lucide="users" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Corporativo:</span> Multi-usuario con acceso desktop y móvil.</span></li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. Servicios Opcionales -->
+      <details class="group rounded-xl overflow-hidden transition-all duration-300 shadow-lg">
+        <summary class="btn-metallic flex items-center justify-between w-full p-5 md:p-6 rounded-xl text-base md:text-xl">
+          <span class="flex items-center gap-3">
+            <i data-lucide="wrench" class="w-6 h-6"></i> Servicios Opcionales
+          </span>
+          <i data-lucide="chevron-right" class="accordion-chevron w-5 h-5"></i>
+        </summary>
+        <div class="bg-white border border-gray-200 border-t-0 rounded-b-xl px-5 md:px-6 pb-5 pt-4 text-gray-600 text-sm md:text-base text-left">
+          <p class="mb-3 text-left">Los siguientes servicios son opcionales y pueden ser agregados según las necesidades específicas de cada cliente:</p>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 text-left">
+            <li class="flex items-center gap-2 text-left"><i data-lucide="globe" class="w-4 h-4 text-amber-700 shrink-0"></i><span class="text-left">Dominio personalizado</span></li>
+            <li class="flex items-center gap-2 text-left"><i data-lucide="mail" class="w-4 h-4 text-amber-700 shrink-0"></i><span class="text-left">Cuenta de correo profesional</span></li>
+            <li class="flex items-center gap-2 text-left"><i data-lucide="calendar-check" class="w-4 h-4 text-amber-700 shrink-0"></i><span class="text-left">Sistema de reservas online</span></li>
+            <li class="flex items-center gap-2 text-left"><i data-lucide="message-circle" class="w-4 h-4 text-amber-700 shrink-0"></i><span class="text-left">Chat widget interactivo</span></li>
+            <li class="flex items-center gap-2 text-left"><i data-lucide="bot" class="w-4 h-4 text-amber-700 shrink-0"></i><span class="text-left">Asistente inteligente con IA</span></li>
+            <li class="flex items-center gap-2 text-left"><i data-lucide="credit-card" class="w-4 h-4 text-amber-700 shrink-0"></i><span class="text-left">Integración de pagos electrónicos</span></li>
+          </ul>
+          <p class="text-amber-700 bg-amber-50 p-3 rounded-md text-sm border-l-4 border-amber-400 flex items-start gap-2 text-left">
+            <i data-lucide="alert-circle" class="w-4 h-4 mt-0.5 shrink-0"></i>
+            <span class="text-left"><span class="font-semibold">Importante:</span> La inclusión o exclusión de estos servicios no afecta los costos base de nuestros planes.</span>
+          </p>
+        </div>
+      </details>
+
+      <!-- 4. Renovación Anual -->
+      <details class="group rounded-xl overflow-hidden transition-all duration-300 shadow-lg">
+        <summary class="btn-metallic flex items-center justify-between w-full p-5 md:p-6 rounded-xl text-base md:text-xl">
+          <span class="flex items-center gap-3">
+            <i data-lucide="refresh-cw" class="w-6 h-6"></i> Renovación Anual
+          </span>
+          <i data-lucide="chevron-right" class="accordion-chevron w-5 h-5"></i>
+        </summary>
+        <div class="bg-white border border-gray-200 border-t-0 rounded-b-xl px-5 md:px-6 pb-5 pt-4 text-gray-600 text-sm md:text-base space-y-2 text-left">
+          <p class="flex items-start gap-2 text-left"><i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Incluido en todos los planes:</span> Un (1) año completo de servicio en dominio y cuenta de correo profesional/comercial.</span></p>
+          <p class="flex items-start gap-2 text-left"><i data-lucide="dollar-sign" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Costo de renovación anual:</span> USD $95.00</span></p>
+          <p class="flex items-start gap-2 text-left"><i data-lucide="sliders" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Flexibilidad de dominio:</span> El cliente puede suministrar su propio dominio sin costo adicional.</span></p>
+        </div>
+      </details>
+
+      <!-- 5. Mantenimientos -->
+      <details class="group rounded-xl overflow-hidden transition-all duration-300 shadow-lg">
+        <summary class="btn-metallic flex items-center justify-between w-full p-5 md:p-6 rounded-xl text-base md:text-xl">
+          <span class="flex items-center gap-3">
+            <i data-lucide="settings" class="w-6 h-6"></i> Mantenimientos Periódicos
+          </span>
+          <i data-lucide="chevron-right" class="accordion-chevron w-5 h-5"></i>
+        </summary>
+        <div class="bg-white border border-gray-200 border-t-0 rounded-b-xl px-5 md:px-6 pb-5 pt-4 text-gray-600 text-sm md:text-base space-y-2 text-left">
+          <p class="flex items-start gap-2 text-left"><i data-lucide="repeat" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Frecuencia:</span> Realizamos mantenimientos al sistema operativo 1-2 veces por mes.</span></p>
+          <p class="flex items-start gap-2 text-left"><i data-lucide="target" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Objetivo:</span> Garantizar el óptimo funcionamiento de todas las páginas publicadas por Bebell Digital Solutions.</span></p>
+          <p class="flex items-start gap-2 text-left"><i data-lucide="file-text" class="w-5 h-5 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Alcance:</span> Mantenimiento de toda la información ya digitada en la página.</span></p>
+          <p class="flex items-start gap-2 text-left"><i data-lucide="x-circle" class="w-5 h-5 text-red-500 mt-0.5 shrink-0"></i><span class="text-left"><span class="font-medium">Exclusión:</span> No incluye agregar o digitalizar nueva información.</span></p>
+          <p class="bg-blue-50 p-3 rounded-md text-blue-800 border-l-4 border-blue-400 text-sm flex items-start gap-2 text-left">
+            <i data-lucide="info" class="w-4 h-4 mt-0.5 shrink-0"></i>
+            <span class="text-left"><span class="font-semibold">Para nuevos contenidos:</span> Adquirir paquete de servicios disponible en nuestra tienda.</span>
+          </p>
+        </div>
+      </details>
+
+      <!-- 6. Tecnología + Soporte + Capacitación -->
+      <details class="group rounded-xl overflow-hidden transition-all duration-300 shadow-lg">
+        <summary class="btn-metallic flex items-center justify-between w-full p-5 md:p-6 rounded-xl text-base md:text-xl">
+          <span class="flex items-center gap-3">
+            <i data-lucide="zap" class="w-6 h-6"></i> Tecnología, soporte y capacitación
+          </span>
+          <i data-lucide="chevron-right" class="accordion-chevron w-5 h-5"></i>
+        </summary>
+        <div class="bg-white border border-gray-200 border-t-0 rounded-b-xl px-5 md:px-6 pb-5 pt-4 text-gray-600 text-sm md:text-base space-y-4 text-left">
+          <div class="text-left">
+            <p class="font-medium text-gray-800 flex items-center gap-2 mb-1 text-left"><i data-lucide="zap" class="w-4 h-4 text-amber-700"></i> Tecnología de Alto Rendimiento</p>
+            <p class="text-left"><span class="font-medium">Almacenamiento SSD:</span> Nuestros servidores utilizan unidades SSD de alto rendimiento.</p>
+            <p class="text-left"><span class="font-medium">Beneficio:</span> Carga increíblemente rápida para archivos y bases de datos.</p>
+            <p class="text-left"><span class="font-medium">Resultado:</span> Sitios web optimizados para máxima velocidad y experiencia de usuario.</p>
+          </div>
+          <div class="border-t border-gray-100 pt-3 text-left">
+            <p class="font-medium text-gray-800 flex items-center gap-2 mb-1 text-left"><i data-lucide="headphones" class="w-4 h-4 text-amber-700"></i> Atención al Cliente 24/7</p>
+            <p class="text-left"><span class="font-medium">Disponibilidad:</span> Atención continua las 24 horas, los 7 días de la semana.</p>
+            <p class="text-left"><span class="font-medium">Medio:</span> Asistente impulsado por Inteligencia Artificial.</p>
+            <p class="text-left"><span class="font-medium">Ventaja:</span> Respuestas inmediatas y soluciones eficientes.</p>
+          </div>
+          <div class="border-t border-gray-100 pt-3 text-left">
+            <p class="font-medium text-gray-800 flex items-center gap-2 mb-1 text-left"><i data-lucide="book-open" class="w-4 h-4 text-amber-700"></i> Recursos de Capacitación</p>
+            <p class="text-left"><span class="font-medium">Asesoría Virtual:</span> Acceso a material adicional de capacitación y entrenamiento.</p>
+            <p class="text-left"><span class="font-medium">Plataforma:</span> Disponible desde el portal de clientes.</p>
+            <p class="text-left"><span class="font-medium">Valor agregado:</span> Herramientas para maximizar el uso de nuestros servicios.</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- 7. Control de Contenido -->
+      <details class="group rounded-xl overflow-hidden transition-all duration-300 shadow-lg">
+        <summary class="btn-metallic flex items-center justify-between w-full p-5 md:p-6 rounded-xl text-base md:text-xl">
+          <span class="flex items-center gap-3">
+            <i data-lucide="pencil" class="w-6 h-6"></i> Control de Contenido
+          </span>
+          <i data-lucide="chevron-right" class="accordion-chevron w-5 h-5"></i>
+        </summary>
+        <div class="bg-white border border-gray-200 border-t-0 rounded-b-xl px-5 md:px-6 pb-5 pt-4 text-gray-600 text-sm md:text-base space-y-2 text-left">
+          <p class="font-medium text-gray-800 text-left">Acceso al Editor de Contenidos (Exclusivo Plan Corporativo):</p>
+          <ul class="space-y-1.5 text-left">
+            <li class="flex items-start gap-2 text-left"><i data-lucide="type" class="w-4 h-4 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left">Edición de textos e imágenes en su ubicación original.</span></li>
+            <li class="flex items-start gap-2 text-left"><i data-lucide="layout" class="w-4 h-4 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left">Sin modificación de diagramación, estructura o diseño.</span></li>
+            <li class="flex items-start gap-2 text-left"><i data-lucide="palette" class="w-4 h-4 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left">Colores y composición permanecen fijos para mantener consistencia.</span></li>
+            <li class="flex items-start gap-2 text-left"><i data-lucide="code" class="w-4 h-4 text-amber-700 mt-0.5 shrink-0"></i><span class="text-left">Cambios estructurales requieren servicios de desarrollo adicionales.</span></li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- 8. Aceptación de Términos -->
+      <details class="group rounded-xl overflow-hidden transition-all duration-300 shadow-lg">
+        <summary class="btn-metallic flex items-center justify-between w-full p-5 md:p-6 rounded-xl text-base md:text-xl">
+          <span class="flex items-center gap-3">
+            <i data-lucide="file-check" class="w-6 h-6"></i> Aceptación de Términos
+          </span>
+          <i data-lucide="chevron-right" class="accordion-chevron w-5 h-5"></i>
+        </summary>
+        <div class="bg-white border border-gray-200 border-t-0 rounded-b-xl px-5 md:px-6 pb-5 pt-4 text-gray-600 text-sm md:text-base space-y-2 text-left">
+          <p class="text-left">Al comprar cualquier plan, el cliente acepta:</p>
+          <ul class="space-y-1 text-left">
+            <li class="flex items-start gap-2 text-left"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i><span class="text-left">Condiciones de uso de Bebell Digital Solutions.</span></li>
+            <li class="flex items-start gap-2 text-left"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i><span class="text-left">Políticas de privacidad establecidas.</span></li>
+            <li class="flex items-start gap-2 text-left"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i><span class="text-left">Términos y condiciones del servicio.</span></li>
+          </ul>
+          <p class="text-gray-500 italic mt-2 flex items-start gap-2 text-left"><i data-lucide="info" class="w-4 h-4 mt-0.5 shrink-0"></i><span class="text-left">Para mayor información: Consulte nuestras políticas completas al pie de la página.</span></p>
+        </div>
+      </details>
+
+    </div>
+    <!-- fin acordeón -->
+
+    <p class="text-center text-xs text-gray-400 mt-10 flex items-center justify-center gap-1.5">
+      <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+      Gestión y Seguridad de DATA · Bebell Digital Solutions
+    </p>
+  </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        <!-- ============================================ -->
+        <!-- FOOTER                                       -->
+        <!-- ============================================ -->
+        <footer class="bg-black border-t border-[#ab9239]/25 py-12 px-6 pt-16 pb-8 relative z-20">
+            <!-- Gold metallic top edge -->
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#ab9239] to-transparent"></div>
+
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+
+                <!-- Left Info (Brand & Copyright) -->
+                <div class="flex flex-col gap-2 md:col-span-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 group">
+                            <img src="https://ik.imagekit.io/bebell/menus-digitales/Branding/ONTO%20AGENCY.webp" alt="Menú Digital Logo" class="w-8 h-8 object-contain transition-transform duration-300 ease-out group-hover:scale-110" />
+                            <span class="font-cabin font-bold italic text-white text-lg tracking-tight">Menú <span class="text-metallic-gold font-bold italic">Digital</span></span>
+                        </a>
+                    </div>
+                    <div class="text-xs text-white/50">
+                        &copy; 2026 Menú Digital. Todos los derechos reservados.
+                    </div>
+                    <img
+                        src="https://bucket.mlcdn.com/a/3336/3336910/images/c6a6d752e1132502e3879b1b07d2ff66e3bb34d3.png"
+                        alt="Accepted payment methods"
+                        class="mt-2 w-full max-w-[170px] object-contain object-left opacity-70 hover:opacity-100 transition-opacity" />
+                </div>
+
+                <!-- Center Links -->
+                <div class="flex flex-wrap gap-12 text-sm md:col-span-5 md:justify-center">
+                    <div>
+                        <h4 class="font-bold text-[#ab9239] mb-4 text-sm uppercase tracking-wider">Plataforma</h4>
+                        <ul class="space-y-3 text-sm text-white/60">
+                            <li><a href="#" class="hover:text-[#ab9239] transition-colors">Página de Inicio</a></li>
+                            <li><a href="#caracteristicas" class="hover:text-[#ab9239] transition-colors">Características</a></li>
+                            <li><a href="#planes" class="hover:text-[#ab9239] transition-colors">Planes y Precio</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#ab9239] mb-4 text-sm uppercase tracking-wider">Compañía</h4>
+                        <ul class="space-y-3 text-sm text-white/60">
+                            <li><a href="#" class="hover:text-[#ab9239] transition-colors">Sobre Nosotros</a></li>
+                            <li><a href="#" class="hover:text-[#ab9239] transition-colors">Contacto</a></li>
+                            <li><a href="#" class="hover:text-[#ab9239] transition-colors">Centro de Ayuda</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#ab9239] mb-4 text-sm uppercase tracking-wider">Legal</h4>
+                        <ul class="space-y-3 text-sm text-white/60">
+                            <li><a href="#" class="hover:text-[#ab9239] transition-colors">Términos</a></li>
+                            <li><a href="#" class="hover:text-[#ab9239] transition-colors">Privacidad</a></li>
+                            <li><a href="#" class="hover:text-[#ab9239] transition-colors">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Column (Support Card) -->
+                <div class="md:col-span-4 mt-6 md:mt-0 w-full flex justify-center md:justify-end">
+                    <div class="w-full max-w-full sm:max-w-[360px] aspect-[3/2] bg-white/[0.03] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-6 relative overflow-hidden flex flex-col justify-center shadow-lg border border-[#ab9239]/25 hover:border-[#ab9239]/60 transition-colors group backdrop-blur-sm">
+                        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#ab9239] to-transparent z-30"></div>
+                        <div class="relative z-10 w-[65%] sm:w-3/4 lg:w-2/3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h4 class="text-white font-bold text-lg sm:text-xl md:text-base lg:text-xl">Soporte Online</h4>
+                                <span class="bg-[#ab9239]/20 text-[#f5d547] border border-[#ab9239]/40 text-[10px] md:text-[9px] lg:text-[10px] font-bold px-2 py-0.5 md:px-1.5 md:py-0 lg:px-2 lg:py-0.5 rounded-md uppercase tracking-wider">24/7</span>
+                            </div>
+                            <p class="text-white/60 text-xs sm:text-sm md:text-[10px] lg:text-sm mb-4 md:mb-2 lg:mb-4 leading-snug">Contáctenos si tiene alguna pregunta. Nuestro equipo está aquí para atenderte.</p>
+                            <button onclick="window.open('/es/soporte', '_blank')" class="btn-metallic bg-[#ab9239] hover:bg-[#8a7429] text-[#2a2000] text-xs sm:text-sm md:text-[11px] lg:text-sm font-bold py-2 px-3 md:py-2 md:px-3 lg:py-2 lg:px-3 rounded-lg flex items-center gap-2 transition-colors border border-[#8a7429] shadow-md w-fit">
+                                <i data-lucide="headset" class="w-4 h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4"></i>
+                                Escríbanos
+                            </button>
+                        </div>
+                        <img
+                            src="https://ik.imagekit.io/bebell/menus-digitales/Branding/support-agent-gold-uniform.webp"
+                            alt="Soporte 24/7"
+                            class="absolute bottom-0 right-0 h-full w-auto pt-[1.5rem] object-contain z-0 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="max-w-7xl mx-auto px-6 border-t border-[#ab9239]/15 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/45">
+                <p>MenúDigital © 2026. Todos los derechos reservados.</p>
+                <p class="flex items-center gap-1">
+                    Desarrollado con <span class="text-[#ab9239]">❤️</span> por <span class="font-bold text-white text-xs">Bebell Digital Solutions</span>.
+                </p>
+            </div>
+        </footer>
+        
+        
+        
+        
+        
+
+    </div> <!-- /site-wrapper -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                      -->
+    <!-- ============================================ -->
+
+    <!-- 1. Init Lucide icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <!-- 2. Navbar interactions (burger, mega-menu, submenu) -->
+    <script>
+        /* ================= Burger menu ================= */
+        (function () {
+            const burgerBtn   = document.getElementById('burgerBtn');
+            const burgerStack = document.getElementById('burgerIconStack');
+            const mobilePanel = document.getElementById('mobilePanel');
+            if (!burgerBtn || !mobilePanel) return;
+
+            function setBurgerState(isOpen) {
+                if (burgerStack) burgerStack.classList.toggle('is-open', isOpen);
+                burgerBtn.setAttribute('aria-expanded', String(isOpen));
+                burgerBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+            }
+            setBurgerState(false);
+
+            burgerBtn.addEventListener('click', () => {
+                const isOpen = mobilePanel.classList.toggle('open');
+                setBurgerState(isOpen);
+            });
+
+            mobilePanel.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobilePanel.classList.remove('open');
+                    setBurgerState(false);
+                });
+            });
+        })();
+
+        /* ================= Mobile Soluciones submenu ================= */
+        (function () {
+            const btn = document.getElementById('mobileSolBtn');
+            const sub = document.getElementById('mobileSolSub');
+            if (!btn || !sub) return;
+            btn.addEventListener('click', () => {
+                const open = sub.classList.toggle('open');
+                btn.classList.toggle('open', open);
+                btn.setAttribute('aria-expanded', String(open));
+            });
+        })();
+
+        /* ================= Desktop Soluciones mega-menu ================= */
+        (function () {
+            const wrap     = document.getElementById('solucionesWrap');
+            const btn      = document.getElementById('solucionesBtn');
+            const chevron  = document.getElementById('solucionesChevron');
+            const menu     = document.getElementById('megaMenu');
+            const items    = menu.querySelectorAll('.mega-item');
+            const imgs     = menu.querySelectorAll('.mega-img');
+            if (!wrap || !btn || !menu) return;
+
+            const DEFAULT_ID = 'default';
+
+            function showImage(id) {
+                imgs.forEach(img => {
+                    img.classList.toggle('active', img.dataset.imgId === id);
+                });
+            }
+
+            function openMenu() {
+                menu.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+                if (chevron) chevron.style.transform = 'rotate(180deg)';
+                items.forEach(i => i.classList.remove('active'));
+                const first = menu.querySelector('.mega-item[data-img="default"]') || items[0];
+                if (first) first.classList.add('active');
+                showImage(DEFAULT_ID);
+            }
+
+            function closeMenu() {
+                menu.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+            }
+
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                menu.classList.contains('open') ? closeMenu() : openMenu();
+            });
+
+            let hoverTimer;
+            wrap.addEventListener('mouseenter', () => {
+                clearTimeout(hoverTimer);
+                openMenu();
+            });
+            wrap.addEventListener('mouseleave', () => {
+                hoverTimer = setTimeout(closeMenu, 180);
+            });
+            menu.addEventListener('mouseenter', () => clearTimeout(hoverTimer));
+            menu.addEventListener('mouseleave', () => {
+                hoverTimer = setTimeout(closeMenu, 180);
+            });
+
+            items.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    items.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    showImage(item.dataset.img || DEFAULT_ID);
+                });
+                item.addEventListener('focus', () => {
+                    items.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    showImage(item.dataset.img || DEFAULT_ID);
+                });
+                item.addEventListener('click', closeMenu);
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeMenu();
+            });
+            document.addEventListener('click', (e) => {
+                if (!wrap.contains(e.target) && !menu.contains(e.target)) closeMenu();
+            });
+        })();
+    </script>
+
+    <!-- 3. Lottie hover animation -->
+    <script>
+        document.querySelectorAll('[data-lottie-hover]').forEach((icon) => {
+            const btn = icon.closest('button');
+            if (!btn) return;
+            btn.addEventListener('mouseenter', () => {
+                icon.speed = 0.6;
+                icon.stop();
+                icon.play();
+            });
+            btn.addEventListener('mouseleave', () => icon.stop());
+        });
+    </script>
+    
+    
+    
+    
+    
+    
+
+
+    <!-- 4. Pricing toggle + GSAP counter-style price animation + URL swap -->
+<script>
+    const btnMonthly = document.getElementById('btn-monthly');
+    const btnYearly = document.getElementById('btn-yearly');
+    const priceVals = document.querySelectorAll('.price-val');
+    const pricePeriods = document.querySelectorAll('.price-period');
+    const planLinks = document.querySelectorAll('a[data-url-monthly]');
+    let isYearly = false;
+
+    /* Find the price-period <span> sibling of a price-val */
+    function periodFor(priceEl) {
+        const wrapper = priceEl.closest('div');
+        return wrapper ? wrapper.querySelector('.price-period') : null;
+    }
+
+    function setActiveButton(activeBtn, inactiveBtn) {
+        activeBtn.classList.add('btn-metallic');
+        activeBtn.classList.remove('text-gray-400', 'hover:text-white');
+        inactiveBtn.classList.remove('btn-metallic');
+        inactiveBtn.classList.add('text-gray-400', 'hover:text-white');
+    }
+
+    function animatePrice(el, targetValue) {
+        const startValue = parseFloat(el.textContent) || 0;
+        const endValue = parseFloat(targetValue) || 0;
+        const duration = 0.9;
+        const obj = { val: startValue };
+
+        gsap.to(obj, {
+            val: endValue,
+            duration: duration,
+            ease: "power2.out",
+            onUpdate: function () {
+                el.textContent = obj.val.toFixed(2);
+            },
+            onComplete: function () {
+                el.textContent = endValue.toFixed(2);
+            }
+        });
+    }
+
+    function updatePricing() {
+        // Animate prices + update period label
+        priceVals.forEach(el => {
+            const targetPrice = isYearly ? el.dataset.yearly : el.dataset.monthly;
+            animatePrice(el, targetPrice);
+
+            const periodEl = periodFor(el);
+            if (periodEl) {
+                periodEl.textContent = isYearly ? "/año" : "/mes";
+            }
+        });
+
+        // Swap CTA hrefs between monthly and yearly URLs
+        planLinks.forEach(link => {
+            const targetUrl = isYearly ? link.dataset.urlYearly : link.dataset.urlMonthly;
+            if (targetUrl) link.setAttribute('href', targetUrl);
+        });
+
+        // Toggle active state on the switcher buttons
+        if (isYearly) {
+            setActiveButton(btnYearly, btnMonthly);
+        } else {
+            setActiveButton(btnMonthly, btnYearly);
+        }
+    }
+
+    btnMonthly.addEventListener('click', () => {
+        if (isYearly) { isYearly = false; updatePricing(); }
+    });
+    btnYearly.addEventListener('click', () => {
+        if (!isYearly) { isYearly = true; updatePricing(); }
+    });
+</script>
+
+    <!-- 5. GSAP scroll animations -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+            gsap.fromTo(element,
+                { y: 50, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+    </script>
+
+    <!-- 6. Cal.com embed (kept for navbar CTA) -->
+    <script type="text/javascript">
+        (function (C, A, L) {
+            let p = function (a, ar) { a.q.push(ar); };
+            let d = C.document;
+            C.Cal = C.Cal || function () {
+                let cal = C.Cal; let ar = arguments;
+                if (!cal.loaded) {
+                    cal.ns = {}; cal.q = cal.q || [];
+                    d.head.appendChild(d.createElement("script")).src = A;
+                    cal.loaded = true;
+                }
+                if (ar[0] === L) {
+                    const api = function () { p(api, arguments); };
+                    const namespace = ar[1];
+                    api.q = api.q || [];
+                    if (typeof namespace === "string") {
+                        cal.ns[namespace] = cal.ns[namespace] || api;
+                        p(cal.ns[namespace], ar);
+                        p(cal, ["initNamespace", namespace]);
+                    } else p(cal, ar);
+                    return;
+                }
+                p(cal, ar);
+            };
+        })(window, "https://app.cal.com/embed/embed.js", "init");
+
+        Cal("init", { origin: "https://app.cal.com" });
+        Cal("init", "30min", { origin: "https://app.cal.com" });
+        Cal.ns["30min"]("ui", {
+            hideEventTypeDetails: false,
+            layout: "month_view",
+            cssVarsPerTheme: {
+                light: { "cal-brand": "#ab9239" },
+                dark:  { "cal-brand": "#ab9239" }
+            }
+        });
+    </script>
+
+</body>
+</html>
