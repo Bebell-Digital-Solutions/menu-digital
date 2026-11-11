@@ -1,10 +1,10 @@
 <div align="center">
 
-![Logo](https://ik.imagekit.io/bebell/menus-digitales/menu-digital-readme-banner.png)
+![Logo](.png)
 
 # Consultorio Digital para Médicos
 
-<img src="https://ik.imagekit.io/bebell/Bebell%20Digital%20Solutions/Consultorios%20Digitales/Banners%20&%20Backgrounds/legacymd-main-banner-2.png" alt="LegacyMD Banner" width="100%">
+<img src="https://ik.imagekit.io/bebell/menus-digitales/menu-digital-readme-banner.png" alt="LegacyMD Banner" width="100%">
 
 ---
 
