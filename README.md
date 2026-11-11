@@ -1,6 +1,7 @@
 <div align="center">
+  
+<img src="https://ik.imagekit.io/bebell/menus-digitales/Branding/ONTO%20AGENCY.webp" alt="Logo Menú Digital" width="70px">
 
-![Logo](https://ik.imagekit.io/bebell/menus-digitales/Branding/ONTO%20AGENCY.webp?updatedAt=1793005960042)
 
 # Menú Digital para Restaurantes, Bares y Hoteles
 
