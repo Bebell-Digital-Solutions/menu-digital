@@ -65,6 +65,8 @@
 
 
 
+
+
     <nav id="mainNav" class="nav-metallic-border  relative z-50 w-full max-w-full mx-auto px-6 py-6 bg-black">
     
         <div class="flex justify-between items-center">
@@ -108,12 +110,63 @@
 
                 <a href="/portafolio" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Portafolio</a>
 
-                <a href="/p/reporte" target="_blank" class="text-sm font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
+                <a href="/p/reporte" target="_blank" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
 
-                <a href="https://en.legacymd.online" title="English" class="relative group text-white hover:text-[#ab9239] transition-colors">
-                    <i data-lucide="languages" class="w-5 h-5"></i>
-                    <span class="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1 whitespace-nowrap rounded bg-black/90 px-4 py-2 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-50">English</span>
-                </a>
+             
+                    
+                <!-- Language dropdown (hover + click + keyboard) -->
+<div class="relative group/lang inline-block">
+
+  <!-- Trigger -->
+  <button
+    type="button"
+    class="flex items-center gap-2 text-white hover:text-[#ab9239] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ab9239]/60 rounded-md px-1 py-1"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <i data-lucide="languages" class="w-5 h-5"></i>
+
+  </button>
+
+  <!-- Dropdown panel -->
+  <div
+    class="absolute right-0 mt-2 w-48 origin-top-right rounded-xl bg-white shadow-xl ring-1 ring-black/10
+           opacity-0 invisible translate-y-1 scale-95
+           group-hover/lang:opacity-100 group-hover/lang:visible group-hover/lang:translate-y-0 group-hover/lang:scale-100
+           group-focus-within/lang:opacity-100 group-focus-within/lang:visible group-focus-within/lang:translate-y-0 group-focus-within/lang:scale-100
+           transition-all duration-200 z-50"
+    role="menu"
+    aria-label="Select language"
+  >
+    <!-- Spanish -->
+    <a href="#" hreflang="es" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] first:rounded-t-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇪🇸</span>
+      <span class="font-medium">Español</span>
+      <span class="ml-auto text-xs text-gray-400">ES</span>
+    </a>
+
+    <!-- American (English) -->
+    <a href="/en" hreflang="en-US" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇺🇸</span>
+      <span class="font-medium">Inglés</span>
+      <span class="ml-auto text-xs text-gray-400">EN</span>
+    </a>
+
+    <!-- French -->
+    <a href="/fr" hreflang="fr" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] last:rounded-b-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇫🇷</span>
+      <span class="font-medium">Francés</span>
+      <span class="ml-auto text-xs text-gray-400">FR</span>
+    </a>
+  </div>
+</div>
+
+                
+                
+                
 
                 <!-- Gold metallic CTA -->
                 <button
@@ -132,6 +185,10 @@
                 </button>
 
             </div>
+            
+            
+            
+            
 
             <!-- BURGER BUTTON — two stacked Lottie players (menu ↔ close) -->
             <button id="burgerBtn" class="nav-burger items-center justify-center text-white p-2 rounded-lg hover:bg-white/10 transition-colors" aria-label="Abrir menú" aria-expanded="false">
@@ -196,7 +253,7 @@
                     <a href="#caracteristicas" class="mega-item" data-img="branding" role="menuitem">
                         <span class="mega-icon"><i data-lucide="palette" class="w-5 h-5"></i></span>
                         <span class="mega-text">
-                            <span class="mega-title">Branding</span>
+                            <span class="mega-title">Personalización</span>
                             <span class="mega-desc">Personaliza colores, tipografías y portada.</span>
                         </span>
                     </a>
@@ -204,14 +261,16 @@
                 </div>
 
                 <div class="mega-menu-right" id="megaRight">
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Menú Digital - vista general" class="mega-img active" data-img-id="default" />
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80" alt="Pedidos online" class="mega-img" data-img-id="pedidos" />
-                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" alt="Reservas" class="mega-img" data-img-id="reservas" />
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Analítica" class="mega-img" data-img-id="analitica" />
-                    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80" alt="Branding" class="mega-img" data-img-id="branding" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/menu-digital.webp?auto=format&fit=crop&w=900&q=80" alt="Menú Digital - vista general" class="mega-img active" data-img-id="default" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/pedidos-online.webp?auto=format&fit=crop&w=900&q=80" alt="Pedidos online" class="mega-img" data-img-id="pedidos" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/reservaciones.webp?auto=format&fit=crop&w=900&q=80" alt="Reservas" class="mega-img" data-img-id="reservas" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/analiticas.webp?auto=format&fit=crop&w=900&q=80" alt="Analítica" class="mega-img" data-img-id="analitica" />
+                    <img src="https://ik.imagekit.io/bebell/menus-digitales/graphic-assets/personalizacion.webp?auto=format&fit=crop&w=900&q=80" alt="Branding" class="mega-img" data-img-id="branding" />
                 </div>
             </div>
         </div>
+        
+        
 
         <!-- MOBILE PANEL -->
         <div id="mobilePanel" class="mobile-panel">
@@ -220,28 +279,96 @@
                 <a href="#" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Inicio</a>
 
                 <div>
+                
                     <button id="mobileSolBtn" class="mobile-sub-btn text-md font-semibold text-white hover:text-[#ab9239] transition-colors" aria-expanded="false">
+                    
                         <span>Soluciones</span>
                         <i data-lucide="chevron-down" class="chev w-4 h-4"></i>
                     </button>
+                    
+                    
                     <div class="mobile-sub pl-2" id="mobileSolSub">
                         <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Menú Digital</a>
+                        
+                        
                         <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Pedidos Online</a>
+                        
+                        
                         <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Reservas</a>
+                        
+                        
                         <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Analítica</a>
-                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Branding</a>
+                        
+                        
+                        <a href="#caracteristicas" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#ab9239] transition-colors">Personalización</a>
+                        
+                        
                     </div>
                 </div>
 
                 <a href="#caracteristicas" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Características</a>
-                <a href="#planes" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Planes</a>
+                
+                
+                <a href="/planes" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Planes</a>
+                
+                
                 <a href="/portafolio" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Portafolio</a>
-                <a href="/p/reporte" target="_blank" class="text-sm font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
+                
+                
+                <a href="/reporte" target="_blank" class="text-md font-semibold text-white hover:text-[#ab9239] transition-colors">Reporte</a>
 
-                <a href="/en" title="English" class="flex items-center gap-2 text-white hover:text-[#ab9239] transition-colors">
-                    <i data-lucide="languages" class="w-5 h-5"></i>
-                    <span class="text-sm font-semibold">English</span>
-                </a>
+              
+                
+               <!-- Language dropdown (mobile — opens upward) -->
+<div class="relative group/lang inline-block w-full">
+
+  <!-- Trigger -->
+  <button
+    type="button"
+    class="flex items-center gap-2 text-white hover:text-[#ab9239] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ab9239]/60 rounded-md px-1 py-1"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <i data-lucide="languages" class="w-5 h-5"></i>
+    <span class="text-sm font-semibold">Español</span>
+    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200 group-hover/lang:rotate-180"></i>
+  </button>
+
+  <!-- Dropdown panel — opens ABOVE the trigger on mobile -->
+  <div
+    class="absolute right-0 bottom-full mb-0 w-48 origin-bottom-left rounded-xl bg-white shadow-xl ring-1 ring-black/10
+           opacity-0 invisible translate-y-1 scale-95
+           group-hover/lang:opacity-100 group-hover/lang:visible group-hover/lang:translate-y-0 group-hover/lang:scale-100
+           group-focus-within/lang:opacity-100 group-focus-within/lang:visible group-focus-within/lang:translate-y-0 group-focus-within/lang:scale-100
+           transition-all duration-200 z-50"
+    role="menu"
+    aria-label="Select language"
+  >
+    <!-- Spanish -->
+    <a href="/es" hreflang="es" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] first:rounded-t-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇪🇸</span>
+      <span class="font-medium">Español</span>
+      <span class="ml-auto text-xs text-gray-400">ES</span>
+    </a>
+
+    <!-- American (English) -->
+    <a href="/en" hreflang="en-US" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇺🇸</span>
+      <span class="font-medium">Inglés</span>
+      <span class="ml-auto text-xs text-gray-400">EN</span>
+    </a>
+
+    <!-- French -->
+    <a href="/fr" hreflang="fr" role="menuitem"
+       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-800 hover:bg-[#ab9239]/10 hover:text-[#8a7429] last:rounded-b-xl transition-colors">
+      <span class="text-lg leading-none" aria-hidden="true">🇫🇷</span>
+      <span class="font-medium">Francés</span>
+      <span class="ml-auto text-xs text-gray-400">FR</span>
+    </a>
+  </div>
+</div>
 
                 <button
                     data-cal-link="bebell-digital-solutions/30min"
@@ -262,6 +389,8 @@
             </div>
         </div>
     </nav>
+    
+
     
     
     
